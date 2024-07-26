@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709d523d47211254c8dc7510d4492845, type: 3}
+  m_Name: ShopContent
+  m_EditorClassIdentifier: 
+  _pathSkinConfig: Assets/Game/LevelTools/Shop/Configs/Skins
+  _pathObjectConfig: Assets/Game/LevelTools/Shop/Configs/Object
+  _pathTrailConfig: Assets/Game/LevelTools/Shop/Configs/Trails
+  _pathAnimalConfig: Assets/Game/LevelTools/Shop/Configs/Animals
+  _pathSoftConfig: Assets/Game/LevelTools/Shop/Configs/Soft
+  _skinItemInfos: []
+  _objectItemInfos: []
+  _trailItemInfos: []
+  _animalItemInfos: []
+  _softItemInfos:
+  - {fileID: 11400000, guid: 13855bc4b1956bb4fb4cae8be87f2487, type: 2}
+  - {fileID: 11400000, guid: 5fc53d44e8662ad4e89440eadae8fed5, type: 2}
+  - {fileID: 11400000, guid: 484d95d7b927c2045a1c78ee86ee9128, type: 2}
+  - {fileID: 11400000, guid: f79b5c6eed02fa4429be54b1256c9d43, type: 2}
