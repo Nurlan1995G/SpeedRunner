@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3430128a8085299448ecda7bebeee73f, type: 3}
+  m_Name: +700
+  m_EditorClassIdentifier: 
+  Id: 31436
+  ItemType: 4
+  CashType: 2
+  Price: 5
+  Icon: {fileID: 21300000, guid: f2fea8a26db11b548b819230aea1ea15, type: 3}
+  ShopPreview: {fileID: 5047191352699508448, guid: dc746d4032fbf274c8dcd4201c09fa75, type: 3}
+  YanId: 51
+  IsDynamic: 0
+  Reward: 700
