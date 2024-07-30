@@ -1,0 +1,112 @@
+newmtl UppertorsoCartoonyRainbowBowTie1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka UppertorsoCartoonyRainbowBowTie1_diff.png
+map_Kd UppertorsoCartoonyRainbowBowTie1_diff.png
+map_d UppertorsoCartoonyRainbowBowTie1_diff.png
+
+newmtl LowertorsoBlueFlameAura1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka LowertorsoBlueFlameAura1_diff.png
+map_Kd LowertorsoBlueFlameAura1_diff.png
+map_d LowertorsoBlueFlameAura1_diff.png
+
+newmtl HeadSpiderAntlers1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka HeadSpiderAntlers1_diff.png
+map_Kd HeadSpiderAntlers1_diff.png
+map_d HeadSpiderAntlers1_diff.png
+
+newmtl UppertorsoJpartyPlush1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka UppertorsoJpartyPlush1_diff.png
+map_Kd UppertorsoJpartyPlush1_diff.png
+map_d UppertorsoJpartyPlush1_diff.png
+
+newmtl UppertorsoFuturisticswordpack1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka UppertorsoFuturisticswordpack1_diff.png
+map_Kd UppertorsoFuturisticswordpack1_diff.png
+map_d UppertorsoFuturisticswordpack1_diff.png
+
+newmtl HeadUltrafabulousHair1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka HeadUltrafabulousHair1_diff.png
+map_Kd HeadUltrafabulousHair1_diff.png
+map_d HeadUltrafabulousHair1_diff.png
+
+newmtl HeadSpiderHeadphones1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka HeadSpiderHeadphones1_diff.png
+map_Kd HeadSpiderHeadphones1_diff.png
+map_d HeadSpiderHeadphones1_diff.png
+
+newmtl Angelrobloxpro3991Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka Angelrobloxpro3991_diff.png
+map_Kd Angelrobloxpro3991_diff.png
+map_d Angelrobloxpro3991_diff.png
+

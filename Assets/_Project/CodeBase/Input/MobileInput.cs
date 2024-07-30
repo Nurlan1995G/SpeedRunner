@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 
 public class MobileInput : IInput
 {
-    private Joystick _joystick;
-    private Joystick _cameraJoystick;
+    private VariableJoystick _joystick;
+    private VariableJoystick _cameraJoystick;
     private JumpButtonHeandler _jumpButton;
 
     public Vector2 MouseDirection => GiveDirection(DirectionalFeature.MouseDirection);
@@ -16,7 +15,7 @@ public class MobileInput : IInput
     public float JoystickMagnitude => _joystick.Direction.magnitude;
     public bool IsActivateInput { get; private set; }
 
-    public MobileInput(Joystick joystick, JumpButtonHeandler jumpButton, Joystick cameraJoystick)
+    public MobileInput(VariableJoystick joystick, JumpButtonHeandler jumpButton, VariableJoystick cameraJoystick)
     {
         _joystick = joystick;
         _jumpButton = jumpButton;

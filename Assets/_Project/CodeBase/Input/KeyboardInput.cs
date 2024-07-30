@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class KeyboardInput : IInput
@@ -6,7 +5,7 @@ public class KeyboardInput : IInput
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
-    private Joystick _cameraJoystick;
+    private VariableJoystick _cameraJoystick;
 
     public Vector2 MouseDirection => GiveDirection(DirectionalFeature.MouseDirection);
     public Vector3 CharacterDirection => GiveDirection(DirectionalFeature.CharacterDirection);
@@ -16,7 +15,7 @@ public class KeyboardInput : IInput
     public bool IsMobileInput => false;
     public bool IsActivateInput { get; private set; }
 
-    public KeyboardInput(Joystick cameraJoystick)
+    public KeyboardInput(VariableJoystick cameraJoystick)
     {
         _cameraJoystick = cameraJoystick;
         IsActivateInput = true;

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ff650e663867f4e9a08c4d847b2e75, type: 3}
+  m_Name: Config
+  m_EditorClassIdentifier: 
+  PlayerData:
+    MoveSpeed: 5
+    RotateSpeed: 5
+    Gravity: 5
+    HeightJump: 5
+  CameraRotateData:
+    RotateSpeedPC: 250
+    RotateSpeedMobile: 150
+    MinZoomDistance: 10
+    MaxZoomDistance: 40
+    ZoomStep: 0.01
+    HideDistance: 50
