@@ -1,0 +1,94 @@
+{
+    "name": "RotateInput",
+    "maps": [
+        {
+            "name": "Touchscreen",
+            "id": "a51bdea3-783a-4937-a4eb-4e7c6d8d1143",
+            "actions": [
+                {
+                    "name": "TouchDelta",
+                    "type": "PassThrough",
+                    "id": "a393f0ea-9904-4cf6-ade6-a4a4fd51d1b8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7059ecb9-141e-4166-9860-5d907f9bea18",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "id": "7d65a214-2f3b-4b28-a9d2-930dff6b0297",
+            "actions": [
+                {
+                    "name": "RightButton",
+                    "type": "Value",
+                    "id": "72f80ef4-3a72-490e-a417-4075610b2729",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseSrollWheel",
+                    "type": "Value",
+                    "id": "67f97475-26de-4f1c-aba9-f3eb12feac6a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e672e74e-0b14-46fa-baaa-6b65ea7817bd",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "RightButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a20c058-91a4-4376-beb1-f03db3907fb5",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseSrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
