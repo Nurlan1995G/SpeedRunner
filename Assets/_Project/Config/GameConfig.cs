@@ -8,6 +8,7 @@ namespace Assets._Project.Config
     {
         public PlayerData PlayerData;
         public CameraRotateData CameraRotateData;
+        public CharacterBotData CharacterBotData;
     }
 
     [Serializable]
@@ -17,6 +18,16 @@ namespace Assets._Project.Config
         public float RotateSpeed;
         public float Gravity;
         public float HeightJump;
+    }
+
+    [Serializable]
+    public class CharacterBotData
+    {
+        public float MoveSpeed;
+        public float RotateSpeed;
+        public float Gravity;
+        public float HeightJump;
+        internal float MinimalDistanceToObject;
     }
 
     [Serializable]

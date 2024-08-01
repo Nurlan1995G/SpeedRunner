@@ -1,23 +1,24 @@
 ﻿using Assets._Project.CodeBase.CameraLogic;
+using Assets._Project.CodeBase.Logic.Move;
 using Assets._Project.Config;
+using Assets.Project.AssetProviders;
+using Assets.Project.CodeBase.Player.Respawn;
+using Assets.Project.CodeBase.Player.UI;
+using Assets.Project.CodeBase.SharkEnemy.Factory;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Bootstraper : MonoBehaviour
 {
-    //[SerializeField] private SpawnerFood _spawnerFood;
-    //[SerializeField] private PositionStaticData _positionStaticData;
+    [SerializeField] private PositionStaticData _positionStaticData;
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private PlayerView _playerView;
     [SerializeField] private PlayerMover _playerMover;
-    //[SerializeField] private List<SpawnPointEnemyBot> _spawnPoints;
+    [SerializeField] private List<SpawnPointEnemyBot> _spawnPoints;
     [SerializeField] private CameraRotater _cameraRotater;
-    //[SerializeField] private ConfigFood _configFood;
-    //[SerializeField] private UIPopup _uiPopup;
-    //[SerializeField] private BoostButtonUI _boostButtonUI;
-    //[SerializeField] private TopSlimeUI _topSharksUI;
-    //[SerializeField] private SoundHandler _soundHandler;
-    //[SerializeField] private MoveJostick _moveJostick;
+    [SerializeField] private UIPopup _uiPopup;
+    [SerializeField] private TopCharacterUI _topSharksUI;
+    [SerializeField] private SoundHandler _soundHandler;
 
     //private IInput _input;
     private Language _language;
@@ -26,22 +27,18 @@ public class Bootstraper : MonoBehaviour
     {
         CheckLanguage();
 
-        //AssetProvider assetProvider = new AssetProvider();
-        //ServesSelectTypeFood random = new ServesSelectTypeFood(_configFood);
-        //TopSharksManager topSharksManager = new TopSharksManager();
-        //FactoryShark factoryShark = new FactoryShark(assetProvider);
-        //RespawnSlime respawnSlime = new RespawnSlime(_uiPopup, _playerView);
+        AssetProvider assetProvider = new AssetProvider();
+        TopCharacterManager topSharksManager = new TopCharacterManager();
+        FactoryCharacter factoryShark = new FactoryCharacter(assetProvider);
+        RespawnSlime respawnSlime = new RespawnSlime(_uiPopup, _playerView);
         PlayerInput playerInput = new PlayerInput();
         RotateInput rotateInput = new RotateInput();
-        //ScoreLevelBarFoodManager scoreLevelBarFoodManager = new(_gameConfig.CameraRotateData.HideDistance,
-            //_cameraRotater.transform, _spawnerFood);
 
         //InitMobileUI();
-        //InitSpawner(assetProvider, random);
-        //WriteSpawnPoint(factoryShark, topSharksManager);
-        InitPlayer(playerInput);
+        WriteSpawnPoint(factoryShark, topSharksManager);
+        InitPlayer(playerInput, respawnSlime);
         InitCamera(rotateInput);
-        //InitTopUI(topSharksManager);
+        InitTopUI(topSharksManager);
     }
 
     private void CheckLanguage()
@@ -52,26 +49,23 @@ public class Bootstraper : MonoBehaviour
             _language = Language.English;
     }
 
-    /*private void InitSpawner(AssetProvider assetProvider, ServesSelectTypeFood random) =>
-        _spawnerFood.Construct(new FoodFactory(_configFood, assetProvider), random, _playerView, _configFood);*/
-
-   /* private void WriteSpawnPoint(FactoryShark factoryShark, TopSharksManager topSharksManager)
+    private void WriteSpawnPoint(FactoryCharacter factoryCharacter, TopCharacterManager topCharacterManager)
     {
         foreach (SpawnPointEnemyBot spawnPoint in _spawnPoints)
-            spawnPoint.Construct(factoryShark, _positionStaticData, _playerView, _spawnerFood, _gameConfig, topSharksManager, _language);
-    }*/
+            spawnPoint.Construct(factoryCharacter, _positionStaticData, _playerView, _gameConfig, topCharacterManager, _language);
+    }
 
-    private void InitPlayer(PlayerInput playerInput)
+    private void InitPlayer(PlayerInput playerInput, RespawnSlime respawnSlime)
     {
-        _playerView.Construct(_gameConfig.PlayerData);
+        _playerView.Construct(_positionStaticData, _uiPopup, _soundHandler, respawnSlime, _language);
         _playerMover.Construct(_gameConfig.PlayerData, playerInput);
     }
 
     private void InitCamera(RotateInput input) =>
         _cameraRotater.Construct(_gameConfig, input);
 
-    /* private void InitTopUI(TopSharksManager topSharksManager) =>
-         _topSharksUI.Construct(topSharksManager);*/
+    private void InitTopUI(TopCharacterManager topCharacterManager) =>
+        _topSharksUI.Construct(topCharacterManager);
 
     private void InitMobileUI()
     {

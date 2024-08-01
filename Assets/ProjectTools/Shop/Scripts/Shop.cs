@@ -1,9 +1,9 @@
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using YG.Utils.Pay;
 
 public class Shop : MonoBehaviour
 {
@@ -19,6 +19,7 @@ public class Shop : MonoBehaviour
     private ShopItemView _shopItemView;
 
     public bool IsInitialized { get; private set; }
+    public Action SkinCangedInShop { get; internal set; }
 
     #region SHOP_PANEL_BUTTONS
     [SerializeField] private BuyButton _buyButton;
