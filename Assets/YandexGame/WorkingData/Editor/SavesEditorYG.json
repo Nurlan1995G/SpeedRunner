@@ -1,12 +1,12 @@
 {
-    "idSave": 198,
+    "idSave": 219,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "CurrentLevel": 0,
     "CurrentLevelIndex": 0,
     "Coin": 0,
-    "IsMute": false,
+    "IsMute": true,
     "OpenItemsInfoId": [
         0,
         0,
