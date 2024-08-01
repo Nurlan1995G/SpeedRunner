@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   PlayerData:
-    MoveSpeed: 5
+    MoveSpeed: 20
     RotateSpeed: 5
     Gravity: 5
     HeightJump: 5
   CameraRotateData:
-    RotateSpeedPC: 250
+    RotateSpeedPC: 350
     RotateSpeedMobile: 150
     MinZoomDistance: 10
     MaxZoomDistance: 40

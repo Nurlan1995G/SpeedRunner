@@ -14,12 +14,8 @@ public class PlayerMover : MonoBehaviour
 
     public void Construct(PlayerData playerData, PlayerInput playerInput)
     {
-        _playerData = playerData;
-        _input = playerInput;
-    }
-
-    private void OnEnable()
-    {
+        _playerData = playerData ?? throw new System.ArgumentNullException(nameof(playerData));
+        _input = playerInput ?? throw new System.ArgumentNullException(nameof(playerInput));
         _input.Enable();
     }
 

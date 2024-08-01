@@ -11,8 +11,8 @@ namespace Assets._Project.CodeBase.CameraLogic
         [SerializeField] private VariableJoystick _variableJoystick;
         [SerializeField] private CinemachineFreeLook _cinemachineFreeLook;
 
-        private CameraRotateData _cameraRotateData;
         private RotateInput _rotateInput;
+        private CameraRotateData _cameraRotateData;
 
         private float _currentXRotation;
         private float _currentYRotation;
@@ -23,10 +23,10 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private Action _rotationCameraAction;
 
-        public void Construct(GameConfig gameConfig,RotateInput rotateInput)
+        public void Construct(GameConfig gameConfig, RotateInput rotateInput)
         {
             _cameraRotateData = gameConfig.CameraRotateData;
-            _rotateInput = rotateInput;
+            _rotateInput = rotateInput ?? throw new ArgumentNullException(nameof(rotateInput));
 
             if (Application.isMobilePlatform)
             {
@@ -51,6 +51,7 @@ namespace Assets._Project.CodeBase.CameraLogic
         private void OnDisable()
         {
             _rotateInput.Disable();
+
             _rotateInput.Mouse.MouseSrollWheel.performed -= OnTouchMouseScrollWheel;
         }
 
