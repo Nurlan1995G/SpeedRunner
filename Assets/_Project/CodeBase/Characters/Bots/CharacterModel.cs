@@ -7,7 +7,7 @@
         public void SetNickName(string name)
         {
             _nickName = name;
-            NickName.NickNameText.text = _nickName;
+            //NickName.NickNameText.text = _nickName;
         }
 
         public override string GetSharkName()

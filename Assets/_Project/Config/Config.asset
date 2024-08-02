@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ff650e663867f4e9a08c4d847b2e75, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  PlayerData:
-    MoveSpeed: 20
-    RotateSpeed: 5
-    Gravity: 5
-    HeightJump: 5
+  CharacterData:
+    MoveSpeed: 0
+    RotateSpeed: 0
+    Gravity: 0
+    HeightJump: 0
   CameraRotateData:
     RotateSpeedPC: 350
     RotateSpeedMobile: 150
-    MinZoomDistance: 10
-    MaxZoomDistance: 40
+    MinZoomDistance: 20
+    MaxZoomDistance: 80
     ZoomStep: 0.01
     HideDistance: 50

@@ -7,19 +7,17 @@ public class SpawnPointEnemyBot : MonoBehaviour
 {
     private FactoryCharacter _factoryShark;
     private PositionStaticData _sharkPositionStaticData;
-    private PlayerView _playerView;
-    private CharacterBotData _characterBotData;
-    private TopCharacterManager _topSharkManager;
+    private Player _playerView;
+    private CharacterData _characterData;
     private Language _language;
 
     public void Construct(FactoryCharacter factoryShark, PositionStaticData sharkPositionStaticData,
-        PlayerView playerView, GameConfig gameConfig, TopCharacterManager topSharksManager, Language language)
+        Player playerView, GameConfig gameConfig, Language language)
     { 
         _factoryShark = factoryShark;
         _sharkPositionStaticData = sharkPositionStaticData;
         _playerView = playerView;
-        _characterBotData = gameConfig.CharacterBotData;
-        _topSharkManager = topSharksManager;
+        _characterData = gameConfig.CharacterData;
         _language = language;
     }
 
@@ -103,7 +101,7 @@ public class SpawnPointEnemyBot : MonoBehaviour
             return;
 
         BotSlimeView botShark = CreateSharkScene(position, sharkEnemy);
-        botShark.Construct(_characterBotData, _topSharkManager);
+        botShark.Construct(_characterData);
         botShark.SetNickname(nickName);
     }
 
