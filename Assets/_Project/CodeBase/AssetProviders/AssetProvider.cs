@@ -10,8 +10,8 @@ namespace Assets.Project.AssetProviders
         public BotSlimeView Instantiate(string path, Vector3 position, Quaternion rotation) =>
             Object.Instantiate(Resources.Load<BotSlimeView>(path), position, rotation);
 
-        public PlayerView Instantiate<T>(string path, Vector3 position) where T : class =>
-            Object.Instantiate(Resources.Load<PlayerView>(path), position, Quaternion.identity);
+        public Player Instantiate<T>(string path, Vector3 position) where T : class =>
+            Object.Instantiate(Resources.Load<Player>(path), position, Quaternion.identity);
 
         public GameObject Instantiate(GameObject gameObject, Transform hatPosition) =>
             Object.Instantiate(gameObject, hatPosition);

@@ -9,8 +9,8 @@ public class BotSlimeView : MonoBehaviour
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private CharacterModel _sharkModel;
 
-    private CharacterBotData _characterBotData;
-    private PlayerView _player;
+    private CharacterData _characterBotData;
+    private Player _player;
     private SlimeBotStateMachine _stateMashine;
 
     private void Start() =>
@@ -19,10 +19,9 @@ public class BotSlimeView : MonoBehaviour
     private void Update() =>
         _stateMashine?.Update();
 
-    public void Construct( CharacterBotData character, TopCharacterManager topCharacterManager)
+    public void Construct( CharacterData character)
     {
         _characterBotData = character;
-        _sharkModel.Init(topCharacterManager);
     }
 
     public void SetNickname(string nickName) =>

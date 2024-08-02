@@ -6,13 +6,12 @@ namespace Assets._Project.Config
     [CreateAssetMenu(fileName = "Config", menuName = "Config/Data")]
     public class GameConfig : ScriptableObject
     {
-        public PlayerData PlayerData;
+        public CharacterData CharacterData;
         public CameraRotateData CameraRotateData;
-        public CharacterBotData CharacterBotData;
     }
 
     [Serializable]
-    public class PlayerData
+    public class CharacterData
     {
         public float MoveSpeed;
         public float RotateSpeed;
@@ -20,15 +19,6 @@ namespace Assets._Project.Config
         public float HeightJump;
     }
 
-    [Serializable]
-    public class CharacterBotData
-    {
-        public float MoveSpeed;
-        public float RotateSpeed;
-        public float Gravity;
-        public float HeightJump;
-        internal float MinimalDistanceToObject;
-    }
 
     [Serializable]
     public class CameraRotateData

@@ -9,24 +9,19 @@ namespace Assets.Project.CodeBase.SharkEnemy.StateMashine.State
     {
         protected NavMeshAgent _agent;
         protected CharacterModel _sharkModel;
-        private CharacterBotData _characterBotData;
-        private DetecterToObject _detecterToObject;
+        private CharacterData _characterData;
 
-        public AgentMoveState (NavMeshAgent agent, CharacterModel sharkModel, CharacterBotData characterBotData)
+        public AgentMoveState (NavMeshAgent agent, CharacterModel sharkModel, CharacterData characterData)
         {
             _agent = agent;
             _sharkModel = sharkModel;
-            _characterBotData = characterBotData;
-
-            _agent.speed = _characterBotData.MoveSpeed;
-
-            _detecterToObject = new DetecterToObject(this, sharkModel,characterBotData);
+            _characterData = characterData;
         }
 
         public void MoveTo(Vector3 position, Transform transform)
         {
             _agent.destination = position;
-            RotateCharacter(position, transform, _characterBotData.RotateSpeed);
+            RotateCharacter(position, transform, _characterData.RotateSpeed);
         }
 
         private void RotateCharacter(Vector3 targetPosition, Transform transform, float rotateSpeed)

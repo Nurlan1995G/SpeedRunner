@@ -8,11 +8,11 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private GameObject _moveJoystick;
 
     private PlayerInput _input;
-    private PlayerData _playerData;
+    private CharacterData _playerData;
     private bool _isBoosting;
     private float _boostTimeRemaining;
 
-    public void Construct(PlayerData playerData, PlayerInput playerInput)
+    public void Construct(CharacterData playerData, PlayerInput playerInput)
     {
         _playerData = playerData ?? throw new System.ArgumentNullException(nameof(playerData));
         _input = playerInput ?? throw new System.ArgumentNullException(nameof(playerInput));
