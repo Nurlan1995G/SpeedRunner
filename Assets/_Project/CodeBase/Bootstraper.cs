@@ -10,11 +10,9 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private PositionStaticData _positionStaticData;
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private Player _playerView;
-    [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private List<SpawnPointEnemyBot> _spawnPoints;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
-    [SerializeField] private PlayerJumper _playerJumper;
 
     //private IInput _input;
     private Language _language;
@@ -29,7 +27,7 @@ public class Bootstraper : MonoBehaviour
         RotateInput rotateInput = new RotateInput();
 
         //InitMobileUI();
-        WriteSpawnPoint(factoryShark);
+        //WriteSpawnPoint(factoryShark);
         InitPlayer(playerInput);
         InitCamera(rotateInput);
     }
@@ -50,8 +48,7 @@ public class Bootstraper : MonoBehaviour
 
     private void InitPlayer(PlayerInput playerInput)
     {
-        _playerView.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language);
-        _playerMover.Construct(_gameConfig.CharacterData, playerInput);
+        _playerView.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language, playerInput);
     }
 
     private void InitCamera(RotateInput input) =>

@@ -3,48 +3,50 @@ using UnityEngine;
 
 public class PlayerJumper : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
+    private CharacterController _characterController;
+    private PlayerMover _playerMover;
     private CharacterData _playerData;
+    private PlayerInput _playerInput;
 
     private Vector3 _velocity;
     private bool _isGrounded;
+    private float _startJumpVelocity;
 
-    public void Construct(CharacterData playerData, CharacterController _characterController)
+    public void Construct(CharacterData playerData, CharacterController _characterController, PlayerInput playerInput, PlayerMover playerMover)
     {
         _playerData = playerData;
+        _playerInput = playerInput;
+        _playerMover = playerMover;
+
+        SetJumpVelocity();
+       // _playerInput.Enable();
     }
 
     private void Update()
     {
-        _isGrounded = _characterController.isGrounded;
+        Vector2 direction = _playerInput.Player.Jump.ReadValue<Vector2>();
 
-        if (_isGrounded && _velocity.y < 0)
-        {
-            _velocity.y = -2f; 
-        }
-
-        HandleJumpInput();
-        ApplyGravity();
-
-        _characterController.Move(_velocity * Time.deltaTime);
+        if (_playerInput.Player.Jump.triggered)
+            Jump();
     }
 
-    private void HandleJumpInput()
+    private void OnDisable()
     {
-        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
+        //_playerInput.Disable();
+    }
+
+    private void SetJumpVelocity()
+    {
+        float maxHeightTime = _playerData.JumpTime / 2;
+        _playerData.Gravity = (2 * _playerData.HeightJump) / Mathf.Pow(maxHeightTime, 2);
+        _startJumpVelocity = (2 * _playerData.HeightJump) / maxHeightTime;
     }
 
     private void Jump()
     {
-        float jumpVelocity = Mathf.Sqrt(_playerData.HeightJump * 2f * _playerData.Gravity);
-        _velocity.y = jumpVelocity;
-    }
-
-    private void ApplyGravity()
-    {
-        _velocity.y += _playerData.Gravity * Time.deltaTime; 
+        if (_characterController.isGrounded)
+        {
+            _playerMover.TakeJumpDirection(_startJumpVelocity);
+        }
     }
 }

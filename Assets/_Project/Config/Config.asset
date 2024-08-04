@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   CharacterData:
-    MoveSpeed: 0
-    RotateSpeed: 0
-    Gravity: 0
-    HeightJump: 0
+    MoveSpeed: 10
+    RotateSpeed: 10
+    Gravity: 10
+    HeightJump: 5
+    JumpTime: 1
   CameraRotateData:
-    RotateSpeedPC: 350
-    RotateSpeedMobile: 150
+    RotateSpeedPC: 400
+    RotateSpeedMobile: 250
     MinZoomDistance: 20
     MaxZoomDistance: 80
     ZoomStep: 0.01
