@@ -22,12 +22,9 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_characterController.isGrounded + " - isGrounded");
-
         //GravityHandling();
 
         Vector2 moveDirection = _input.Player.Move.ReadValue<Vector2>();
-        Debug.Log(moveDirection + " - moveDirection");
         Move(moveDirection);
     }
 

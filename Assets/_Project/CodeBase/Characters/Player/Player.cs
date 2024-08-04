@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         _language = language;
 
         _playerMover.Construct(playerData, playerInput, _characterController);
-        _playerJumper.Construct(playerData, _characterController, playerInput, _playerMover);
+        _playerJumper.Construct(playerData, _characterController, playerInput);
     }
 
     public void TryStart(bool isStartMoving)
