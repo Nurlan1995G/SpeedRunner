@@ -3,48 +3,56 @@ using UnityEngine;
 
 public class PlayerJumper : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
+    private CharacterController _characterController;
+    private PlayerInput _playerInput;
     private CharacterData _playerData;
 
     private Vector3 _velocity;
-    private bool _isGrounded;
+    private float _jumpVelocity;
 
-    public void Construct(CharacterData playerData, CharacterController _characterController)
+    public void Construct(CharacterData playerData, CharacterController characterController, PlayerInput playerInput)
     {
         _playerData = playerData;
+        _playerInput = playerInput;
+        _characterController = characterController;
+
+        SetJumpVelocity();
+        _playerInput.Enable();
     }
 
     private void Update()
     {
-        _isGrounded = _characterController.isGrounded;
-
-        if (_isGrounded && _velocity.y < 0)
-        {
-            _velocity.y = -2f; 
-        }
-
-        HandleJumpInput();
+        HandleJump();
         ApplyGravity();
 
         _characterController.Move(_velocity * Time.deltaTime);
     }
 
-    private void HandleJumpInput()
+    private void OnDisable()
     {
-        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
+        _playerInput.Disable();
     }
 
-    private void Jump()
+    private void SetJumpVelocity()
     {
-        float jumpVelocity = Mathf.Sqrt(_playerData.HeightJump * 2f * _playerData.Gravity);
-        _velocity.y = jumpVelocity;
+        float maxHeightTime = _playerData.JumpTime / 2;
+        _playerData.Gravity = (2 * _playerData.HeightJump) / Mathf.Pow(maxHeightTime, 2);
+        _jumpVelocity = (2 * _playerData.HeightJump) / maxHeightTime;
+    }
+
+    private void HandleJump()
+    {
+        if (_characterController.isGrounded && _playerInput.Player.Jump.triggered)
+        {
+            _velocity.y = _jumpVelocity;
+        }
     }
 
     private void ApplyGravity()
     {
-        _velocity.y += _playerData.Gravity * Time.deltaTime; 
+        if (!_characterController.isGrounded)
+        {
+            _velocity.y -= _playerData.Gravity * Time.deltaTime;
+        }
     }
 }

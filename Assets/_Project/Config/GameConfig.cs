@@ -17,6 +17,7 @@ namespace Assets._Project.Config
         public float RotateSpeed;
         public float Gravity;
         public float HeightJump;
+        public float JumpTime;
     }
 
 

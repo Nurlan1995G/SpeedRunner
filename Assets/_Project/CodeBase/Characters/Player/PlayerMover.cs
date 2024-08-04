@@ -1,26 +1,29 @@
-﻿using Assets._Project.Config;
+﻿using Assets._Project.CodeBase.Logic.Move;
+using Assets._Project.Config;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private GameObject _moveJoystick;
+    [SerializeField] private MoveJoystick _moveJoystick;
 
+    private CharacterController _characterController;
     private PlayerInput _input;
     private CharacterData _playerData;
-    private bool _isBoosting;
-    private float _boostTimeRemaining;
 
-    public void Construct(CharacterData playerData, PlayerInput playerInput)
+    private Vector3 _velocityDirection;
+
+    public void Construct(CharacterData playerData, PlayerInput playerInput, CharacterController characterController)
     {
         _playerData = playerData ?? throw new System.ArgumentNullException(nameof(playerData));
         _input = playerInput ?? throw new System.ArgumentNullException(nameof(playerInput));
+        _characterController = characterController;
         _input.Enable();
     }
 
     private void Update()
     {
+        //GravityHandling();
+
         Vector2 moveDirection = _input.Player.Move.ReadValue<Vector2>();
         Move(moveDirection);
     }
@@ -28,6 +31,11 @@ public class PlayerMover : MonoBehaviour
     private void OnDisable()
     {
         _input.Disable();
+    }
+
+    public void TakeJumpDirection(float jumpDirection)
+    {
+        _velocityDirection.y = jumpDirection;
     }
 
     private void Move(Vector2 direction)
@@ -55,5 +63,19 @@ public class PlayerMover : MonoBehaviour
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerData.RotateSpeed * Time.deltaTime);
         }
+    }
+
+    private void GravityHandling()
+    {
+        if (!_characterController.isGrounded)
+        {
+            _velocityDirection.y -= _playerData.Gravity * Time.deltaTime;
+        }
+        else
+        {
+            _velocityDirection.y = -5f;
+        }
+
+        _characterController.Move(_velocityDirection * Time.deltaTime);
     }
 }
