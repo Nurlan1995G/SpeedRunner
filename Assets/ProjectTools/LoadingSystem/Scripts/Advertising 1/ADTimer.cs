@@ -4,6 +4,8 @@ using TMPro;
 [RequireComponent(typeof(CanvasGroup))]
 public class ADTimer : MonoBehaviour
 {
+    [SerializeField] private Shop _shop;
+    [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private float _totalSecondToShowAd = 60;
     [SerializeField] private float _timeToShowDisplay = 5f;
     [SerializeField] private TMP_Text _timerText;
@@ -17,12 +19,17 @@ public class ADTimer : MonoBehaviour
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponent<Canvas>();
+
+        _canvas.sortingOrder = -1;
     }
 
     private void Start() => StartTimer();
 
     private void Update()
     {
+        if (IsMenuOpened())
+            return;
+
         if (_currentTime > 0f)
         {
             _currentTime -= Time.unscaledDeltaTime;
@@ -45,8 +52,14 @@ public class ADTimer : MonoBehaviour
                 TimerExpired();
                 StartTimer();
             }
+
+            if (!Application.isFocused)
+                _canvas.sortingOrder = -1;
         }
     }
+
+    private bool IsMenuOpened() =>
+       _shop.gameObject.activeSelf || _mainMenu.gameObject.activeSelf;
 
     private void StartTimer()
     {
@@ -60,7 +73,7 @@ public class ADTimer : MonoBehaviour
         if (_timerText != null)
         {
             int minutes = Mathf.FloorToInt(_currentTime / 60f);
-            int seconds = Mathf.FloorToInt(_currentTime % 60f);
+            int seconds = Mathf.FloorToInt(_currentTime + 1 % 60f);
 
             _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
