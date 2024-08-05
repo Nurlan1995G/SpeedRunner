@@ -4,55 +4,61 @@ using UnityEngine;
 public class PlayerJumper : MonoBehaviour
 {
     private CharacterController _characterController;
+    private PlayerMover _playerMover;
     private PlayerInput _playerInput;
     private CharacterData _playerData;
+
+    private LayerMask _layerMaskGround;
+    private LayerMask _layerMaskTrampoline;
 
     private Vector3 _velocity;
     private float _jumpVelocity;
 
-    public void Construct(CharacterData playerData, CharacterController characterController, PlayerInput playerInput)
+    private const string GroundMask = "Ground";
+    private const string TrampolineMask = "Trampoline";
+
+    public void Construct(CharacterData playerData, CharacterController characterController, PlayerInput playerInput, PlayerMover playerMover)
     {
         _playerData = playerData;
         _playerInput = playerInput;
         _characterController = characterController;
+        _playerMover = playerMover;
 
-        SetJumpVelocity();
         _playerInput.Enable();
+        
+        SetMask();
     }
 
     private void Update()
     {
+        _characterController.Move(Vector3.zero);
         HandleJump();
-        ApplyGravity();
-
-        _characterController.Move(_velocity * Time.deltaTime);
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() => 
         _playerInput.Disable();
+
+    private void SetMask()
+    {
+        _layerMaskGround = LayerMask.GetMask(GroundMask);
+        _layerMaskTrampoline = LayerMask.GetMask(TrampolineMask);
     }
 
-    private void SetJumpVelocity()
+    private bool IsGrounded() => 
+        CheckLayerCollision(_layerMaskGround);
+
+    private bool CheckLayerCollision(LayerMask layerMask)
     {
-        float maxHeightTime = _playerData.JumpTime / 2;
-        _playerData.Gravity = (2 * _playerData.HeightJump) / Mathf.Pow(maxHeightTime, 2);
-        _jumpVelocity = (2 * _playerData.HeightJump) / maxHeightTime;
+
+        return Physics.Raycast(transform.position, Vector3.down, _characterController.height / 2 + 0.1f,
+            layerMask);
     }
 
     private void HandleJump()
     {
-        if (_characterController.isGrounded && _playerInput.Player.Jump.triggered)
-        {
-            _velocity.y = _jumpVelocity;
-        }
-    }
-
-    private void ApplyGravity()
-    {
-        if (!_characterController.isGrounded)
-        {
-            _velocity.y -= _playerData.Gravity * Time.deltaTime;
-        }
+        if (IsGrounded() && _playerInput.Player.Jump.triggered)
+            _playerMover.TakeJumpDirection(_playerData.HeightJump);
+        else if(CheckLayerCollision(_layerMaskTrampoline))
+            _playerMover.TakeJumpDirection(_playerData.HeightJump * 1.5f);
     }
 }

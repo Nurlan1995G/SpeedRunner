@@ -22,7 +22,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        //GravityHandling();
+        GravityHandling();
 
         Vector2 moveDirection = _input.Player.Move.ReadValue<Vector2>();
         Move(moveDirection);
@@ -40,7 +40,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
+       Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
         Quaternion cameraRotationY = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
         MoveCharacter(newDirection, cameraRotationY);
