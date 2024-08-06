@@ -11,8 +11,8 @@ namespace Assets._Project.CodeBase.CameraLogic
         [SerializeField] private VariableJoystick _variableJoystick;
         [SerializeField] private CinemachineFreeLook _cinemachineFreeLook;
 
-        private RotateInput _rotateInput;
         private CameraRotateData _cameraRotateData;
+        private RotateInput _rotateInput;
 
         private float _currentXRotation;
         private float _currentYRotation;
