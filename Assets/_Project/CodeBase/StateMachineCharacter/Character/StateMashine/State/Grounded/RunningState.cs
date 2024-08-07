@@ -1,29 +1,29 @@
-﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Config;
+﻿using Assets._Project.Config;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
     public class RunningState : GroundedState
     {
-        private readonly RunningStateConfig _config;
+        private CharacterData _config;
 
         public RunningState(ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(switchState, stateMashineData, character)
         {
-            _config = character.Config.RunningStateConfig;
+            _config = character.GameConfig.CharacterData;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            CharacterView.StartRunning();
-            StateMashineData.Speed = _config.Speed;
+            CharacterAnimation.StartRunning();
+            StateMashineData.Speed = _config.MoveSpeed;
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            CharacterView.StopRunning();
+            CharacterAnimation.StopRunning();
         }
 
         public override void Update()

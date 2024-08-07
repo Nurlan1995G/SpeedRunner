@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private MoveJoystick _moveJoystick;
-
     private CharacterController _characterController;
     private PlayerInput _input;
     private CharacterData _playerData;

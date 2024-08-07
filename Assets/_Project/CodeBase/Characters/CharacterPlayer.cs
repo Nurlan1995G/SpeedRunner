@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, IDestroyableSlime
+public abstract class CharacterPlayer : MonoBehaviour, IDestroyableSlime
 {
     protected int Score = 1;
 

@@ -1,4 +1,5 @@
-﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine;
+﻿using Assets._Project.Config;
+using Assets.ProjectLesson2.Scripts.Character.StateMashine;
 using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character
@@ -6,20 +7,20 @@ namespace Assets.ProjectLesson2.Scripts.Character
     [RequireComponent(typeof(CharacterController))]
     public class Character : MonoBehaviour
     {
-        [field: SerializeField] public CharacterView CharacterView {  get; private set; }
-        [field: SerializeField] public CharacterConfig Config { get; private set; }
         [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
+        [field: SerializeField] public CharacterController CharacterController { get; private set; }
 
         private CharacterStateMachine _stateMachine;
 
+        public GameConfig GameConfig { get; private set; }
         public PlayerInput PlayerInput { get; private set; }
-        public CharacterController CharacterController { get; private set; }
+        public CharacterAnimation CharacterAnimation {  get; private set; }
 
-        private void Awake()
+        public void Construct(PlayerInput playerInput, GameConfig gameConfig, CharacterAnimation characterAnimation)
         {
-            CharacterView.Initialize();
-            CharacterController = GetComponent<CharacterController>();
-            PlayerInput = new PlayerInput();
+            PlayerInput = playerInput;
+            GameConfig = gameConfig;
+            CharacterAnimation = characterAnimation;
             _stateMachine = new CharacterStateMachine(this);
         }
 

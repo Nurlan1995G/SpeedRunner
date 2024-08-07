@@ -3,6 +3,7 @@ using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn;
 using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine
 {
@@ -14,6 +15,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine
         public CharacterStateMachine(Character character)
         {
             StateMashineData stateMashineData = new StateMashineData();
+            Debug.Log("CharacerStateMachine = cons");
 
             _states = new List<IState>
             {

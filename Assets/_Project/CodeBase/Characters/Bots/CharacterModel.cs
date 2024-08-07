@@ -1,6 +1,6 @@
 ﻿namespace Assets.Project.CodeBase.SharkEnemy
 {
-    public class CharacterModel : Character
+    public class CharacterModel : CharacterPlayer
     {
         private string _nickName;
 
