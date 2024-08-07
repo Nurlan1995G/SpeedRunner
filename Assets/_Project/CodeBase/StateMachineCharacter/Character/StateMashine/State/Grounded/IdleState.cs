@@ -1,4 +1,6 @@
-﻿namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
+﻿using UnityEngine;
+
+namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
     public class IdleState : GroundedState
     {
@@ -9,15 +11,14 @@
         public override void Enter()
         {
             base.Enter();
-
-            CharacterView.StartIdle();
+            CharacterAnimation.StartIdle();
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            CharacterView.StopIdle();
+            CharacterAnimation.StopIdle();
         }
 
         public override void Update()

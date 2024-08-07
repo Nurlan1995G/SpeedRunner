@@ -1,31 +1,31 @@
-﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Config;
+﻿using Assets._Project.Config;
 using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 {
     public class AirbornState : MovementState
     {
-        private readonly AirbornStateConfig _config;
+        private readonly AirbornCharacterData _config;
 
         public AirbornState (ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(stateMashineData, switchState, character)
         {
-            _config = character.Config.AirbornStateConfig;
+            _config = character.GameConfig.AirbornCharacterData;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            CharacterView.StartAirborn();
+            CharacterAnimation.StartAirborn();
 
-            StateMashineData.Speed = _config.Speed;
+            StateMashineData.Speed = _config.SpeedAirborn;
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            CharacterView.StopAirborn();
+            CharacterAnimation.StopAirborn();
         }
 
         public override void Update()

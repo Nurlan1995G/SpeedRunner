@@ -173,7 +173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &11538707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,10 +188,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionStaticData: {fileID: 11400000, guid: a3b4e103367361a438f2df08f2212746, type: 2}
   _gameConfig: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
-  _playerView: {fileID: 1005853624}
+  _character: {fileID: 232025186}
   _spawnPoints: []
   _cameraRotater: {fileID: 341800128}
   _soundHandler: {fileID: 1808591607}
+  _playerAnimation: {fileID: 1603438277}
 --- !u!4 &11538708
 Transform:
   m_ObjectHideFlags: 0
@@ -902,9 +903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81a1fd58fc991141996bb8242e1a4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CharacterView>k__BackingField: {fileID: 1603438279}
-  <Config>k__BackingField: {fileID: 11400000, guid: 40e9d05c1b6314d429ea3647efe47d5f, type: 2}
   <GroundChecker>k__BackingField: {fileID: 671300039}
+  <CharacterController>k__BackingField: {fileID: 232025187}
 --- !u!143 &232025187
 CharacterController:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -1.2, z: 0}
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!4 &232025188
 Transform:
   m_ObjectHideFlags: 0
@@ -1377,7 +1377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _variableJoystick: {fileID: 1831132717}
   _cinemachineFreeLook: {fileID: 113185021}
-  _gameConfig: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
 --- !u!1001 &351463703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2773,7 +2772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c4346e1a4398e40a1d0d51946f6772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveJoystick: {fileID: 479067275}
 --- !u!114 &1005853624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4082,14 +4080,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7293998829446728033, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1603438279}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
---- !u!1 &1603438277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7293998829446728033, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
+--- !u!95 &1603438277 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7591278233993227678, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
   m_PrefabInstance: {fileID: 1603438276}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1603438278 stripped
@@ -4097,18 +4092,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5127499480071165382, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
   m_PrefabInstance: {fileID: 1603438276}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1603438279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603438277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0eb035513b4487448d35f1517b42113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1643736552
 GameObject:
   m_ObjectHideFlags: 0

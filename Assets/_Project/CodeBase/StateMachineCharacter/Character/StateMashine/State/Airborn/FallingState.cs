@@ -1,13 +1,16 @@
 ﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded;
+using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 {
     public class FallingState : AirbornState
     {
         private readonly GroundChecker _groundChecker;
+        private readonly Character _character;
 
         public FallingState (ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(switchState, stateMashineData, character)
         {
+            _character = character;
             _groundChecker = character.GroundChecker;
         }
 
@@ -15,19 +18,22 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         {
             base.Enter();
 
-            CharacterView.StartFalling();
+            CharacterAnimation.StartFalling();
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            CharacterView.StopFalling();
+            CharacterAnimation.StopFalling();
         }
 
         public override void Update()
         {
             base.Update();
+
+            StateMashineData.YVelocity -= _character.GameConfig.AirbornCharacterData
+                .BaseGrafity * Time.deltaTime;
 
             if (_groundChecker.IsTouches)
             {

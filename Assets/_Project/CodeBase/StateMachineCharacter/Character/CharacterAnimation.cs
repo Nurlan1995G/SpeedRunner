@@ -2,8 +2,7 @@
 
 namespace Assets.ProjectLesson2.Scripts.Character
 {
-    [RequireComponent(typeof(Animator))]
-    public class CharacterView : MonoBehaviour
+    public class CharacterAnimation
     {
         private const string IsIdling = "IsIdling";
         private const string IsRunning = "IsRunning";
@@ -15,8 +14,10 @@ namespace Assets.ProjectLesson2.Scripts.Character
 
         private Animator _animator;
 
-        public void Initialize() =>
-            _animator = GetComponent<Animator>();
+        public CharacterAnimation(Animator animator)
+        {
+            _animator = animator;
+        }
 
         public void StartIdle() => _animator.SetBool(IsIdling, true);
         public void StopIdle() => _animator.SetBool(IsIdling, false);

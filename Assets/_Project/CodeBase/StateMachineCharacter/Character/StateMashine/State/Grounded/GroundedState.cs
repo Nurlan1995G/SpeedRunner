@@ -16,14 +16,14 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         {
             base.Enter();
 
-            CharacterView.StartGrounded();
+            CharacterAnimation.StartGrounded();
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            CharacterView.StopGrounded();
+            CharacterAnimation.StopGrounded();
         }
 
         public override void Update()
