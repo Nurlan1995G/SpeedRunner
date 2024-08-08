@@ -12,7 +12,7 @@ namespace Assets.ProjectLesson2.Scripts.Character
 
         private CharacterStateMachine _stateMachine;
 
-        public Vector3 Velocity { get; set; }
+        public Vector3 Velocity;
 
         public GameConfig GameConfig { get; private set; }
         public PlayerInput PlayerInput { get; private set; }
@@ -29,6 +29,7 @@ namespace Assets.ProjectLesson2.Scripts.Character
         private void Update()
         {
             _stateMachine.HandleInput();
+            Debug.Log(_stateMachine.CurrentState.GetType());
 
             _stateMachine.Update();
         }

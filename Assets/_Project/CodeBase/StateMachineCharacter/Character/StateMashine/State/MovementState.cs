@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using YG.Utils.LB;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 {
@@ -23,48 +23,44 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 
         public virtual void Enter()
         {
-            Debug.Log("MovementState - Enter");
+            //Debug.Log("MovementState - Enter");
             CharacterAnimation.StartMovement(); 
             AddInputActionsCallbacks();    
         }
 
         public virtual void Exit()
         {
-            Debug.Log("MovementState - Exit");
+            //Debug.Log("MovementState - Exit");
             CharacterAnimation.StopMovement();  
             RemoveInputActionsCallback(); 
         }
 
         public virtual void HandleInput()
         {
-            Debug.Log("MovementState - HandleInput");
+            //Debug.Log("MovementState - HandleInput");
             Vector2 direction = PlayerInput.Player.Move.ReadValue<Vector2>();
             Move(direction);
         }
 
         public virtual void Update()
         {
-            Debug.Log("MovementState - Update");
+            //Debug.Log("MovementState - Update");
 
-            Vector3 velocity = GetConvertedVecloity();
-
-            CharacterController.Move(velocity * Time.deltaTime);
+            
         }
 
         protected virtual void AddInputActionsCallbacks()
         {
-            Debug.Log("MovementState - AddInputActionsCallbacks");
+            //Debug.Log("MovementState - AddInputActionsCallbacks");
         }
 
         protected virtual void RemoveInputActionsCallback()
         {
-            Debug.Log("MovementState - RemoveInputActionsCallback");
+            //Debug.Log("MovementState - RemoveInputActionsCallback");
         }
 
-        protected bool IsHorizontalInputZero() => StateMashineData.XInput == 0;
-
-        private Vector3 GetConvertedVecloity() =>
-            new Vector3(StateMashineData.XVelocity, StateMashineData.YVelocity, 0);
+        protected bool IsHorizontalInputZero() => _character.Velocity == Vector3.zero;
+        
 
         private void Move(Vector2 direction)
         {

@@ -4,8 +4,11 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
     public class IdleState : GroundedState
     {
+        private readonly Character _character;
+
         public IdleState(ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(switchState, stateMashineData, character)
         {
+            _character = character;
         }
 
         public override void Enter()
@@ -13,6 +16,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
             base.Enter();
             Debug.Log("IdleState - Enter");
             CharacterAnimation.StartIdle();
+            _character.Velocity = new Vector3(_character.Velocity.x, _character.Velocity.y, _character.Velocity.z);
         }
 
         public override void Exit()
@@ -28,10 +32,8 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 
             Debug.Log("IdleState - Update");
 
-            if (IsHorizontalInputZero())
-                return;
-
-            SwitchState.SwitchState<RunningState>();
+            if (!IsHorizontalInputZero())
+                SwitchState.SwitchState<RunningState>();
         }
     }
 }

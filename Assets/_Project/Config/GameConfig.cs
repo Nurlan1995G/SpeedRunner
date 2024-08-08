@@ -27,7 +27,6 @@ namespace Assets._Project.Config
     {
         public float MoveSpeed;
         public float RotateSpeed;
-        public float Gravity;
     }
 
     [Serializable]
@@ -35,6 +34,7 @@ namespace Assets._Project.Config
     {
         public JumpingData JumpingData;
         public float SpeedAirborn;
+        public float Gravity;
 
         public float BaseGrafity =>
             2f * JumpingData.MaxHeight / (JumpingData.TimeToReachMaxHeight * JumpingData.TimeToReachMaxHeight);

@@ -1,7 +1,6 @@
 ﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn;
-using System;
 using UnityEngine;
-using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.InputSystem;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
@@ -17,7 +16,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("GroundedState - Enter");
+           // Debug.Log("GroundedState - Enter");
 
             CharacterAnimation.StartGrounded();
         }
@@ -25,7 +24,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("GroundedState - Exit");
+            //Debug.Log("GroundedState - Exit");
             CharacterAnimation.StopGrounded();
         }
 
@@ -33,7 +32,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         {
             base.Update();
 
-            Debug.Log("GroundedState - Update");
+            //Debug.Log("GroundedState - Update");
 
             if (_groundCheck.IsTouches == false)
                 SwitchState.SwitchState<FallingState>();
@@ -42,18 +41,18 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         protected override void AddInputActionsCallbacks()
         {
             base.AddInputActionsCallbacks();
-            Debug.Log("GroundedState - AddInputActionsCallbacks = Jump подсписка");
+            //Debug.Log("GroundedState - AddInputActionsCallbacks = Jump подсписка");
             PlayerInput.Player.Jump.started += OnJumpKeyPressed;
         }
 
         protected override void RemoveInputActionsCallback()
         {
             base.RemoveInputActionsCallback();
-            Debug.Log("GroundedState - RemoveInputActionsCallback = Jump отписка");
+            //Debug.Log("GroundedState - RemoveInputActionsCallback = Jump отписка");
             PlayerInput.Player.Jump.started -= OnJumpKeyPressed;
         }
 
-        private void OnJumpKeyPressed(CallbackContext context)
+        private void OnJumpKeyPressed(InputAction.CallbackContext context)
         {
             Debug.Log("GroundedState - OnJumpKeyPressed");
             SwitchState.SwitchState<JumpingState>();

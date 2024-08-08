@@ -18,7 +18,6 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 
             Debug.Log("RunningState - Enter");
             CharacterAnimation.StartRunning();
-            StateMashineData.Speed = _config.MoveSpeed;
         }
 
         public override void Exit()

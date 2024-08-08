@@ -12,7 +12,6 @@ namespace Assets.ProjectLesson2.Scripts.Character
 
         private void Update()
         {
-            Debug.Log("GroundChecker - Update");
             IsTouches = Physics.CheckSphere(transform.position, _distanceToCheck, _ground);
         }
     }

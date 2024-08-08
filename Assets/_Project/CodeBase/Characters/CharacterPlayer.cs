@@ -14,7 +14,6 @@ public abstract class CharacterPlayer : MonoBehaviour, IDestroyableSlime
     {
     }
 
-
     public abstract string GetSharkName();
 
     public void Destroy() =>

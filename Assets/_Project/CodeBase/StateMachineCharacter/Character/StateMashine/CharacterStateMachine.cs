@@ -29,6 +29,8 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine
             _currentState.Enter();
         }
 
+        public IState CurrentState => _currentState;
+
         public void SwitchState<State>() where State : IState
         {
             IState state = _states.FirstOrDefault(state => state is State);
