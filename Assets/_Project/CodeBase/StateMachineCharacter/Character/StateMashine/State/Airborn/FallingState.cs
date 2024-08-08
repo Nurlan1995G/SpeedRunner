@@ -36,8 +36,10 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 
             if (_groundChecker.IsTouches)
             {
-                StateMashineData.YVelocity = 0;
-                
+                _character.Velocity.y = 0;
+
+                Debug.Log("vsdfd");
+
                 if(IsHorizontalInputZero())
                     SwitchState.SwitchState<IdleState>();
                 else
