@@ -23,73 +23,48 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 
         public virtual void Enter()
         {
+            Debug.Log("MovementState - Enter");
             CharacterAnimation.StartMovement(); 
             AddInputActionsCallbacks();    
         }
 
         public virtual void Exit()
         {
+            Debug.Log("MovementState - Exit");
             CharacterAnimation.StopMovement();  
             RemoveInputActionsCallback(); 
         }
 
         public virtual void HandleInput()
         {
-            Vector2 inputVector = ReadInput();
-            StateMashineData.XInput = inputVector.x;
-            StateMashineData.XVelocity = inputVector.x * StateMashineData.Speed;
+            Debug.Log("MovementState - HandleInput");
+            Vector2 direction = PlayerInput.Player.Move.ReadValue<Vector2>();
+            Move(direction);
         }
 
         public virtual void Update()
         {
-            Vector3 velocity = GetConvertedVelocity();
+            Debug.Log("MovementState - Update");
+
+            Vector3 velocity = GetConvertedVecloity();
 
             CharacterController.Move(velocity * Time.deltaTime);
-            _character.transform.rotation = GetRotationFrom(velocity); 
         }
 
         protected virtual void AddInputActionsCallbacks()
         {
-            PlayerInput.Player.Move.performed += OnMovePerformed;
-            PlayerInput.Player.Move.canceled += OnMoveCanceled;
+            Debug.Log("MovementState - AddInputActionsCallbacks");
         }
 
         protected virtual void RemoveInputActionsCallback()
         {
-            PlayerInput.Player.Move.performed -= OnMovePerformed;
-            PlayerInput.Player.Move.canceled -= OnMoveCanceled;
+            Debug.Log("MovementState - RemoveInputActionsCallback");
         }
 
         protected bool IsHorizontalInputZero() => StateMashineData.XInput == 0;
 
-        private Quaternion GetRotationFrom(Vector3 velocity)
-        {
-            if (velocity.x > 0)
-                return Quaternion.LookRotation(Vector3.right);
-
-            if (velocity.x < 0)
-                return Quaternion.LookRotation(Vector3.left);
-
-            return _character.transform.rotation;
-        }
-
-        private Vector3 GetConvertedVelocity() =>
+        private Vector3 GetConvertedVecloity() =>
             new Vector3(StateMashineData.XVelocity, StateMashineData.YVelocity, 0);
-
-        private Vector2 ReadInput() =>
-            PlayerInput.Player.Move.ReadValue<Vector2>();
-
-        private void OnMovePerformed(InputAction.CallbackContext context)
-        {
-            Vector2 direction = context.ReadValue<Vector2>();
-            Move(direction);
-        }
-
-        private void OnMoveCanceled(InputAction.CallbackContext context)
-        {
-            StateMashineData.XInput = 0;
-            StateMashineData.XVelocity = 0;
-        }
 
         private void Move(Vector2 direction)
         {

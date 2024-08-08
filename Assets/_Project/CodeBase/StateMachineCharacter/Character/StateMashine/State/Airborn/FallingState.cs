@@ -17,14 +17,14 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         public override void Enter()
         {
             base.Enter();
-
+            Debug.Log("FallingState- Enter");
             CharacterAnimation.StartFalling();
         }
 
         public override void Exit()
         {
             base.Exit();
-
+            Debug.Log("FallingState - Exit");
             CharacterAnimation.StopFalling();
         }
 
@@ -32,8 +32,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         {
             base.Update();
 
-            StateMashineData.YVelocity -= _character.GameConfig.AirbornCharacterData
-                .BaseGrafity * Time.deltaTime;
+            Debug.Log("FallingState - Update");
 
             if (_groundChecker.IsTouches)
             {

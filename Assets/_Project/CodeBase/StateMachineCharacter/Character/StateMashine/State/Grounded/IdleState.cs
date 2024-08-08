@@ -11,19 +11,22 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("IdleState - Enter");
             CharacterAnimation.StartIdle();
         }
 
         public override void Exit()
         {
             base.Exit();
-
+            Debug.Log("IdleState - Exit");
             CharacterAnimation.StopIdle();
         }
 
         public override void Update()
         {
             base.Update();
+
+            Debug.Log("IdleState - Update");
 
             if (IsHorizontalInputZero())
                 return;

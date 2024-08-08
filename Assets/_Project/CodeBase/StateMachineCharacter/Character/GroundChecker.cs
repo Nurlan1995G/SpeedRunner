@@ -10,7 +10,10 @@ namespace Assets.ProjectLesson2.Scripts.Character
 
         public bool IsTouches { get; private set; }
 
-        private void Update() => 
+        private void Update()
+        {
+            Debug.Log("GroundChecker - Update");
             IsTouches = Physics.CheckSphere(transform.position, _distanceToCheck, _ground);
+        }
     }
 }
