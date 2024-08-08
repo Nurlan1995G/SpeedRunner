@@ -25,3 +25,12 @@ MonoBehaviour:
     MaxZoomDistance: 80
     ZoomStep: 0.01
     HideDistance: 50
+  AirbornCharacterData:
+    JumpingData:
+      MaxHeight: 10
+      TimeToReachMaxHeight: 1
+    SpeedAirborn: 4
+  RunningCharacterData:
+    MoveSpeed: 20
+    RotateSpeed: 5
+    Gravity: 10

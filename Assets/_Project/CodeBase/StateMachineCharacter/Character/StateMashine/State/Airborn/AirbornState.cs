@@ -15,7 +15,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         public override void Enter()
         {
             base.Enter();
-
+            Debug.Log("AirbornState - Enter");
             CharacterAnimation.StartAirborn();
 
             StateMashineData.Speed = _config.SpeedAirborn;
@@ -24,13 +24,15 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         public override void Exit()
         {
             base.Exit();
-
+            Debug.Log("AirbornState - Exit");
             CharacterAnimation.StopAirborn();
         }
 
         public override void Update()
         {
             base.Update();
+
+            Debug.Log("AirbornState - Update");
 
             StateMashineData.YVelocity -= GetGravityMultiPlayer() * Time.deltaTime;
         }

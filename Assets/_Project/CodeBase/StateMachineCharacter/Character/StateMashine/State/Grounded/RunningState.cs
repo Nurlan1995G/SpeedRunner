@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Config;
+using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
@@ -15,6 +16,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         {
             base.Enter();
 
+            Debug.Log("RunningState - Enter");
             CharacterAnimation.StartRunning();
             StateMashineData.Speed = _config.MoveSpeed;
         }
@@ -22,7 +24,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         public override void Exit()
         {
             base.Exit();
-
+            Debug.Log("RunningState - Exit");
             CharacterAnimation.StopRunning();
         }
 
@@ -30,6 +32,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         {
             base.Update();
 
+            Debug.Log("RunningState - Update");
             if (IsHorizontalInputZero())
                 SwitchState.SwitchState<IdleState>();
         }

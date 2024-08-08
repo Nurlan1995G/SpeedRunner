@@ -12,6 +12,8 @@ namespace Assets.ProjectLesson2.Scripts.Character
 
         private CharacterStateMachine _stateMachine;
 
+        public Vector3 Velocity { get; set; }
+
         public GameConfig GameConfig { get; private set; }
         public PlayerInput PlayerInput { get; private set; }
         public CharacterAnimation CharacterAnimation {  get; private set; }
