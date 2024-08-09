@@ -23,21 +23,18 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 
         public virtual void Enter()
         {
-            //Debug.Log("MovementState - Enter");
             CharacterAnimation.StartMovement(); 
             AddInputActionsCallbacks();    
         }
 
         public virtual void Exit()
         {
-            //Debug.Log("MovementState - Exit");
             CharacterAnimation.StopMovement();  
             RemoveInputActionsCallback(); 
         }
 
         public virtual void HandleInput()
         {
-            //Debug.Log("MovementState - HandleInput");
             Vector2 direction = PlayerInput.Player.Move.ReadValue<Vector2>();
             Move(direction);
         }
@@ -45,8 +42,6 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
         public virtual void Update()
         {
             //Debug.Log("MovementState - Update");
-
-            
         }
 
         protected virtual void AddInputActionsCallbacks()
@@ -59,8 +54,11 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
             //Debug.Log("MovementState - RemoveInputActionsCallback");
         }
 
-        protected bool IsHorizontalInputZero() => _character.Velocity == Vector3.zero;
-        
+        protected bool IsHorizontalInputZero()
+        {
+            Vector2 directionInput = PlayerInput.Player.Move.ReadValue<Vector2>();
+            return directionInput == Vector2.zero;
+        }
 
         private void Move(Vector2 direction)
         {

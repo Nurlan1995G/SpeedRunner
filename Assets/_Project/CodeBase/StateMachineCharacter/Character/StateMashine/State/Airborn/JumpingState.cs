@@ -1,6 +1,4 @@
 ﻿using Assets._Project.Config;
-using TMPro;
-using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 {
@@ -18,21 +16,20 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         public override void Enter()
         {
             base.Enter();
-            //Debug.Log("JumpingState- Enter");
             CharacterAnimation.StartJumping();
+            _character.Velocity.y = _config.StartYVelosity;
         }
 
         public override void Exit()
         {
             base.Exit();
-            //Debug.Log("JumpingState- Exit");
             CharacterAnimation.StopJumping();
         }
 
         public override void Update()
         {
             base.Update();
-            //Debug.Log("JumpingState- Update");
+            
             if (_character.Velocity.y <= 0)
                 SwitchState.SwitchState<FallingState>();
         }
