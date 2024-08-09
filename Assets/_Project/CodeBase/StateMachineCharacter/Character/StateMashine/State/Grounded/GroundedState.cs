@@ -1,6 +1,4 @@
 ﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
@@ -36,18 +34,18 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
         protected override void AddInputActionsCallbacks()
         {
             base.AddInputActionsCallbacks();
-            PlayerInput.Player.Jump.started += OnJumpKeyPressed;
+            //PlayerInput.Player.Jump.started += OnJumpKeyPressed;
         }
 
         protected override void RemoveInputActionsCallback()
         {
             base.RemoveInputActionsCallback();
-            PlayerInput.Player.Jump.started -= OnJumpKeyPressed;
+            //PlayerInput.Player.Jump.started -= OnJumpKeyPressed;
         }
 
-        private void OnJumpKeyPressed(InputAction.CallbackContext context)
+        /*private void OnJumpKeyPressed(InputAction.CallbackContext context)
         {
             SwitchState.SwitchState<JumpingState>();
-        }
+        }*/
     }
 }

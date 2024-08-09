@@ -27,10 +27,10 @@ MonoBehaviour:
     HideDistance: 50
   AirbornCharacterData:
     JumpingData:
-      MaxHeight: 10
+      MaxHeight: 7
       TimeToReachMaxHeight: 0.5
     SpeedAirborn: 4
-    Gravity: 30
+    Gravity: 50
   RunningCharacterData:
     MoveSpeed: 70
     RotateSpeed: 10

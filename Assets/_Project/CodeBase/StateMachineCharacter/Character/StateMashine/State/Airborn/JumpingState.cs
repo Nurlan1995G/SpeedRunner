@@ -1,15 +1,13 @@
-﻿using Assets._Project.Config;
-
-namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
+﻿namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 {
     public class JumpingState : AirbornState
     {
-        private readonly JumpingData _config;
+        //private readonly JumpingData _config;
         private readonly Character _character;
 
         public JumpingState(ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(switchState, stateMashineData, character)
         {
-            _config = character.GameConfig.AirbornCharacterData.JumpingData;
+            //_config = character.GameConfig.AirbornCharacterData.JumpingData;
             _character = character;
         }
 
@@ -17,7 +15,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         {
             base.Enter();
             CharacterAnimation.StartJumping();
-            _character.Velocity.y = _config.StartYVelosity;
+            //_character.Velocity.y = _config.StartYVelosity;
         }
 
         public override void Exit()

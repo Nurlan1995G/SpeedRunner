@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using YG.Utils.LB;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 {
@@ -35,8 +34,8 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 
         public virtual void HandleInput()
         {
-            Vector2 direction = PlayerInput.Player.Move.ReadValue<Vector2>();
-            Move(direction);
+           // Vector2 direction = PlayerInput.Player.Move.ReadValue<Vector2>();
+            //Move(direction);
         }
 
         public virtual void Update()
@@ -56,8 +55,9 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
 
         protected bool IsHorizontalInputZero()
         {
-            Vector2 directionInput = PlayerInput.Player.Move.ReadValue<Vector2>();
-            return directionInput == Vector2.zero;
+            return true;
+            //Vector2 directionInput = PlayerInput.Player.Move.ReadValue<Vector2>();
+            //return directionInput == Vector2.zero;
         }
 
         private void Move(Vector2 direction)
@@ -73,8 +73,8 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
         {
             Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
-            CharacterController.Move(finalDirection * _character.GameConfig.RunningCharacterData
-                .MoveSpeed * Time.deltaTime);
+           // CharacterController.Move(finalDirection * _character.GameConfig.RunningCharacterData
+               // .MoveSpeed * Time.deltaTime);
         }
 
         private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
@@ -84,7 +84,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
                 Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(finalDirection);
 
-                _character.transform.rotation = Quaternion.Lerp(_character.transform.rotation, targetRotation, _character.GameConfig.RunningCharacterData.RotateSpeed * Time.deltaTime);
+                //_character.transform.rotation = Quaternion.Lerp(_character.transform.rotation, targetRotation, _character.GameConfig.RunningCharacterData.RotateSpeed * Time.deltaTime);
             }
         }
     }

@@ -1,15 +1,13 @@
-﻿using Assets._Project.Config;
-using UnityEngine;
-
+﻿
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded
 {
     public class RunningState : GroundedState
     {
-        private CharacterData _config;
+        //private CharacterData _config;
 
         public RunningState(ISwitchState switchState, StateMashineData stateMashineData, Character character) : base(switchState, stateMashineData, character)
         {
-            _config = character.GameConfig.CharacterData;
+            //_config = character.GameConfig.CharacterData;
         }
 
         public override void Enter()

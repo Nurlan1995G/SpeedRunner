@@ -2,7 +2,6 @@
 using Assets._Project.Config;
 using Assets.Project.AssetProviders;
 using Assets.Project.CodeBase.SharkEnemy.Factory;
-using Assets.ProjectLesson2.Scripts.Character;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class Bootstraper : MonoBehaviour
 {
     [SerializeField] private PositionStaticData _positionStaticData;
     [SerializeField] private GameConfig _gameConfig;
-    [SerializeField] private Character _character;
+    [SerializeField] private Player _player;
     [SerializeField] private List<SpawnPointEnemyBot> _spawnPoints;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
@@ -51,7 +50,8 @@ public class Bootstraper : MonoBehaviour
 
     private void InitPlayer(PlayerInput playerInput, CharacterAnimation characterAnimation)
     {
-        _character.Construct(playerInput, _gameConfig, characterAnimation);
+        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language,
+            playerInput, characterAnimation);
     }
 
     private void InitCamera(RotateInput input) =>
