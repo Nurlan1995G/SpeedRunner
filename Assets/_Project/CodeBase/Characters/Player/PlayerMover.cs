@@ -17,14 +17,49 @@ public class PlayerMover : MonoBehaviour
     private void Update()
     {
         GravityHandling();
-
         Vector2 moveDirection = _player.PlayerInput.Player.Move.ReadValue<Vector2>();
         Move(moveDirection);
+
+        HandleAnimations(moveDirection);
     }
 
-    public void TakeJumpDirection(float jumpDirection)
-    {
+    public void TakeJumpDirection(float jumpDirection) => 
         _velocityDirection.y = jumpDirection;
+
+    private void HandleAnimations(Vector2 moveDirection)
+    {
+        if (_player.GroundChecker.IsGrounded)
+        {
+            _player.CharacterAnimation.StopFalling();
+            _player.CharacterAnimation.StopJumping();
+
+            if (moveDirection != Vector2.zero)
+            {
+                _player.CharacterAnimation.StartRunning();
+                _player.CharacterAnimation.StopIdle();
+            }
+            else
+            {
+                _player.CharacterAnimation.StopRunning();
+                _player.CharacterAnimation.StartIdle();
+            }
+        }
+        else
+        {
+            _player.CharacterAnimation.StopRunning();
+            _player.CharacterAnimation.StopIdle();
+
+            if (_velocityDirection.y > 0)
+            {
+                _player.CharacterAnimation.StartJumping();
+                _player.CharacterAnimation.StopFalling();
+            }
+            else
+            {
+                _player.CharacterAnimation.StopJumping();
+                _player.CharacterAnimation.StartFalling();
+            }
+        }
     }
 
     private void Move(Vector2 direction)
@@ -56,7 +91,7 @@ public class PlayerMover : MonoBehaviour
 
     private void GravityHandling()
     {
-        if (_player.CharacterController.isGrounded == false)
+        if (_player.GroundChecker.IsGrounded == false)
         {
             _velocityDirection.y -= _playerData.Gravity * Time.deltaTime;
         }

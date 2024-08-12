@@ -16,7 +16,7 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State
             _character = character;
         }
 
-        protected PlayerInput PlayerInput => _character.PlayerInput;
+        protected PlayerInputsd PlayerInput => _character.PlayerInput;
         protected CharacterController CharacterController => _character.CharacterController;
         protected CharacterAnimation CharacterAnimation => _character.CharacterAnimation;
 

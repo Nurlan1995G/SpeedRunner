@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   CharacterData:
-    MoveSpeed: 100
+    MoveSpeed: 50
     RotateSpeed: 5
     Gravity: 80
-    HeightJump: 30
+    HeightJump: 50
     JumpTime: 1
   CameraRotateData:
     RotateSpeedPC: 400

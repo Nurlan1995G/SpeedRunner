@@ -14,10 +14,10 @@ namespace Assets.ProjectLesson2.Scripts.Character
         public Vector3 Velocity;
 
         public GameConfig GameConfig { get; private set; }
-        public PlayerInput PlayerInput { get; private set; }
+        public PlayerInputsd PlayerInput { get; private set; }
         public CharacterAnimation CharacterAnimation {  get; private set; }
 
-        public void Construct(PlayerInput playerInput, GameConfig gameConfig, CharacterAnimation characterAnimation)
+        public void Construct(PlayerInputsd playerInput, GameConfig gameConfig, CharacterAnimation characterAnimation)
         {
             PlayerInput = playerInput;
             GameConfig = gameConfig;

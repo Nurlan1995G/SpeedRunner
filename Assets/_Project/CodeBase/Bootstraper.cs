@@ -30,8 +30,8 @@ public class Bootstraper : MonoBehaviour
 
         //InitMobileUI();
         //WriteSpawnPoint(factoryShark);
-        InitCamera(rotateInput);
         InitPlayer(playerInput, characterAnimation);
+        InitCamera(rotateInput);
     }
 
     private void CheckLanguage()
