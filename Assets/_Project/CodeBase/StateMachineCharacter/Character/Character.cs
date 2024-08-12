@@ -1,5 +1,4 @@
-﻿using Assets._Project.Config;
-using Assets.ProjectLesson2.Scripts.Character.StateMashine;
+﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine;
 using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character
@@ -15,10 +14,10 @@ namespace Assets.ProjectLesson2.Scripts.Character
         public Vector3 Velocity;
 
         public GameConfig GameConfig { get; private set; }
-        public PlayerInput PlayerInput { get; private set; }
+        public PlayerInputsd PlayerInput { get; private set; }
         public CharacterAnimation CharacterAnimation {  get; private set; }
 
-        public void Construct(PlayerInput playerInput, GameConfig gameConfig, CharacterAnimation characterAnimation)
+        public void Construct(PlayerInputsd playerInput, GameConfig gameConfig, CharacterAnimation characterAnimation)
         {
             PlayerInput = playerInput;
             GameConfig = gameConfig;
@@ -29,13 +28,12 @@ namespace Assets.ProjectLesson2.Scripts.Character
         private void Update()
         {
             _stateMachine.HandleInput();
-            Debug.Log(_stateMachine.CurrentState.GetType());
 
             _stateMachine.Update();
         }
 
-        private void OnEnable() => PlayerInput.Enable();
+        //private void OnEnable() => PlayerInput.Enable();
 
-        private void OnDisable() => PlayerInput.Disable();
+        //private void OnDisable() => PlayerInput.Disable();
     }
 }

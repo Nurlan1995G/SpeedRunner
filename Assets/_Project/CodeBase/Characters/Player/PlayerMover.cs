@@ -1,39 +1,65 @@
-﻿using Assets._Project.CodeBase.Logic.Move;
-using Assets._Project.Config;
+﻿using Assets._Project.Config;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    private CharacterController _characterController;
-    private PlayerInput _input;
+    private Player _player;
     private CharacterData _playerData;
 
     private Vector3 _velocityDirection;
 
-    public void Construct(CharacterData playerData, PlayerInput playerInput, CharacterController characterController)
+    public void Construct(CharacterData playerData, Player player)
     {
+        _player = player;
         _playerData = playerData ?? throw new System.ArgumentNullException(nameof(playerData));
-        _input = playerInput ?? throw new System.ArgumentNullException(nameof(playerInput));
-        _characterController = characterController;
-        _input.Enable();
     }
 
     private void Update()
     {
         GravityHandling();
-
-        Vector2 moveDirection = _input.Player.Move.ReadValue<Vector2>();
+        Vector2 moveDirection = _player.PlayerInput.Player.Move.ReadValue<Vector2>();
         Move(moveDirection);
+
+        HandleAnimations(moveDirection);
     }
 
-    private void OnDisable()
-    {
-        _input.Disable();
-    }
-
-    public void TakeJumpDirection(float jumpDirection)
-    {
+    public void TakeJumpDirection(float jumpDirection) => 
         _velocityDirection.y = jumpDirection;
+
+    private void HandleAnimations(Vector2 moveDirection)
+    {
+        if (_player.GroundChecker.IsGrounded)
+        {
+            _player.CharacterAnimation.StopFalling();
+            _player.CharacterAnimation.StopJumping();
+
+            if (moveDirection != Vector2.zero)
+            {
+                _player.CharacterAnimation.StartRunning();
+                _player.CharacterAnimation.StopIdle();
+            }
+            else
+            {
+                _player.CharacterAnimation.StopRunning();
+                _player.CharacterAnimation.StartIdle();
+            }
+        }
+        else
+        {
+            _player.CharacterAnimation.StopRunning();
+            _player.CharacterAnimation.StopIdle();
+
+            if (_velocityDirection.y > 0)
+            {
+                _player.CharacterAnimation.StartJumping();
+                _player.CharacterAnimation.StopFalling();
+            }
+            else
+            {
+                _player.CharacterAnimation.StopJumping();
+                _player.CharacterAnimation.StartFalling();
+            }
+        }
     }
 
     private void Move(Vector2 direction)
@@ -49,7 +75,7 @@ public class PlayerMover : MonoBehaviour
     {
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
-        _characterController.Move(finalDirection * _playerData.MoveSpeed * Time.deltaTime);
+        _player.CharacterController.Move(finalDirection * _playerData.MoveSpeed * Time.deltaTime);
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
@@ -65,15 +91,11 @@ public class PlayerMover : MonoBehaviour
 
     private void GravityHandling()
     {
-        if (!_characterController.isGrounded)
+        if (_player.GroundChecker.IsGrounded == false)
         {
             _velocityDirection.y -= _playerData.Gravity * Time.deltaTime;
         }
-        else
-        {
-            _velocityDirection.y = -5f;
-        }
 
-        _characterController.Move(_velocityDirection * Time.deltaTime);
+        _player.CharacterController.Move(_velocityDirection * Time.deltaTime);
     }
 }

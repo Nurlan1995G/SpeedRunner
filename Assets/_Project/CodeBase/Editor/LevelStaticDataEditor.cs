@@ -23,15 +23,15 @@ public class LevelStaticDataEditor : UnityEditor.Editor
 
         if (GUILayout.Button("Collect"))
         {
-            levelData.InitSharkOnePosition = GameObject.FindWithTag(SharkEnemy1).transform.position;
-            levelData.InitSharkTwoPosition = GameObject.FindWithTag(SharkEnemy2).transform.position;
-            levelData.InitSharkThreePosition = GameObject.FindWithTag(SharkEnemy3).transform.position;
-            levelData.InitSharkFourPosition = GameObject.FindWithTag(SharkEnemy4).transform.position;
-            levelData.InitSharkFivePosition = GameObject.FindWithTag(SharkEnemy5).transform.position;
-            levelData.InitSharkSixPosition = GameObject.FindWithTag(SharkEnemy6).transform.position;
-            levelData.InitSharkSevenPosition = GameObject.FindWithTag(SharkEnemy7).transform.position;
-            levelData.InitSharkEightPosition = GameObject.FindWithTag(SharkEnemy8).transform.position;
-            levelData.InitSharkNinePosition = GameObject.FindWithTag(SharkEnemy9).transform.position;
+            //levelData.InitSharkOnePosition = GameObject.FindWithTag(SharkEnemy1).transform.position;
+            //levelData.InitSharkTwoPosition = GameObject.FindWithTag(SharkEnemy2).transform.position;
+            //levelData.InitSharkThreePosition = GameObject.FindWithTag(SharkEnemy3).transform.position;
+            //levelData.InitSharkFourPosition = GameObject.FindWithTag(SharkEnemy4).transform.position;
+            //levelData.InitSharkFivePosition = GameObject.FindWithTag(SharkEnemy5).transform.position;
+            //levelData.InitSharkSixPosition = GameObject.FindWithTag(SharkEnemy6).transform.position;
+            //levelData.InitSharkSevenPosition = GameObject.FindWithTag(SharkEnemy7).transform.position;
+            //levelData.InitSharkEightPosition = GameObject.FindWithTag(SharkEnemy8).transform.position;
+            //levelData.InitSharkNinePosition = GameObject.FindWithTag(SharkEnemy9).transform.position;
             levelData.InitPlayerPosition = GameObject.FindWithTag(PlayerPointTag).transform.position;
         }
 

@@ -1,5 +1,4 @@
 ﻿using Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Grounded;
-using UnityEngine;
 
 namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
 {
@@ -17,14 +16,12 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("FallingState- Enter");
             CharacterAnimation.StartFalling();
         }
 
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("FallingState - Exit");
             CharacterAnimation.StopFalling();
         }
 
@@ -32,13 +29,11 @@ namespace Assets.ProjectLesson2.Scripts.Character.StateMashine.State.Airborn
         {
             base.Update();
 
-            Debug.Log("FallingState - Update");
 
             if (_groundChecker.IsTouches)
             {
                 _character.Velocity.y = 0;
 
-                Debug.Log("vsdfd");
 
                 if(IsHorizontalInputZero())
                     SwitchState.SwitchState<IdleState>();

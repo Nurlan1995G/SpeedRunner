@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   CharacterData:
-    MoveSpeed: 100
+    MoveSpeed: 50
     RotateSpeed: 5
     Gravity: 80
-    HeightJump: 30
+    HeightJump: 50
     JumpTime: 1
   CameraRotateData:
     RotateSpeedPC: 400
@@ -27,10 +27,10 @@ MonoBehaviour:
     HideDistance: 50
   AirbornCharacterData:
     JumpingData:
-      MaxHeight: 50
+      MaxHeight: 7
       TimeToReachMaxHeight: 0.5
     SpeedAirborn: 4
-    Gravity: 2
+    Gravity: 50
   RunningCharacterData:
-    MoveSpeed: 50
-    RotateSpeed: 5
+    MoveSpeed: 70
+    RotateSpeed: 10
