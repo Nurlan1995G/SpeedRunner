@@ -8,5 +8,11 @@ public class PlayerTrigger : Interactable
     {
         if (other.TryGetComponent(out BurningBox burningBox))
             _player.Respawn(true);
+
+        if (other.TryGetComponent(out Coin coin))
+        {
+            _player.SetScore(10);
+            coin.SetEffectCoin();
+        }
     }
 }
