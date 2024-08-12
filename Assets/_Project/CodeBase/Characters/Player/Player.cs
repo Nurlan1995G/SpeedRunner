@@ -11,16 +11,15 @@ public class Player : MonoBehaviour
     private SoundHandler _soundhandler;
     private Language _language;
     private bool _respawn;
+    private int _score = 0;
 
-    public Action RespawnedCheckpoints;
-    public Action RespawnedFuelCanister;
     private Action<Player> PlayerDied;
 
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     public CharacterAnimation CharacterAnimation { get; private set; }
     public PlayerInput PlayerInput { get; private set; }
-    public Vector3 RespawnPosition { get; private set; }
+    public int Score => _score;
 
     public void Construct(PositionStaticData positionStaticData, CharacterData playerData,
          SoundHandler soundHandler, Language language, PlayerInput playerInput, CharacterAnimation characterAnimation)
@@ -45,8 +44,16 @@ public class Player : MonoBehaviour
 
     private void OnDisable() =>
         PlayerInput.Disable();
+    
+    public void Respawn(bool respawn)
+    {
+        _respawn = respawn;
+    }
 
-    public void Destroyable()
+    public void SetScore(int score) =>
+        _score = score;
+
+    private void Destroyable()
     {   
         //PlayerDied?.Invoke(this);
 
@@ -64,10 +71,5 @@ public class Player : MonoBehaviour
         gameObject.SetActive(true);
         _respawn = false;
         _soundhandler.PlayWin();
-    }
-
-    public void Respawn(bool respawn)
-    {
-        _respawn = respawn;
     }
 }
