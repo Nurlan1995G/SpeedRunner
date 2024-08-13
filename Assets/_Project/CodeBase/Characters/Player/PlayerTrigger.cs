@@ -14,5 +14,10 @@ public class PlayerTrigger : Interactable
             _player.SetScore(10);
             coin.SetEffectCoin();
         }
+
+        if(other.TryGetComponent(out BoostBox boostBox))
+        {
+
+        }
     }
 }
