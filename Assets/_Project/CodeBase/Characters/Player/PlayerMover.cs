@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Config;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
@@ -7,11 +8,14 @@ public class PlayerMover : MonoBehaviour
     private CharacterData _playerData;
 
     private Vector3 _velocityDirection;
+    private Coroutine _speedBoostCoroutine;
+    private float _currentSpeed;
 
-    public void Construct(CharacterData playerData, Player player)
+    public void Construct(Player player)
     {
         _player = player;
-        _playerData = playerData ?? throw new System.ArgumentNullException(nameof(playerData));
+        _playerData = _player.GameConfig.CharacterData;
+        _currentSpeed = _playerData.MoveSpeed;
     }
 
     private void Update()
@@ -75,7 +79,7 @@ public class PlayerMover : MonoBehaviour
     {
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
-        _player.CharacterController.Move(finalDirection * _playerData.MoveSpeed * Time.deltaTime);
+        _player.CharacterController.Move(finalDirection * _currentSpeed * Time.deltaTime);
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
@@ -97,5 +101,20 @@ public class PlayerMover : MonoBehaviour
         }
 
         _player.CharacterController.Move(_velocityDirection * Time.deltaTime);
+    }
+
+    public void ActivateSpeedBoost(float multiplier, float duration)
+    {
+        if (_speedBoostCoroutine != null)
+            StopCoroutine(_speedBoostCoroutine);
+
+        _speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(multiplier, duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
+    {
+        _currentSpeed = _playerData.MoveSpeed * multiplier;
+        yield return new WaitForSeconds(duration);
+        _currentSpeed = _playerData.MoveSpeed;
     }
 }
