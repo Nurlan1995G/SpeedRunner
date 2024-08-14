@@ -15,8 +15,8 @@ MonoBehaviour:
   CharacterData:
     MoveSpeed: 80
     RotateSpeed: 5
-    Gravity: 50
-    HeightJump: 30
+    Gravity: 70
+    HeightJump: 35
     JumpTime: 1
     BoostMultiplier: 2
     BoostDuration: 0.5
