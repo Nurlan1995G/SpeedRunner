@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private PlayerJumper _playerJumper;
+    [SerializeField] private ParticleSystem _effectSpawnPlayer;
 
     private PositionStaticData _positionStaticData;
     private SoundHandler _soundhandler;
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
     private void Teleport()
     {
         transform.position = _positionStaticData.InitPlayerPosition;
+        _effectSpawnPlayer.Play();
         gameObject.SetActive(true);
         _respawn = false;
         _soundhandler.PlayWin();
