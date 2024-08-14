@@ -7,10 +7,10 @@ public class PlayerJumper : MonoBehaviour
     private Player _player;
     private CharacterData _playerData;
 
-    public void Construct(Player player, CharacterData playerData, PlayerMover playerMover)
+    public void Construct(Player player, PlayerMover playerMover)
     {
         _player = player;
-        _playerData = playerData;
+        _playerData = _player.GameConfig.CharacterData;
         _playerMover = playerMover;
     }
 

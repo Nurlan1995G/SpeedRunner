@@ -8,8 +8,6 @@ namespace Assets._Project.Config
     {
         public CharacterData CharacterData;
         public CameraRotateData CameraRotateData;
-        public AirbornCharacterData AirbornCharacterData;
-        public RunningCharacterData RunningCharacterData;
     }
 
     [Serializable]
@@ -20,35 +18,12 @@ namespace Assets._Project.Config
         public float Gravity;
         public float HeightJump;
         public float JumpTime;
-    }
-
-    [Serializable]
-    public class RunningCharacterData
-    {
-        public float MoveSpeed;
-        public float RotateSpeed;
-    }
-
-    [Serializable]
-    public class AirbornCharacterData
-    {
-        public JumpingData JumpingData;
-        public float SpeedAirborn;
-        public float Gravity;
+        public float BoostMultiplier = 2f;
+        public float BoostDuration = 0.5f;
 
         public float BaseGrafity =>
-            2f * JumpingData.MaxHeight / (JumpingData.TimeToReachMaxHeight * JumpingData.TimeToReachMaxHeight);
+            2f * HeightJump / (JumpTime * JumpTime);
     }
-
-    [Serializable]
-    public class JumpingData
-    {
-        public float MaxHeight;
-        public float TimeToReachMaxHeight;
-
-        public float StartYVelosity => 2 * MaxHeight / TimeToReachMaxHeight;
-    }
-
 
     [Serializable]
     public class CameraRotateData

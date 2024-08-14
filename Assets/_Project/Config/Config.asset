@@ -18,6 +18,8 @@ MonoBehaviour:
     Gravity: 50
     HeightJump: 30
     JumpTime: 1
+    BoostMultiplier: 2
+    BoostDuration: 0.5
   CameraRotateData:
     RotateSpeedPC: 400
     RotateSpeedMobile: 250
@@ -25,12 +27,3 @@ MonoBehaviour:
     MaxZoomDistance: 80
     ZoomStep: 0.01
     HideDistance: 50
-  AirbornCharacterData:
-    JumpingData:
-      MaxHeight: 7
-      TimeToReachMaxHeight: 0.5
-    SpeedAirborn: 4
-    Gravity: 50
-  RunningCharacterData:
-    MoveSpeed: 70
-    RotateSpeed: 10

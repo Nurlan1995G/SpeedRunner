@@ -3,6 +3,7 @@
 public class PlayerTrigger : Interactable
 {
     [SerializeField] private Player _player;
+    [SerializeField] private PlayerMover _playerMover;
 
     protected override void Interact(Collider other)
     {
@@ -17,7 +18,8 @@ public class PlayerTrigger : Interactable
 
         if(other.TryGetComponent(out BoostBox boostBox))
         {
-
+            _playerMover.ActivateSpeedBoost(_player.GameConfig.CharacterData.BoostMultiplier,
+                _player.GameConfig.CharacterData.BoostDuration);
         }
     }
 }
