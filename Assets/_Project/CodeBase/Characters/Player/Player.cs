@@ -71,8 +71,8 @@ public class Player : MonoBehaviour
     private void Teleport()
     {
         transform.position = _positionStaticData.InitPlayerPosition;
-        _effectSpawnPlayer.Play();
         gameObject.SetActive(true);
+        _effectSpawnPlayer.Play();
         _respawn = false;
         _soundhandler.PlayWin();
     }
