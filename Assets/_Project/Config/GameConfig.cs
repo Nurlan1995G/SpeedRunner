@@ -28,8 +28,10 @@ namespace Assets._Project.Config
     [Serializable]
     public class CameraRotateData
     {
-        public float RotateSpeedPC;
-        public float RotateSpeedMobile;
+        public float RotateSpeedKeyboardX;
+        public float RotateSpeedKeyboardY;
+        public float RotateSpeedMobileX;
+        public float RotateSpeedMobileY;
         public float MinZoomDistance;
         public float MaxZoomDistance;
         public float ZoomStep;

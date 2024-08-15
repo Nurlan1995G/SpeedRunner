@@ -21,8 +21,10 @@ MonoBehaviour:
     BoostMultiplier: 2
     BoostDuration: 0.5
   CameraRotateData:
-    RotateSpeedPC: 400
-    RotateSpeedMobile: 250
+    RotateSpeedKeyboardX: 600
+    RotateSpeedKeyboardY: 4
+    RotateSpeedMobileX: 50
+    RotateSpeedMobileY: 2
     MinZoomDistance: 20
     MaxZoomDistance: 80
     ZoomStep: 0.01
