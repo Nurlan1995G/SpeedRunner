@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
 
-    private PositionStaticData _positionStaticData;
     private SoundHandler _soundhandler;
     private Language _language;
+
+    private Vector3 _respawnPosition;
     private bool _respawn;
     private int _score = 0;
 
@@ -27,7 +28,6 @@ public class Player : MonoBehaviour
          SoundHandler soundHandler, Language language, PlayerInput playerInput, CharacterAnimation characterAnimation)
     {
         PlayerInput = playerInput ?? throw new ArgumentNullException(nameof(playerInput));
-        _positionStaticData = positionStaticData ?? throw new ArgumentNullException(nameof(positionStaticData));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;
         GameConfig = gameConfig;
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
         _playerMover.Construct(this);
         _playerJumper.Construct(this, _playerMover);
+        RespawnPosition(positionStaticData.InitPlayerPosition);
     }
 
     private void OnEnable() =>
@@ -48,10 +49,11 @@ public class Player : MonoBehaviour
     private void OnDisable() =>
         PlayerInput.Disable();
 
-    public void Respawn(bool respawn)
-    {
+    public void Respawn(bool respawn) =>
         _respawn = respawn;
-    }
+
+    public void RespawnPosition(Vector3 position) =>
+        _respawnPosition = position;
 
     public void SetScore(int score) =>
         _score = score;
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
 
     private void Teleport()
     {
-        transform.position = _positionStaticData.InitPlayerPosition;
+        transform.position = _respawnPosition;
         gameObject.SetActive(true);
         _effectSpawnPlayer.Play();
         _respawn = false;

@@ -16,7 +16,6 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private float _currentXRotation;
         private float _currentYRotation;
-        private float _sensivity;
 
         private Vector2 _lastDirection;
         private Vector3 _currentMousePosition;
@@ -30,14 +29,19 @@ namespace Assets._Project.CodeBase.CameraLogic
 
             if (Application.isMobilePlatform)
             {
-                _sensivity = _cameraRotateData.RotateSpeedMobile;
+                _currentXRotation = _cameraRotateData.RotateSpeedMobileX;
+                _currentYRotation = _cameraRotateData.RotateSpeedMobileY;
                 _rotationCameraAction = HandleTouchInput;
             }
             else
             {
-                _sensivity = _cameraRotateData.RotateSpeedPC;
+                _currentXRotation = _cameraRotateData.RotateSpeedKeyboardX;
+                _currentYRotation = _cameraRotateData.RotateSpeedKeyboardY;
                 _rotationCameraAction = ControlRotation;
             }
+
+            _cinemachineFreeLook.m_XAxis.m_MaxSpeed = _currentXRotation;
+            _cinemachineFreeLook.m_YAxis.m_MaxSpeed = _currentYRotation;
 
             _rotateInput.Enable();
             _rotateInput.Mouse.MouseSrollWheel.performed += OnTouchMouseScrollWheel;
@@ -46,6 +50,8 @@ namespace Assets._Project.CodeBase.CameraLogic
         private void Update()
         {
             _rotationCameraAction.Invoke();
+
+            float speed = _cinemachineFreeLook.m_XAxis.m_MaxSpeed;
         }
 
         private void OnDisable()
@@ -127,26 +133,6 @@ namespace Assets._Project.CodeBase.CameraLogic
                 }
 
                 _cinemachineFreeLook.m_Orbits[i] = orbit;
-            }
-        }
-
-        public void OnTouchPerformed(InputAction.CallbackContext context) =>
-            Rotate(context.ReadValue<Vector2>());
-
-        private void Rotate(Vector2 direction)
-        {
-            if (_lastDirection != direction)
-            {
-                _currentXRotation += direction.x * _sensivity * Time.deltaTime;
-                _currentYRotation += -direction.y * _sensivity * Time.deltaTime;
-
-                _currentYRotation = Mathf.Clamp(_currentYRotation, -45f, 90f);
-
-                Quaternion rotationX = Quaternion.Euler(0, _currentXRotation, 0);
-                Quaternion rotationY = Quaternion.Euler(_currentYRotation, 0, 0);
-
-                transform.rotation = rotationX * rotationY;
-                _lastDirection = direction;
             }
         }
     }

@@ -14,7 +14,6 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
     [SerializeField] private Animator _playerAnimation;
-    [SerializeField] private FlagPoint _flagPoint;
 
     //private IInput _input;
     private Language _language;
@@ -33,7 +32,6 @@ public class Bootstraper : MonoBehaviour
         //WriteSpawnPoint(factoryShark);
         InitPlayer(playerInput, characterAnimation);
         InitCamera(rotateInput);
-        _flagPoint.Construct(_positionStaticData);
     }
 
     private void CheckLanguage()
