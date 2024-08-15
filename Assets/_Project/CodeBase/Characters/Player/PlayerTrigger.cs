@@ -21,5 +21,8 @@ public class PlayerTrigger : Interactable
             _playerMover.ActivateSpeedBoost(_player.GameConfig.CharacterData.BoostMultiplier,
                 _player.GameConfig.CharacterData.BoostDuration);
         }
+
+        if (other.TryGetComponent(out FlagPoint flagPoint))
+            flagPoint.FlagChange(_player);
     }
 }
