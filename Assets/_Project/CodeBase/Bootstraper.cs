@@ -50,7 +50,7 @@ public class Bootstraper : MonoBehaviour
 
     private void InitPlayer(PlayerInput playerInput, CharacterAnimation characterAnimation)
     {
-        _player.Construct(_positionStaticData, _gameConfig, _soundHandler, _language,
+        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language,
             playerInput, characterAnimation);
     }
 

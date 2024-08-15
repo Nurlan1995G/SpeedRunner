@@ -18,8 +18,10 @@ namespace Assets._Project.Config
         public float Gravity;
         public float HeightJump;
         public float JumpTime;
+
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;
+        public float BoostHeightUp = 1.2f;
 
         public float BaseGrafity =>
             2f * HeightJump / (JumpTime * JumpTime);
