@@ -21,16 +21,16 @@ public class Player : MonoBehaviour
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     public CharacterAnimation CharacterAnimation { get; private set; }
     public PlayerInput PlayerInput { get; private set; }
-    public GameConfig GameConfig { get; private set; }
+    public CharacterData CharacterData { get; private set; }
     public int Score => _score;
 
-    public void Construct(PositionStaticData positionStaticData, GameConfig gameConfig,
+    public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
          SoundHandler soundHandler, Language language, PlayerInput playerInput, CharacterAnimation characterAnimation)
     {
         PlayerInput = playerInput ?? throw new ArgumentNullException(nameof(playerInput));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;
-        GameConfig = gameConfig;
+        CharacterData = characterData;
         CharacterAnimation = characterAnimation ?? throw new ArgumentNullException(nameof(characterAnimation));
 
         _playerMover.Construct(this);

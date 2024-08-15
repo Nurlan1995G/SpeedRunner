@@ -16,13 +16,18 @@ public class PlayerTrigger : Interactable
             coin.SetEffectCoin();
         }
 
-        if(other.TryGetComponent(out BoostBox boostBox))
+        if(other.TryGetComponent(out BoostBoxForward boostBox))
         {
-            _playerMover.ActivateSpeedBoost(_player.GameConfig.CharacterData.BoostMultiplier,
-                _player.GameConfig.CharacterData.BoostDuration);
+            _playerMover.ActivateSpeedBoost(_player.CharacterData.BoostMultiplier,
+                _player.CharacterData.BoostDuration);
         }
 
         if (other.TryGetComponent(out FlagPoint flagPoint))
             flagPoint.FlagChange(_player);
+
+        if(other.TryGetComponent(out BoostBoxUp boostBoxUp))
+        {
+            _playerMover.TakeJumpDirection(_player.CharacterData.BoostHeightUp);
+        }
     }
 }

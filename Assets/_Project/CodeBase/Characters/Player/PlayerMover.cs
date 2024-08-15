@@ -14,7 +14,7 @@ public class PlayerMover : MonoBehaviour
     public void Construct(Player player)
     {
         _player = player;
-        _playerData = _player.GameConfig.CharacterData;
+        _playerData = _player.CharacterData;
         _currentSpeed = _playerData.MoveSpeed;
     }
 
