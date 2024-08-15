@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     private void OnDisable() =>
         PlayerInput.Disable();
-    
+
     public void Respawn(bool respawn)
     {
         _respawn = respawn;
