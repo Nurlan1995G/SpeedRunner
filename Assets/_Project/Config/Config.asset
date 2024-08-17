@@ -19,9 +19,9 @@ MonoBehaviour:
     HeightJump: 35
     JumpStep: 1.5
     BoostMultiplier: 2
-    BoostDuration: 0.5
+    BoostDuration: 0.8
     BoostHeightUp: 40
-    BoostWaitTime: 0.1
+    BoostWaitTime: 0.15
   CameraRotateData:
     RotateSpeedMobileX: 50
     RotateSpeedMobileY: 2
