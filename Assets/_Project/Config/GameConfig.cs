@@ -13,27 +13,29 @@ namespace Assets._Project.Config
     [Serializable]
     public class CharacterData
     {
+        [Header("Speed")]
         public float MoveSpeed;
         public float RotateSpeed;
+        [Header("Other")]
         public float Gravity;
         public float HeightJump;
-        public float JumpTime;
-
+        public float JumpStep = 1.5f;
+        [Header("Boost")]
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;
         public float BoostHeightUp = 1.2f;
-
-        public float BaseGrafity =>
-            2f * HeightJump / (JumpTime * JumpTime);
+        public float BoostWaitTime = 0.5f;
     }
 
     [Serializable]
     public class CameraRotateData
     {
-        public float RotateSpeedKeyboardX;
-        public float RotateSpeedKeyboardY;
+        [Header("Mobile")]
         public float RotateSpeedMobileX;
         public float RotateSpeedMobileY;
+        [Header("Keyboard")]
+        public float RotateSpeedKeyboardX;
+        public float RotateSpeedKeyboardY;
         public float MinZoomDistance;
         public float MaxZoomDistance;
         public float ZoomStep;

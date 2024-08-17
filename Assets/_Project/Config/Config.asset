@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   CharacterData:
-    MoveSpeed: 80
+    MoveSpeed: 50
     RotateSpeed: 5
     Gravity: 70
     HeightJump: 35
-    JumpTime: 1
+    JumpStep: 1.5
     BoostMultiplier: 2
     BoostDuration: 0.5
+    BoostHeightUp: 40
+    BoostWaitTime: 0.1
   CameraRotateData:
-    RotateSpeedKeyboardX: 600
-    RotateSpeedKeyboardY: 4
     RotateSpeedMobileX: 50
     RotateSpeedMobileY: 2
+    RotateSpeedKeyboardX: 600
+    RotateSpeedKeyboardY: 4
     MinZoomDistance: 20
     MaxZoomDistance: 80
     ZoomStep: 0.01

@@ -21,14 +21,16 @@ public class PlayerMover : MonoBehaviour
     private void Update()
     {
         GravityHandling();
-        Vector2 moveDirection = _player.PlayerInput.Player.Move.ReadValue<Vector2>();
+        Vector2 moveDirection = _player.PlayerInputs.MoveDirection;
         Move(moveDirection);
 
         HandleAnimations(moveDirection);
     }
 
-    public void TakeJumpDirection(float jumpDirection) => 
+    public void TakeJumpDirection(float jumpDirection)
+    {
         _velocityDirection.y = jumpDirection;
+    }
 
     private void HandleAnimations(Vector2 moveDirection)
     {
