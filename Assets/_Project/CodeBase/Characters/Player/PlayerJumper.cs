@@ -22,9 +22,9 @@ public class PlayerJumper : MonoBehaviour
 
     private void HandleJump()
     {
-        if (_player.GroundChecker.IsGrounded && _player.PlayerInput.Player.Jump.triggered)
+        if (_player.GroundChecker.IsGrounded && _player.PlayerInputs.JumpTriggered)
             _playerMover.TakeJumpDirection(_playerData.HeightJump);
         else if (_player.GroundChecker.IsOnTrampoline) 
-            _playerMover.TakeJumpDirection(_playerData.HeightJump * 1.5f);
+            _playerMover.TakeJumpDirection(_playerData.HeightJump * _playerData.JumpStep);
     }
 }

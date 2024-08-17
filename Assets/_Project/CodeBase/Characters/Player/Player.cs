@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerMover _playerMover;
-    [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
 
     private SoundHandler _soundhandler;
@@ -20,26 +18,26 @@ public class Player : MonoBehaviour
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     public CharacterAnimation CharacterAnimation { get; private set; }
-    public PlayerInput PlayerInput { get; private set; }
+    public PlayerInputs PlayerInputs { get; private set; }
     public CharacterData CharacterData { get; private set; }
     public int Score => _score;
 
     public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
-         SoundHandler soundHandler, Language language, PlayerInput playerInput, CharacterAnimation characterAnimation)
+         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, CharacterAnimation characterAnimation, PlayerMover playerMover, PlayerJumper playerJumper)
     {
-        PlayerInput = playerInput ?? throw new ArgumentNullException(nameof(playerInput));
+        PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;
         CharacterData = characterData;
         CharacterAnimation = characterAnimation ?? throw new ArgumentNullException(nameof(characterAnimation));
 
-        _playerMover.Construct(this);
-        _playerJumper.Construct(this, _playerMover);
+        playerMover.Construct(this);
+        playerJumper.Construct(this, playerMover);
         RespawnPosition(positionStaticData.InitPlayerPosition);
     }
 
     private void OnEnable() =>
-        PlayerInput.Enable();
+        PlayerInputs.EnableInput();
 
     private void Update()
     {
@@ -47,7 +45,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnDisable() =>
-        PlayerInput.Disable();
+        PlayerInputs.DisableInput();
 
     public void Respawn(bool respawn) =>
         _respawn = respawn;

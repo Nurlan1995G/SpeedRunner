@@ -24,10 +24,13 @@ public class PlayerTrigger : Interactable
 
         if (other.TryGetComponent(out FlagPoint flagPoint))
             flagPoint.FlagChange(_player);
+    }
 
-        if(other.TryGetComponent(out BoostBoxUp boostBoxUp))
+    protected override void InteractExit(Collider other)
+    {
+        if (other.TryGetComponent(out BoostBoxUp boostBoxUp))
         {
-            _playerMover.TakeJumpDirection(_player.CharacterData.BoostHeightUp);
+            boostBoxUp.SetPowerJump(_player, _playerMover);
         }
     }
 }

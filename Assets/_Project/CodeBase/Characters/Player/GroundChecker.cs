@@ -10,12 +10,12 @@ public class GroundChecker : MonoBehaviour
 
     public bool IsGrounded { get; private set; }
     public bool IsOnTrampoline { get; private set; }
-    public bool IsOnBurning { get; set; }
+    public bool IsOnBoostUp { get; set; }
 
     private void Update()
     {
         IsGrounded = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[0]);
         IsOnTrampoline = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[1]);
-        //IsOnBurning = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[2]);
+        IsOnBoostUp = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[2]);
     }
 }

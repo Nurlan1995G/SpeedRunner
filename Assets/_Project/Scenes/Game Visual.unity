@@ -189,6 +189,8 @@ MonoBehaviour:
   _positionStaticData: {fileID: 11400000, guid: a3b4e103367361a438f2df08f2212746, type: 2}
   _gameConfig: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
   _player: {fileID: 1005853624}
+  _playerMover: {fileID: 1005853623}
+  _playerJumper: {fileID: 1005853622}
   _spawnPoints: []
   _cameraRotater: {fileID: 341800128}
   _soundHandler: {fileID: 1808591607}
@@ -1184,7 +1186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260822709}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1637268, y: -0.5992618, z: 0.12687993, w: 0.7732919}
+  m_LocalRotation: {x: 0.1637268, y: -0.59926176, z: 0.12687992, w: 0.77329195}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3096,6 +3098,8 @@ MonoBehaviour:
     m_Bits: 64
   - serializedVersion: 2
     m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 256
   _distanceToCheck: 0.3
 --- !u!4 &852592890
 Transform:
@@ -3380,8 +3384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc83d4e13fb494429916494143051eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMover: {fileID: 1005853623}
-  _playerJumper: {fileID: 1005853622}
   _effectSpawnPlayer: {fileID: 98724745}
   <CharacterController>k__BackingField: {fileID: 1005853621}
   <GroundChecker>k__BackingField: {fileID: 852592889}
@@ -7544,9 +7546,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoostUp
       objectReference: {fileID: 0}
+    - target: {fileID: 323549725844892214, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413972208350240008, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522606895229122454, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Size.y
+      value: 12.843666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522606895229122454, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522606895229122454, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Center.x
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522606895229122454, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Center.y
+      value: 5.921831
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522606895229122454, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126743020718337059, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6709451598045046729, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.1
+      value: 83.8
       objectReference: {fileID: 0}
     - target: {fileID: 6709451598045046729, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7583,6 +7617,10 @@ PrefabInstance:
     - target: {fileID: 6709451598045046729, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130709756185487993, guid: 967be21eaa7e5be44b1c3f86ea6d364f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
