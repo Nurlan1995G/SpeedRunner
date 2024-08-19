@@ -12,25 +12,47 @@ public class SoundHandler : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
+        }
     }
 
-    private void Start() =>
-        PlayBackground();
+    private void Start() => PlayBackground();
 
-    public void PlayWin() =>
-        _win.Play();
+    public void PlayWin()
+    {
+        if (_win != null)
+            _win.Play();
+        else
+            Debug.LogWarning("Win sound not assigned!");
+    }
 
-    public void PlayLose() =>
-        _lose.Play();
+    public void PlayLose()
+    {
+        if (_lose != null)
+            _lose.Play();
+        else
+            Debug.LogWarning("Lose sound not assigned!");
+    }
 
-    public void PlayBuy() =>
-        _buy.Play();
+    public void PlayBuy()
+    {
+        if (_buy != null)
+            _buy.Play();
+        else
+            Debug.LogWarning("Buy sound not assigned!");
+    }
 
-    private void PlayBackground() =>
-        _background.Play();
+    private void PlayBackground()
+    {
+        if (_background != null)
+            _background.Play();
+        else
+            Debug.LogWarning("Background sound not assigned!");
+    }
 }
