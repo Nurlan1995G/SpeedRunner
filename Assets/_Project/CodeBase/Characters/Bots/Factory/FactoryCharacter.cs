@@ -13,9 +13,9 @@ namespace Assets.Project.CodeBase.SharkEnemy.Factory
             _assetProviser = assetProvider ?? throw new ArgumentNullException(nameof(assetProvider));
         }
 
-        public BotSlimeView CreateSharkEnemy(string sharkEnemy, Vector3 position)
+        public BotView CreateSharkEnemy(string sharkEnemy, Vector3 position)
         {
-            BotSlimeView shark = _assetProviser.Instantiate(sharkEnemy, position, 
+            BotView shark = _assetProviser.Instantiate(sharkEnemy, position, 
                 Quaternion.Euler(0,GetRandomRotation(),0));
 
             return shark;

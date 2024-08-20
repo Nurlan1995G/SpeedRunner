@@ -13,11 +13,11 @@ namespace Assets.Project.CodeBase.SharkEnemy.StateMashine
         private List<IState> _states;
         private IState _currentState;
 
-        public SlimeBotStateMachine(NavMeshAgent agent, CharacterModel sharkModel, CharacterData characterData)
+        public SlimeBotStateMachine(NavMeshAgent agent, CharacterData characterData)
         {
             _states = new List<IState>
             {
-                new AgentMoveState(agent,sharkModel, characterData),
+                new AgentMoveState(agent, characterData),
             };
 
             _currentState = _states[0];

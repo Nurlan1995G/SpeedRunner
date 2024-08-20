@@ -8,13 +8,11 @@ namespace Assets.Project.CodeBase.SharkEnemy.StateMashine.State
     public class AgentMoveState : IState
     {
         protected NavMeshAgent _agent;
-        protected CharacterModel _sharkModel;
         private CharacterData _characterData;
 
-        public AgentMoveState (NavMeshAgent agent, CharacterModel sharkModel, CharacterData characterData)
+        public AgentMoveState (NavMeshAgent agent, CharacterData characterData)
         {
             _agent = agent;
-            _sharkModel = sharkModel;
             _characterData = characterData;
         }
 

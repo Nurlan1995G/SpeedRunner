@@ -4,17 +4,16 @@ using Assets.Project.CodeBase.SharkEnemy.StateMashine;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotSlimeView : MonoBehaviour   
+public class BotView : MonoBehaviour   
 {   
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private CharacterModel _sharkModel;
 
     private CharacterData _characterBotData;
     private Player _player;
     private SlimeBotStateMachine _stateMashine;
 
     private void Start() =>
-        _stateMashine = new SlimeBotStateMachine(_agent, _sharkModel, _characterBotData);
+        _stateMashine = new SlimeBotStateMachine(_agent, _characterBotData);
 
     private void Update() =>
         _stateMashine?.Update();
@@ -23,7 +22,4 @@ public class BotSlimeView : MonoBehaviour
     {
         _characterBotData = character;
     }
-
-    public void SetNickname(string nickName) =>
-        _sharkModel.SetNickName(nickName);
 }
