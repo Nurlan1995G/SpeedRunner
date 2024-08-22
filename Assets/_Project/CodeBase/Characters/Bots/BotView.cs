@@ -1,25 +1,29 @@
-﻿using Assets._Project.Config;
-using Assets.Project.CodeBase.SharkEnemy;
-using Assets.Project.CodeBase.SharkEnemy.StateMashine;
+﻿using Assets._Project.CodeBase.Characters.Interface;
+using Assets._Project.Config;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotView : MonoBehaviour   
+public class BotView : MonoBehaviour, IRespawned
 {   
-    [SerializeField] private NavMeshAgent _agent;
+    //[SerializeField] private FlagPoint _targetPoint;
 
-    private CharacterData _characterBotData;
+    private BotMover _botMover;
     private Player _player;
-    private SlimeBotStateMachine _stateMashine;
+    [field: SerializeField] public NavMeshAgent Agent;
 
-    private void Start() =>
-        _stateMashine = new SlimeBotStateMachine(_agent, _characterBotData);
+    public CharacterData CharacterBotData { get; private set; }
+    [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
+    [field: SerializeField] public BotNickName Nickname { get; private set; }
 
-    private void Update() =>
-        _stateMashine?.Update();
-
-    public void Construct( CharacterData character)
+    public void Construct(CharacterData character)
     {
-        _characterBotData = character;
+        CharacterBotData = character;
+
+        _botMover = new(Agent, this);
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("RespawnBots");
     }
 }
