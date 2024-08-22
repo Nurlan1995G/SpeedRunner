@@ -1,8 +1,9 @@
+using Assets._Project.CodeBase.Characters.Interface;
 using Assets._Project.Config;
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
 
@@ -41,32 +42,22 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Destroyable();
     }
 
     private void OnDisable() =>
         PlayerInputs.DisableInput();
 
-    public void Respawn(bool respawn) =>
-        _respawn = respawn;
+    public void Respawn()
+    {
+        gameObject.SetActive(false);
+        Teleport();
+    }
 
     public void RespawnPosition(Vector3 position) =>
         _respawnPosition = position;
 
     public void SetScore(int score) =>
         _score = score;
-
-    private void Destroyable()
-    {   
-        //PlayerDied?.Invoke(this);
-
-        if(transform.position.y < -20 || _respawn)
-        {
-            _soundhandler.PlayLose();
-            gameObject.SetActive(false);
-            Teleport();
-        }
-    }
 
     private void Teleport()
     {

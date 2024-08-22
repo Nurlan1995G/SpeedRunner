@@ -1,8 +1,7 @@
 ﻿using Assets._Project.CodeBase.CameraLogic;
 using Assets._Project.Config;
 using Assets.Project.AssetProviders;
-using Assets.Project.CodeBase.SharkEnemy.Factory;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Bootstraper : MonoBehaviour
@@ -12,10 +11,11 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private PlayerJumper _playerJumper;
-    [SerializeField] private List<SpawnPointEnemyBot> _spawnPoints;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
     [SerializeField] private Animator _playerAnimation;
+    [SerializeField] private BotView _botView;
+    [SerializeField] private TimerLevel _timerLevel;
 
     //private IInput _input;
     private Language _language;
@@ -26,15 +26,15 @@ public class Bootstraper : MonoBehaviour
 
         PlayerInput playerInput = new();
         AssetProvider assetProvider = new();
-        FactoryCharacter factoryShark = new(assetProvider);
         PlayerInputs playerInputs = new(playerInput);
         RotateInput rotateInput = new();
         CharacterAnimation characterAnimation = new(_playerAnimation);
 
         //InitMobileUI();
-        //WriteSpawnPoint(factoryShark);
         InitPlayer(playerInputs, characterAnimation);
         InitCamera(rotateInput);
+        InitBot();
+        _timerLevel.Construct(_gameConfig.LogicConfig);
     }
 
     private void CheckLanguage()
@@ -44,12 +44,6 @@ public class Bootstraper : MonoBehaviour
         else
             _language = Language.English;
     }
-
-   /* private void WriteSpawnPoint(FactoryCharacter factoryCharacter)
-    {
-        foreach (SpawnPointEnemyBot spawnPoint in _spawnPoints)
-            spawnPoint.Construct(factoryCharacter, _positionStaticData, _character, _gameConfig, _language);
-    }*/
 
     private void InitPlayer(PlayerInputs playerInputs, CharacterAnimation characterAnimation)
     {
@@ -70,5 +64,10 @@ public class Bootstraper : MonoBehaviour
             //_moveJostick.gameObject.SetActive(true);
             //_boostButtonUI.gameObject.SetActive(true);
         }
+    }
+
+    private void InitBot()
+    {
+        _botView.Construct(_gameConfig.CharacterData);
     }
 }

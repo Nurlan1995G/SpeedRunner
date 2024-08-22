@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace Assets.Project.CodeBase.SharkEnemy
 {
-    public class NickName : MonoBehaviour
+    public class NickNameSetter : MonoBehaviour
     {
         [SerializeField] private List<BotView> _bots;
         [ReadOnly]

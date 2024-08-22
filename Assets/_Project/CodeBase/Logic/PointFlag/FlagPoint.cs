@@ -15,4 +15,9 @@ public class FlagPoint : MonoBehaviour
             player.RespawnPosition(transform.position);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }

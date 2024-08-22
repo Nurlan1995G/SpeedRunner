@@ -8,6 +8,7 @@ namespace Assets._Project.Config
     {
         public CharacterData CharacterData;
         public CameraRotateData CameraRotateData;
+        public LogicConfig LogicConfig;
     }
 
     [Serializable]
@@ -20,6 +21,8 @@ namespace Assets._Project.Config
         public float Gravity;
         public float HeightJump;
         public float JumpStep = 1.5f;
+        public float JumpDuration;
+        public float NormalizedJumpTimeMax;
         [Header("Boost")]
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;
@@ -40,5 +43,11 @@ namespace Assets._Project.Config
         public float MaxZoomDistance;
         public float ZoomStep;
         public float HideDistance;
+    }
+
+    [Serializable]
+    public class LogicConfig
+    {
+        public float Timer;
     }
 }
