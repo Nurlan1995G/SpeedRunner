@@ -5,33 +5,32 @@ using UnityEngine.AI;
 
 public class AgentLinkBotMover : MonoBehaviour
 {
-    [SerializeField] private List<FlagPoint> _flagPoints;
-    [SerializeField] private BotView _bot;
-    [SerializeField] private float _jumpCooldown = 0.1f; // Минимальная задержка между прыжками
+    [SerializeField] private List<FlagPoint> _flagPoints;   
+    [SerializeField] private BotView _bot;                  
+    [SerializeField] private float _jumpCooldown = 0.1f;    
 
-    private int _currentFlagIndex = 0;
-    private bool _canJump = true;
+    private int _currentFlagIndex = 0;                     
 
     private void Start()
     {
-        MoveToNextFlag();
+        _bot.Agent.speed = _bot.CharacterBotData.MoveSpeed;
+        MoveToNextFlag();  
     }
 
     private void Update()
     {
-        if (_bot.Agent.isOnOffMeshLink && _canJump && _bot.GroundChecker.IsGrounded)
+        if (_bot.Agent.isOnOffMeshLink && _bot.GroundChecker.IsGrounded)
         {
-            StartCoroutine(JumpAcrossGap());
+            StartCoroutine(JumpAcrossGap());  
         }
     }
 
     private IEnumerator JumpAcrossGap()
     {
-        _canJump = false;
+        OffMeshLinkData data = _bot.Agent.currentOffMeshLinkData; 
+        Vector3 startPos = _bot.Agent.transform.position;          
+        Vector3 endPos = data.endPos + Vector3.up * _bot.Agent.baseOffset; 
 
-        OffMeshLinkData data = _bot.Agent.currentOffMeshLinkData;
-        Vector3 startPos = _bot.Agent.transform.position;
-        Vector3 endPos = data.endPos + Vector3.up * _bot.Agent.baseOffset;
         float normalizedTime = 0.0f;
 
         while (normalizedTime < _bot.CharacterBotData.NormalizedJumpTimeMax)
@@ -42,21 +41,18 @@ public class AgentLinkBotMover : MonoBehaviour
             yield return null;
         }
 
-        _bot.Agent.CompleteOffMeshLink();
-        _canJump = true;
+        _bot.Agent.CompleteOffMeshLink();  
 
-        // Задержка между прыжками
         yield return new WaitForSeconds(_jumpCooldown);
 
-        // После прыжка сразу двигаемся к следующему флагу
-        MoveToNextFlag();
+        MoveToNextFlag();  
     }
 
     private void MoveToNextFlag()
     {
-        if (_flagPoints.Count == 0) return;
+        if (_flagPoints.Count == 0) return;  
 
-        _currentFlagIndex = (_currentFlagIndex + 1) % _flagPoints.Count;
-        _bot.Agent.SetDestination(_flagPoints[_currentFlagIndex].transform.position);
+        _currentFlagIndex = (_currentFlagIndex + 1) % _flagPoints.Count; 
+        _bot.Agent.SetDestination(_flagPoints[_currentFlagIndex].transform.position);  
     }
 }
