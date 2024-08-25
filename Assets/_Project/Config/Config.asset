@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterData:
     MoveSpeed: 50
-    RotateSpeed: 5
+    RotateSpeed: 20
     Gravity: 70
     HeightJump: 35
     JumpStep: 1.5
@@ -34,4 +34,4 @@ MonoBehaviour:
     ZoomStep: 0.01
     HideDistance: 50
   LogicConfig:
-    Timer: 100
+    Timer: 120

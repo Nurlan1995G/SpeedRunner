@@ -8,10 +8,7 @@ public class DeadZone : Interactable
         if(other.TryGetComponent(out IRespawned respawn))
         {
             if (respawn is Player)
-            {
-                Debug.Log("проигрывает музыка респана игрока");
                 SoundHandler.Instance.PlayLose();
-            }
 
             respawn.Respawn();
         }

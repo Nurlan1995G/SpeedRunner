@@ -13,7 +13,6 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
-    [SerializeField] private Animator _playerAnimation;
     [SerializeField] private BotView _botView;
     [SerializeField] private TimerLevel _timerLevel;
 
@@ -28,10 +27,9 @@ public class Bootstraper : MonoBehaviour
         AssetProvider assetProvider = new();
         PlayerInputs playerInputs = new(playerInput);
         RotateInput rotateInput = new();
-        CharacterAnimation characterAnimation = new(_playerAnimation);
 
         //InitMobileUI();
-        InitPlayer(playerInputs, characterAnimation);
+        InitPlayer(playerInputs);
         InitCamera(rotateInput);
         InitBot();
         _timerLevel.Construct(_gameConfig.LogicConfig);
@@ -45,10 +43,10 @@ public class Bootstraper : MonoBehaviour
             _language = Language.English;
     }
 
-    private void InitPlayer(PlayerInputs playerInputs, CharacterAnimation characterAnimation)
+    private void InitPlayer(PlayerInputs playerInputs)
     {
         _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language,
-            playerInputs, characterAnimation, _playerMover, _playerJumper);
+            playerInputs, _playerMover, _playerJumper);
     }
 
     private void InitCamera(RotateInput input) =>

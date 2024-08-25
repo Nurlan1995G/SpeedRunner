@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
+    [SerializeField] private Animator _playerAnimator;
 
     private SoundHandler _soundhandler;
     private Language _language;
@@ -24,13 +25,15 @@ public class Player : MonoBehaviour, IRespawned
     public int Score => _score;
 
     public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
-         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, CharacterAnimation characterAnimation, PlayerMover playerMover, PlayerJumper playerJumper)
+         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper)
     {
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;
         CharacterData = characterData;
-        CharacterAnimation = characterAnimation ?? throw new ArgumentNullException(nameof(characterAnimation));
+
+        CharacterAnimation characterAnimation = new(_playerAnimator);
+        CharacterAnimation = characterAnimation;
 
         playerMover.Construct(this);
         playerJumper.Construct(this, playerMover);
@@ -39,10 +42,6 @@ public class Player : MonoBehaviour, IRespawned
 
     private void OnEnable() =>
         PlayerInputs.EnableInput();
-
-    private void Update()
-    {
-    }
 
     private void OnDisable() =>
         PlayerInputs.DisableInput();
