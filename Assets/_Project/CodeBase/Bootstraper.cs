@@ -29,10 +29,10 @@ public class Bootstraper : MonoBehaviour
         RotateInput rotateInput = new();
 
         //InitMobileUI();
+        _timerLevel.Construct(_gameConfig.LogicConfig);
         InitPlayer(playerInputs);
         InitCamera(rotateInput);
         InitBot();
-        _timerLevel.Construct(_gameConfig.LogicConfig);
     }
 
     private void CheckLanguage()

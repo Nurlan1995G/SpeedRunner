@@ -24,6 +24,8 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         public void Construct(GameConfig gameConfig, RotateInput rotateInput)
         {
+            Debug.Log("Construct - Camera");
+
             _cameraRotateData = gameConfig.CameraRotateData;
             _rotateInput = rotateInput ?? throw new ArgumentNullException(nameof(rotateInput));
 
