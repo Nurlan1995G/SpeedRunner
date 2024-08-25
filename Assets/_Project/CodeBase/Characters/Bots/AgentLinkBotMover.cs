@@ -1,58 +1,85 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AgentLinkBotMover : MonoBehaviour
 {
-    [SerializeField] private List<FlagPoint> _flagPoints;   
-    [SerializeField] private BotView _bot;                  
-    [SerializeField] private float _jumpCooldown = 0.1f;    
+    [SerializeField] private BotView _bot;
 
-    private int _currentFlagIndex = 0;                     
+    private bool _isRespawned;
 
-    private void Start()
+    private void OnEnable()
     {
-        _bot.Agent.speed = _bot.CharacterBotData.MoveSpeed;
-        MoveToNextFlag();  
+        _bot.Respawned += OnRespawned;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (_bot.Agent.isOnOffMeshLink && _bot.GroundChecker.IsGrounded)
-        {
-            StartCoroutine(JumpAcrossGap());  
-        }
+        _bot.Respawned -= OnRespawned;
     }
 
-    private IEnumerator JumpAcrossGap()
+    private IEnumerator Start()
     {
-        OffMeshLinkData data = _bot.Agent.currentOffMeshLinkData; 
-        Vector3 startPos = _bot.Agent.transform.position;          
-        Vector3 endPos = data.endPos + Vector3.up * _bot.Agent.baseOffset; 
+        _bot.Agent.autoTraverseOffMeshLink = false;
 
-        float normalizedTime = 0.0f;
-
-        while (normalizedTime < _bot.CharacterBotData.NormalizedJumpTimeMax)
+        while (true)
         {
-            float yOffset = _bot.CharacterBotData.HeightJump * (normalizedTime - normalizedTime * normalizedTime);
-            _bot.Agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
-            normalizedTime += Time.deltaTime / _bot.CharacterBotData.JumpDuration;
+            if (_bot.Agent.isOnOffMeshLink)
+            {
+                 yield return StartCoroutine(Parabola(_bot.Agent, _bot.CharacterBotData.HeightJump, _bot.CharacterBotData.JumpDuration));
+            }
+
             yield return null;
         }
-
-        _bot.Agent.CompleteOffMeshLink();  
-
-        yield return new WaitForSeconds(_jumpCooldown);
-
-        MoveToNextFlag();  
     }
 
-    private void MoveToNextFlag()
+    private IEnumerator WaitingForRespawn()
     {
-        if (_flagPoints.Count == 0) return;  
+        yield return new WaitUntil(() => _isRespawned);
+        yield return new WaitForSeconds(0.1f);
+        _bot.ChagePosition();
 
-        _currentFlagIndex = (_currentFlagIndex + 1) % _flagPoints.Count; 
-        _bot.Agent.SetDestination(_flagPoints[_currentFlagIndex].transform.position);  
+    }
+
+    private void OnRespawned()
+    {
+        _isRespawned = true;
+
+        StartCoroutine(WaitingForRespawn());
+    }
+
+    private IEnumerator NormalSpeed(NavMeshAgent agent)
+    {
+        OffMeshLinkData data = agent.currentOffMeshLinkData;
+        Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+        while (agent.transform.position != endPos)
+        {
+            agent.transform.position = Vector3.MoveTowards(agent.transform.position, endPos, agent.speed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    private IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
+    {
+        OffMeshLinkData data = agent.currentOffMeshLinkData;
+        Vector3 startPos = agent.transform.position;
+        Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+        float normalizedTime = 0.0f;
+
+        while (normalizedTime < 1.0f)
+        {
+            float yOffset = height * (normalizedTime - normalizedTime * normalizedTime);
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+
+            if (_isRespawned)
+            {
+                _isRespawned = false;
+
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 }

@@ -1,27 +1,23 @@
-﻿using UnityEngine.AI;
-
-public class BotMover
+﻿public class BotMover
 {
-    private NavMeshAgent _agent;
     private BotView _botView;
 
-    public BotMover(NavMeshAgent agent, BotView botView)
+    public BotMover(BotView botView)
     {
-        _agent = agent;
         _botView = botView;
 
-        _agent.speed = _botView.CharacterBotData.MoveSpeed;
+        _botView.Agent.speed = _botView.CharacterBotData.MoveSpeed;
     }
 
-    public void MoveToPoint(FlagPoint flagPoint)
+    public void MoveTo(FlagPoint flagPoint)
     {
-        _agent.isStopped = false;
-        _agent.destination = flagPoint.transform.position;
+        _botView.Agent.isStopped = false;
+        _botView.Agent.destination = flagPoint.transform.position;
     }
 
     public void StopMovement()
     {
-        _agent.isStopped = true;
-        _agent.SetDestination(_botView.transform.position);
+        _botView.Agent.isStopped = true;
+        _botView.Agent.SetDestination(_botView.transform.position);
     }
 }

@@ -27,6 +27,8 @@ public class Player : MonoBehaviour, IRespawned
     public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
          SoundHandler soundHandler, Language language, PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper)
     {
+        Debug.Log("Construct - Player");
+
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;

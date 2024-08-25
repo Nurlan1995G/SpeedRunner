@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FlagPoint : MonoBehaviour
+public class FlagPoint : Interactable
 {
     [SerializeField] private GameObject _redFlag, _blueFlag;
     [SerializeField] private ParticleSystem _effectPointFlag;
@@ -16,8 +16,13 @@ public class FlagPoint : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void Interact(Collider other)
     {
-        
+        if (other.TryGetComponent(out BotView bot))
+            bot.SetRespawnPosition(transform.position);
+    }
+
+    protected override void InteractExit(Collider other)
+    {
     }
 }
