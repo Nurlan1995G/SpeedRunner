@@ -68,10 +68,6 @@ public class AgentLinkBotMover : MonoBehaviour
 
         while (normalizedTime < 1.0f)
         {
-            float yOffset = height * (normalizedTime - normalizedTime * normalizedTime);
-            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
-            normalizedTime += Time.deltaTime / duration;
-
             if (_isRespawned)
             {
                 _isRespawned = false;
@@ -79,7 +75,13 @@ public class AgentLinkBotMover : MonoBehaviour
                 yield break;
             }
 
+            float yOffset = height * (normalizedTime - normalizedTime * normalizedTime);
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+
             yield return null;
         }
+
+        _bot.Agent.CompleteOffMeshLink();
     }
 }
