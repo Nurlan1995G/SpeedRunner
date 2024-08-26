@@ -1,29 +1,25 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 
-public class BoostBoxUp : MonoBehaviour
+public class BoostBoxUp : Interactable
 {
-    public void SetPowerJump(Player player, PlayerMover playerMover)
+    public event Action BoostJump;
+
+    public override void InteractEnter(Collider other)
     {
-        StartCoroutine(WaitForJumpInput(player, playerMover));
+        if (other.TryGetComponent(out PlayerMover playerMover))
+            playerMover.SetBoostBoxUp(this);
+
+        if (other.TryGetComponent(out BotView bot))
+            bot.SetBoostBoxUp(this);
     }
 
-    private IEnumerator WaitForJumpInput(Player player, PlayerMover playerMover)
+    public override void InteractExit(Collider other)
     {
-        float elapsedTime = 0f;
+        if(other.TryGetComponent(out PlayerMover playerMover))
+            BoostJump?.Invoke();
 
-        while (elapsedTime < player.CharacterData.BoostWaitTime)
-        {
-            if (player.PlayerInputs.JumpTriggered)
-            {
-                playerMover.TakeJumpDirection(player.CharacterData.BoostHeightUp * player.CharacterData.JumpStep);
-                yield break;
-            }
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        playerMover.TakeJumpDirection(player.CharacterData.BoostHeightUp);
+        if (other.TryGetComponent(out BotView bot))
+            BoostJump?.Invoke();
     }
 }

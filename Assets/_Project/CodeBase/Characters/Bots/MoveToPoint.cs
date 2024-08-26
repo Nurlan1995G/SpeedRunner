@@ -1,4 +1,4 @@
-﻿public class MoveToPoint
+﻿public class MoveToPoint : IBehaviour
 {
     private readonly BotMover _botMover;
     private readonly FlagPoint _targetPoint;
@@ -17,6 +17,6 @@
         _botMover.MoveTo(_targetPoint);
     }
 
-    public void Diactivate() =>
+    public void Deactivate() =>
         _botMover.StopMovement();
 }

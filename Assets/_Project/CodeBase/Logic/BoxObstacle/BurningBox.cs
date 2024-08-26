@@ -1,9 +1,9 @@
 using Assets._Project.CodeBase.Characters.Interface;
 using UnityEngine;
 
-public class BurningBox : Interactable
+public class BurningBox : InteractableEnter
 {
-    protected override void Interact(Collider other)
+    public override void InteractEnter(Collider other)
     {
         if(other.TryGetComponent(out IRespawned respawned))
         {
@@ -12,9 +12,5 @@ public class BurningBox : Interactable
 
             respawned.Respawn();
         }
-    }
-
-    protected override void InteractExit(Collider other)
-    {
     }
 }

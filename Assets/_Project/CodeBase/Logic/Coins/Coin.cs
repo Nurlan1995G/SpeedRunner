@@ -1,11 +1,20 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : InteractableEnter
 {
     [SerializeField] private GameObject _canvasCoin;
     [SerializeField] private ParticleSystem _coinEffect;
 
-    public void SetEffectCoin()
+    public override void InteractEnter(Collider other)
+    {
+        if(other.TryGetComponent(out Player player))
+        {
+            player.SetScore(10);
+            SetEffectCoin();
+        }
+    }
+
+    private void SetEffectCoin()
     {
         if (_canvasCoin.activeSelf)
         {
