@@ -10,6 +10,7 @@ public class PlayerMover : MonoBehaviour
     private Vector3 _velocityDirection;
     private Coroutine _speedBoostCoroutine;
     private float _currentSpeed;
+    private BoostBoxUp _boostBoxUp;
 
     public void Construct(Player player)
     {
@@ -17,6 +18,13 @@ public class PlayerMover : MonoBehaviour
         _playerData = _player.CharacterData;
         _currentSpeed = _playerData.MoveSpeed;
     }
+
+    private void OnEnable()
+    {
+        if(_boostBoxUp != null)
+            _boostBoxUp.BoostJump += OnBoostJump;
+    }
+
 
     private void Update()
     {
@@ -27,9 +35,32 @@ public class PlayerMover : MonoBehaviour
         HandleAnimations(moveDirection);
     }
 
-    public void TakeJumpDirection(float jumpDirection)
+    private void OnDisable()
     {
+        if(_boostBoxUp != null)
+            _boostBoxUp.BoostJump -= OnBoostJump;
+    }
+
+    public void TakeJumpDirection(float jumpDirection) => 
         _velocityDirection.y = jumpDirection;
+
+    public void ActivateSpeedBoost()
+    {
+        if (_speedBoostCoroutine != null)
+            StopCoroutine(_speedBoostCoroutine);
+
+        _speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(_player.CharacterData.BoostMultiplier,
+                _player.CharacterData.BoostDuration));
+    }
+
+    public void SetBoostBoxUp(BoostBoxUp boostBoxUp)
+    {
+        if (_boostBoxUp != null)
+            _boostBoxUp.BoostJump -= OnBoostJump;
+
+        _boostBoxUp = boostBoxUp;
+
+        _boostBoxUp.BoostJump += OnBoostJump;
     }
 
     private void HandleAnimations(Vector2 moveDirection)
@@ -105,18 +136,32 @@ public class PlayerMover : MonoBehaviour
         _player.CharacterController.Move(_velocityDirection * Time.deltaTime);
     }
 
-    public void ActivateSpeedBoost(float multiplier, float duration)
-    {
-        if (_speedBoostCoroutine != null)
-            StopCoroutine(_speedBoostCoroutine);
-
-        _speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(multiplier, duration));
-    }
+    private void OnBoostJump() => 
+        StartCoroutine(WaitForJumpInput());
 
     private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
     {
         _currentSpeed = _playerData.MoveSpeed * multiplier;
         yield return new WaitForSeconds(duration);
         _currentSpeed = _playerData.MoveSpeed;
+    }
+
+    private IEnumerator WaitForJumpInput()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _player.CharacterData.BoostWaitTime)
+        {
+            if (_player.PlayerInputs.JumpTriggered)
+            {
+                TakeJumpDirection(_player.CharacterData.BoostHeightUp * _player.CharacterData.JumpStep);
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        TakeJumpDirection(_player.CharacterData.BoostHeightUp);
     }
 }

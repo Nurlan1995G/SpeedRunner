@@ -1,7 +1,7 @@
 ﻿using Assets._Project.CodeBase.CameraLogic;
 using Assets._Project.Config;
 using Assets.Project.AssetProviders;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstraper : MonoBehaviour
@@ -13,7 +13,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
-    [SerializeField] private BotView _botView;
+    [SerializeField] private List<BotView> _botViews;
     [SerializeField] private TimerLevel _timerLevel;
 
     //private IInput _input;
@@ -66,6 +66,9 @@ public class Bootstraper : MonoBehaviour
 
     private void InitBot()
     {
-        _botView.Construct(_gameConfig.CharacterData);
+        foreach (var bot in _botViews)
+        {
+            bot.Construct(_gameConfig.CharacterData);
+        }
     }
 }

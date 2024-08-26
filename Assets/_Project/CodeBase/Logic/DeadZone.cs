@@ -1,9 +1,9 @@
 ﻿using Assets._Project.CodeBase.Characters.Interface;
 using UnityEngine;
 
-public class DeadZone : Interactable
+public class DeadZone : InteractableEnter
 {
-    protected override void Interact(Collider other)
+    public override void InteractEnter(Collider other)
     {
         if(other.TryGetComponent(out IRespawned respawn))
         {
@@ -12,9 +12,5 @@ public class DeadZone : Interactable
 
             respawn.Respawn();
         }
-    }
-
-    protected override void InteractExit(Collider other)
-    {
     }
 }
