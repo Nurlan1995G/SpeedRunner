@@ -23,7 +23,17 @@ MonoBehaviour:
     BoostMultiplier: 2
     BoostDuration: 0.8
     BoostHeightUp: 40
-    BoostWaitTime: 0.15
+    BoostWaitTime: 0.05
+  CharacterBotData:
+    MoveSpeed: 120
+    RotateSpeed: 50
+    HeightJump: 20
+    JumpStep: 1.5
+    JumpDuration: 1.5
+    BoostMultiplier: 2
+    BoostDuration: 0.8
+    BoostHeightUp: 40
+    BoostWaitTime: 1
   CameraRotateData:
     RotateSpeedMobileX: 50
     RotateSpeedMobileY: 2

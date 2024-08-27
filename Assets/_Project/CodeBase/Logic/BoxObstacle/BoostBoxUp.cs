@@ -3,23 +3,24 @@ using UnityEngine;
 
 public class BoostBoxUp : Interactable
 {
-    public event Action BoostJump;
+    public event Action PlayerBoostJump;
+    public event Action BotBoostJump;
 
     public override void InteractEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerMover playerMover))
-            playerMover.SetBoostBoxUp(this);
+            playerMover.InitBoostBoxUp(this);
 
         if (other.TryGetComponent(out BotView bot))
-            bot.SetBoostBoxUp(this);
+            bot.InitBoostBoxUp(this);
     }
 
     public override void InteractExit(Collider other)
     {
         if(other.TryGetComponent(out PlayerMover playerMover))
-            BoostJump?.Invoke();
+            PlayerBoostJump?.Invoke();
 
         if (other.TryGetComponent(out BotView bot))
-            BoostJump?.Invoke();
+            BotBoostJump?.Invoke();
     }
 }

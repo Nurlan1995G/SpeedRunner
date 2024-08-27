@@ -500,6 +500,7 @@ MonoBehaviour:
   _targetPoint: {fileID: 0}
   _botSkinHendler: {fileID: 6464090264825984447}
   _behaviourType: 1
+  _groundChecker: {fileID: 2350517844169614822}
   <Agent>k__BackingField: {fileID: 5937823375894377398}
   <Nickname>k__BackingField: {fileID: 150631714499243195}
 --- !u!114 &3225703665291819529
