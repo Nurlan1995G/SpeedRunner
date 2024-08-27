@@ -11,8 +11,8 @@ public class BoostBoxUp : Interactable
         if (other.TryGetComponent(out PlayerMover playerMover))
             playerMover.InitBoostBoxUp(this);
 
-        if (other.TryGetComponent(out BotView bot))
-            bot.InitBoostBoxUp(this);
+        /*if (other.TryGetComponent(out BotView bot))
+            bot.InitBoostBoxUp(this);*/
     }
 
     public override void InteractExit(Collider other)
@@ -20,7 +20,7 @@ public class BoostBoxUp : Interactable
         if(other.TryGetComponent(out PlayerMover playerMover))
             PlayerBoostJump?.Invoke();
 
-        if (other.TryGetComponent(out BotView bot))
-            BotBoostJump?.Invoke();
+        /*if (other.TryGetComponent(out BotView bot))
+            BotBoostJump?.Invoke();*/
     }
 }

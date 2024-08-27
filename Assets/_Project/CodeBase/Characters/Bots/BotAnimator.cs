@@ -8,23 +8,23 @@ public class BotAnimator
     private readonly int _fallingHash = Animator.StringToHash("FallingBot");
 
     private Vector3 _position;
-    private Transform _transform;
+    private BotView _bot;
 
-    public BotAnimator(Animator animator, Transform transform)
+    public BotAnimator(Animator animator, BotView bot)
     {
         _animator = animator;
-        _transform = transform;
+        _bot = bot;
     }
 
     public void Update(bool IsActivateJetpack)
     {
-        if (_transform.position == _position)
+        if (_bot.transform.position == _position)
         {
             PlayIdle();
         }
         else
         {
-            if (IsActivateJetpack)
+            if (IsActivateJetpack && _bot.GroundChecker.IsGrounded == false)
             {
                 PlayJump();
             }
@@ -34,7 +34,7 @@ public class BotAnimator
             }
         }
 
-        _position = _transform.position;
+        _position = _bot.transform.position;
     }
 
     public void PlayIdle() =>
