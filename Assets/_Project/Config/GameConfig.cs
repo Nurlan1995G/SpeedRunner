@@ -7,6 +7,7 @@ namespace Assets._Project.Config
     public class GameConfig : ScriptableObject
     {
         public CharacterData CharacterData;
+        public CharacterBotData CharacterBotData;
         public CameraRotateData CameraRotateData;
         public LogicConfig LogicConfig;
     }
@@ -23,6 +24,23 @@ namespace Assets._Project.Config
         public float JumpStep = 1.5f;
         public float JumpDuration;
         public float NormalizedJumpTimeMax;
+        [Header("Boost")]
+        public float BoostMultiplier = 2f;
+        public float BoostDuration = 0.5f;
+        public float BoostHeightUp = 1.2f;
+        public float BoostWaitTime = 0.5f;
+    }
+
+    [Serializable]
+    public class CharacterBotData
+    {
+        [Header("Speed")]
+        public float MoveSpeed;
+        public float RotateSpeed;
+        [Header("Other")]
+        public float HeightJump;
+        public float JumpStep = 1.5f;
+        public float JumpDuration;
         [Header("Boost")]
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;

@@ -11,13 +11,13 @@
 
     public void MoveTo(FlagPoint flagPoint)
     {
-        _botView.Agent.isStopped = false;
-        _botView.Agent.destination = flagPoint.transform.position;
+         _botView.Agent.isStopped = false;
+         _botView.Agent.destination = flagPoint.transform.position;
     }
 
     public void StopMovement()
     {
-        _botView.Agent.isStopped = true;
-        _botView.Agent.SetDestination(_botView.transform.position);
+         _botView.Agent.isStopped = true;
+         _botView.Agent.SetDestination(_botView.transform.position);
     }
 }

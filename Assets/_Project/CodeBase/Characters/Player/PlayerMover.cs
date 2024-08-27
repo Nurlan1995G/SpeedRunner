@@ -19,12 +19,6 @@ public class PlayerMover : MonoBehaviour
         _currentSpeed = _playerData.MoveSpeed;
     }
 
-    private void OnEnable()
-    {
-        if(_boostBoxUp != null)
-            _boostBoxUp.BoostJump += OnBoostJump;
-    }
-
 
     private void Update()
     {
@@ -33,12 +27,6 @@ public class PlayerMover : MonoBehaviour
         Move(moveDirection);
 
         HandleAnimations(moveDirection);
-    }
-
-    private void OnDisable()
-    {
-        if(_boostBoxUp != null)
-            _boostBoxUp.BoostJump -= OnBoostJump;
     }
 
     public void TakeJumpDirection(float jumpDirection) => 
@@ -53,14 +41,14 @@ public class PlayerMover : MonoBehaviour
                 _player.CharacterData.BoostDuration));
     }
 
-    public void SetBoostBoxUp(BoostBoxUp boostBoxUp)
+    public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
     {
         if (_boostBoxUp != null)
-            _boostBoxUp.BoostJump -= OnBoostJump;
+            _boostBoxUp.PlayerBoostJump -= OnBoostJump;
 
         _boostBoxUp = boostBoxUp;
 
-        _boostBoxUp.BoostJump += OnBoostJump;
+        _boostBoxUp.PlayerBoostJump += OnBoostJump;
     }
 
     private void HandleAnimations(Vector2 moveDirection)

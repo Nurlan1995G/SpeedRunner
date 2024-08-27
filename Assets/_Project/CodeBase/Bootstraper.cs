@@ -68,7 +68,7 @@ public class Bootstraper : MonoBehaviour
     {
         foreach (var bot in _botViews)
         {
-            bot.Construct(_gameConfig.CharacterData);
+            bot.Construct(_gameConfig.CharacterBotData);
         }
     }
 }

@@ -21,14 +21,15 @@ public class BotView : MonoBehaviour, IRespawned
 
     private bool _isActivateJetpack = false;
 
+    [SerializeField] private GroundChecker _groundChecker;
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
-    public CharacterData CharacterBotData { get; private set; }
+    public CharacterBotData CharacterBotData { get; private set; }
     public Vector3 RespawnPosition { get; private set; }
 
     public event Action Respawned;
 
-    public void Construct(CharacterData character)
+    public void Construct(CharacterBotData character)
     {
         CharacterBotData = character;
 
@@ -64,14 +65,14 @@ public class BotView : MonoBehaviour, IRespawned
         RespawnPosition = position;
     }
 
-    public void SetBoostBoxUp(BoostBoxUp boostBoxUp)
+    public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
     {
         if (_boostBoxUp != null)
-            _boostBoxUp.BoostJump -= OnBoostJump;
+            _boostBoxUp.BotBoostJump -= OnBoostJump;
 
         _boostBoxUp = boostBoxUp;
 
-        _boostBoxUp.BoostJump += OnBoostJump;
+        _boostBoxUp.BotBoostJump += OnBoostJump;
     }
 
     private void InitializeBotBehavior()
@@ -111,29 +112,41 @@ public class BotView : MonoBehaviour, IRespawned
 
     private void OnBoostJump()
     {
-        StartCoroutine(JumpCoroutine(CharacterBotData.BoostHeightUp * CharacterBotData.JumpStep));
+        StartCoroutine(JumpCoroutine(CharacterBotData.BoostHeightUp));
     }
 
     private IEnumerator JumpCoroutine(float jumpHeight)
     {
-        Debug.Log("JumpCoroutine started with height: " + jumpHeight);
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = startPosition + Vector3.up * jumpHeight;
 
-        Agent.enabled = false; // Отключаем NavMeshAgent временно
+        Agent.enabled = false; 
 
         float elapsedTime = 0f;
-        float duration = 0.5f; // Время прыжка
 
-        while (elapsedTime < duration)
+        while (elapsedTime < CharacterBotData.BoostWaitTime)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / CharacterBotData.BoostWaitTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         transform.position = targetPosition;
-        Agent.enabled = true; // Включаем NavMeshAgent обратно
+        elapsedTime = 0;
+
+        while(elapsedTime < CharacterBotData.BoostWaitTime)
+        {
+            transform.position = Vector3.Lerp(targetPosition, startPosition, elapsedTime / CharacterBotData.BoostWaitTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = startPosition;
+
+        Agent.enabled = true;
+
+        if (_currentBehaviour != null && Agent.isOnNavMesh)
+            ChangeBehaviour(_currentBehaviour);
     }
 }
 
