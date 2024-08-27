@@ -21,7 +21,7 @@ public class BotView : MonoBehaviour, IRespawned
 
     private bool _isActivateJetpack = false;
 
-    [SerializeField] private GroundChecker _groundChecker;
+    [field: SerializeField] public GroundChecker GroundChecker;
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
     public CharacterBotData CharacterBotData { get; private set; }
@@ -47,6 +47,11 @@ public class BotView : MonoBehaviour, IRespawned
         else
             _isActivateJetpack = false;
 
+        if (GroundChecker.IsOnTrampoline)
+        {
+            OnBoostJump();
+        }
+
         _botAnimator?.Update(_isActivateJetpack);
     }
 
@@ -61,11 +66,10 @@ public class BotView : MonoBehaviour, IRespawned
 
     public void SetRespawnPosition(Vector3 position)
     {
-        Debug.Log(RespawnPosition + " - RespawnPosition");
         RespawnPosition = position;
     }
 
-    public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
+    /*public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
     {
         if (_boostBoxUp != null)
             _boostBoxUp.BotBoostJump -= OnBoostJump;
@@ -73,13 +77,13 @@ public class BotView : MonoBehaviour, IRespawned
         _boostBoxUp = boostBoxUp;
 
         _boostBoxUp.BotBoostJump += OnBoostJump;
-    }
+    }*/
 
     private void InitializeBotBehavior()
     {
         _botSkinHendler.EnableRandomSkin();
         BotMover botMover = new(this);
-        _botAnimator = new(_botSkinHendler.CurrentSkin.Animator, transform);
+        _botAnimator = new(_botSkinHendler.CurrentSkin.Animator, this);
         _moveToFinish = new(botMover, _targetPoint, _botAnimator);
         _idleBehavior = new(_botAnimator, botMover);
 

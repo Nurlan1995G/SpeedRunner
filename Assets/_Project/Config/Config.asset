@@ -17,7 +17,7 @@ MonoBehaviour:
     RotateSpeed: 20
     Gravity: 70
     HeightJump: 35
-    JumpStep: 1.5
+    JumpStep: 2
     JumpDuration: 1.5
     NormalizedJumpTimeMax: 1
     BoostMultiplier: 2
