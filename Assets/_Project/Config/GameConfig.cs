@@ -19,11 +19,11 @@ namespace Assets._Project.Config
         public float MoveSpeed;
         public float RotateSpeed;
         [Header("Other")]
-        public float Gravity;
+        public float JumpGravity = 1.5f;
+        public float FallGravity = 2.5f;
         public float HeightJump;
         public float JumpStep = 1.5f;
         public float JumpDuration;
-        public float NormalizedJumpTimeMax;
         [Header("Boost")]
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;
@@ -40,7 +40,7 @@ namespace Assets._Project.Config
         [Header("Other")]
         public float HeightJump;
         public float JumpStep = 1.5f;
-        public float JumpDuration;
+        public float BotJumpDuration;
         [Header("Boost")]
         public float BoostMultiplier = 2f;
         public float BoostDuration = 0.5f;
