@@ -28,7 +28,7 @@ public class AgentLinkBotMover : MonoBehaviour
             {
                 yield return new WaitWhile(() => _bot.Agent.velocity != Vector3.zero);
 
-                 yield return StartCoroutine(Parabola(_bot.Agent, _bot.CharacterBotData.HeightJump, _bot.CharacterBotData.JumpDuration));
+                 yield return StartCoroutine(Parabola(_bot.Agent, _bot.CharacterBotData.HeightJump, _bot.CharacterBotData.BotJumpDuration));
             }
 
             yield return null;

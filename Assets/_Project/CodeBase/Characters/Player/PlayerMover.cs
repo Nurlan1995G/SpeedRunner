@@ -30,7 +30,7 @@ public class PlayerMover : MonoBehaviour
     }
 
     public void TakeJumpDirection(float jumpDirection) => 
-        _velocityDirection.y = jumpDirection;
+        _velocityDirection.y = Mathf.Sqrt(2 * _playerData.JumpGravity * jumpDirection);
 
     public void ActivateSpeedBoost()
     {
@@ -100,7 +100,10 @@ public class PlayerMover : MonoBehaviour
     {
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
-        _player.CharacterController.Move(finalDirection * _currentSpeed * Time.deltaTime);
+        if(_player.GroundChecker.IsGrounded)
+            _player.CharacterController.Move(finalDirection * _currentSpeed * Time.deltaTime);
+        else
+            _player.CharacterController.Move(finalDirection * _currentSpeed / 2 * Time.deltaTime);
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
@@ -118,7 +121,10 @@ public class PlayerMover : MonoBehaviour
     {
         if (_player.GroundChecker.IsGrounded == false)
         {
-            _velocityDirection.y -= _playerData.Gravity * Time.deltaTime;
+            if (_velocityDirection.y > 0)
+                _velocityDirection.y -= _playerData.JumpGravity * Time.deltaTime;
+            else
+                _velocityDirection.y -= _playerData.FallGravity * Time.deltaTime;
         }
 
         _player.CharacterController.Move(_velocityDirection * Time.deltaTime);

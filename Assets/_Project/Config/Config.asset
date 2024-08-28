@@ -15,21 +15,21 @@ MonoBehaviour:
   CharacterData:
     MoveSpeed: 80
     RotateSpeed: 20
-    Gravity: 70
-    HeightJump: 35
-    JumpStep: 2
-    JumpDuration: 1.5
-    NormalizedJumpTimeMax: 1
+    JumpGravity: 80
+    FallGravity: 100
+    HeightJump: 20
+    JumpStep: 1.5
+    JumpDuration: 3
     BoostMultiplier: 2
     BoostDuration: 0.8
-    BoostHeightUp: 40
+    BoostHeightUp: 30
     BoostWaitTime: 0.05
   CharacterBotData:
     MoveSpeed: 120
     RotateSpeed: 50
     HeightJump: 20
     JumpStep: 1.5
-    JumpDuration: 1.5
+    BotJumpDuration: 0
     BoostMultiplier: 2
     BoostDuration: 0.8
     BoostHeightUp: 40
