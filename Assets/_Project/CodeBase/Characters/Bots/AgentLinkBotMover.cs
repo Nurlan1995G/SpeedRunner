@@ -26,9 +26,9 @@ public class AgentLinkBotMover : MonoBehaviour
         {
             if (_bot.Agent.isOnOffMeshLink)
             {
-                yield return new WaitWhile(() => _bot.Agent.velocity != Vector3.zero);
+                //yield return new WaitWhile(() => _bot.Agent.velocity != Vector3.zero);
 
-                 yield return StartCoroutine(Parabola(_bot.Agent, _bot.CharacterBotData.HeightJump, _bot.CharacterBotData.BotJumpDuration));
+                 yield return StartCoroutine(Parabola(_bot.Agent, _bot.CharacterBotData.BotHeightJump, _bot.CharacterBotData.BotJumpDuration));
             }
 
             yield return null;

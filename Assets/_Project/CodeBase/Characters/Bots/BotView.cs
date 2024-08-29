@@ -1,7 +1,6 @@
 ﻿using Assets._Project.CodeBase.Characters.Interface;
 using Assets._Project.Config;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,13 +14,14 @@ public class BotView : MonoBehaviour, IRespawned
     private BotAnimator _botAnimator;
     private MoveToPoint _moveToFinish;
     private IdleBehavior _idleBehavior;
+    private RandomBehaviour _randomMoving;
     private IBehaviour _currentBehaviour;
     private List<IBehaviour> _behaviours;
     private BoostBoxUp _boostBoxUp;
 
     private bool _isActivateJetpack = false;
 
-    [field: SerializeField] public GroundChecker GroundChecker;
+    [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
     public CharacterBotData CharacterBotData { get; private set; }
@@ -47,11 +47,6 @@ public class BotView : MonoBehaviour, IRespawned
         else
             _isActivateJetpack = false;
 
-        if (GroundChecker.IsOnTrampoline)
-        {
-            OnBoostJump();
-        }
-
         _botAnimator?.Update(_isActivateJetpack);
     }
 
@@ -64,33 +59,23 @@ public class BotView : MonoBehaviour, IRespawned
         ChangeBehaviour(_currentBehaviour);
     }
 
-    public void SetRespawnPosition(Vector3 position)
-    {
+    public void SetRespawnPosition(Vector3 position) => 
         RespawnPosition = position;
-    }
-
-    /*public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
-    {
-        if (_boostBoxUp != null)
-            _boostBoxUp.BotBoostJump -= OnBoostJump;
-
-        _boostBoxUp = boostBoxUp;
-
-        _boostBoxUp.BotBoostJump += OnBoostJump;
-    }*/
 
     private void InitializeBotBehavior()
     {
         _botSkinHendler.EnableRandomSkin();
         BotMover botMover = new(this);
         _botAnimator = new(_botSkinHendler.CurrentSkin.Animator, this);
+        _randomMoving = new(_botAnimator, botMover);
         _moveToFinish = new(botMover, _targetPoint, _botAnimator);
         _idleBehavior = new(_botAnimator, botMover);
 
         _behaviours = new List<IBehaviour>
         {
             _moveToFinish,
-            _idleBehavior
+            _idleBehavior,
+            _randomMoving
         };
     }
 
@@ -104,6 +89,9 @@ public class BotView : MonoBehaviour, IRespawned
             case BehaviourType.MoveToPoint:
                 ChangeBehaviour(_moveToFinish);
                 break;
+            case BehaviourType.RandomMoving:
+                ChangeBehaviour(_randomMoving);
+                break;
         }
     }
 
@@ -113,49 +101,11 @@ public class BotView : MonoBehaviour, IRespawned
         _currentBehaviour = behaviour;
         _currentBehaviour.Activate();
     }
-
-    private void OnBoostJump()
-    {
-        StartCoroutine(JumpCoroutine(CharacterBotData.BoostHeightUp));
-    }
-
-    private IEnumerator JumpCoroutine(float jumpHeight)
-    {
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + Vector3.up * jumpHeight;
-
-        Agent.enabled = false; 
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < CharacterBotData.BoostWaitTime)
-        {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / CharacterBotData.BoostWaitTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPosition;
-        elapsedTime = 0;
-
-        while(elapsedTime < CharacterBotData.BoostWaitTime)
-        {
-            transform.position = Vector3.Lerp(targetPosition, startPosition, elapsedTime / CharacterBotData.BoostWaitTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = startPosition;
-
-        Agent.enabled = true;
-
-        if (_currentBehaviour != null && Agent.isOnNavMesh)
-            ChangeBehaviour(_currentBehaviour);
-    }
 }
 
 public enum BehaviourType
 {
     Idle,
-    MoveToPoint
+    MoveToPoint,
+    RandomMoving
 }
