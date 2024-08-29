@@ -35,17 +35,18 @@ namespace Assets._Project.Config
     public class CharacterBotData
     {
         [Header("Speed")]
-        public float MoveSpeed;
-        public float RotateSpeed;
+        public float BotMoveSpeed;
+        public float BotRotateSpeed;
         [Header("Other")]
-        public float HeightJump;
-        public float JumpStep = 1.5f;
+        public float BotHeightJump;
+        public float BotJumpStep = 1.5f;
         public float BotJumpDuration;
+        public float BotRangeRandomMoving = 20;
         [Header("Boost")]
-        public float BoostMultiplier = 2f;
-        public float BoostDuration = 0.5f;
-        public float BoostHeightUp = 1.2f;
-        public float BoostWaitTime = 0.5f;
+        public float BotBoostMultiplier = 2f;
+        public float BotBoostDuration = 0.5f;
+        public float BotBoostHeightUp = 1.2f;
+        public float BotBoostWaitTime = 0.5f;
     }
 
     [Serializable]
