@@ -3,31 +3,35 @@ using UnityEngine;
 
 public class MovingPlatform : Interactable
 {
-    [SerializeField] private TypeMovingPlatform _type; 
-    [SerializeField] private float _speed = 2f; 
-    [SerializeField] private float _distance = 3f; 
+    [SerializeField] private TypeMovingPlatform _type;
+    [SerializeField] private Transform _target;
+    [SerializeField] private float _duration;
+    [SerializeField] private bool _isTwistLeft;
+
+    private float _rotationYLenght = 360;
 
     private Vector3 _startPosition;
-    private Vector3 _direction;
     private CharacterController _characterController;
 
     private void Start()
     {
         _startPosition = transform.position;
 
-        if (_type == TypeMovingPlatform.UpDown)
-            _direction = Vector3.up; 
-        else if (_type == TypeMovingPlatform.LeftRight)
-            _direction = Vector3.forward; 
+        transform.DOMove(_target.position, _duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+        
+        if (_type == TypeMovingPlatform.Rotate)
+        {
+            if (_isTwistLeft)
+                _rotationYLenght = -_rotationYLenght;
+
+            transform.DORotate(new Vector3(0, _rotationYLenght, 0), _duration, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+        }
     }
 
     private void Update()
     {
-        float movementFactor = Mathf.Sin(Time.time * _speed) * _distance;
-        Vector3 newPosition = _startPosition + _direction * movementFactor;
-        Vector3 platformMovement = newPosition - transform.position;
-
-        transform.position = newPosition;
+        Vector3 platformMovement = _startPosition - transform.position;
+        transform.position = _startPosition;
 
         if (_characterController != null)
         {
@@ -55,5 +59,6 @@ public class MovingPlatform : Interactable
 public enum TypeMovingPlatform
 {
     UpDown,
-    LeftRight
+    LeftRight,
+    Rotate
 }
