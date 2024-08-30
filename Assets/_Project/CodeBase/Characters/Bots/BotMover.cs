@@ -30,10 +30,8 @@ public class BotMover
          _botView.Agent.SetDestination(_botView.transform.position);
     }
 
-    public void StartRandomMove()
-    {
+    public void StartRandomMove() =>
         _coroutine = CoroutineRunner.Instance.RunCoroutine(RandomMoving());
-    }
 
     private IEnumerator RandomMoving()
     {
@@ -58,7 +56,7 @@ public class BotMover
 
     private bool IsRandomPointFound(Vector3 center, float range, out Vector3 result)
     {
-        Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;
+        Vector3 randomPoint = center + Random.insideUnitSphere * range;
 
         if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 20.0f, NavMesh.AllAreas))
         {
