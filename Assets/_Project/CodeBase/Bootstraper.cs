@@ -2,6 +2,7 @@
 using Assets._Project.Config;
 using Assets.Project.AssetProviders;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bootstraper : MonoBehaviour
@@ -15,8 +16,8 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private SoundHandler _soundHandler;
     [SerializeField] private List<BotView> _botViews;
     [SerializeField] private TimerLevel _timerLevel;
+    [SerializeField] private CoroutineRunner _coroutineRunner;
 
-    //private IInput _input;
     private Language _language;
 
     private void Awake()
@@ -32,6 +33,7 @@ public class Bootstraper : MonoBehaviour
         _timerLevel.Construct(_gameConfig.LogicConfig);
         InitPlayer(playerInputs);
         InitCamera(rotateInput);
+        InitCoroutine();
         InitBot();
     }
 
@@ -63,6 +65,9 @@ public class Bootstraper : MonoBehaviour
             //_boostButtonUI.gameObject.SetActive(true);
         }
     }
+
+    private void InitCoroutine() =>
+        _coroutineRunner.Initialize();
 
     private void InitBot()
     {
