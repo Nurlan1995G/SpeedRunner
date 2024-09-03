@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72af6910af263674c968f9049bac7178, type: 3}
+  m_Name: AnimalItemInfo 8
+  m_EditorClassIdentifier: 
+  Id: 0
+  ItemType: 0
+  CashType: 0
+  Price: 0
+  Icon: {fileID: 21300000, guid: 2d15b34d53034f549aa51202ae4c2ff3, type: 3}
+  ShopPreview: {fileID: 982166925482532373, guid: 3242427c072b5c440987d4d01903fea8, type: 3}
+  YanId: 0
+  IsDynamic: 1
+  MainMenuPreview: {fileID: 982166925482532373, guid: 29d3f75b0d36fef49876c3e4a9c8860b, type: 3}
