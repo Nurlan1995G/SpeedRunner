@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2c57e29046b454585d00f15cafca51, type: 3}
+  m_Name: TrailItemInfo 3
+  m_EditorClassIdentifier: 
+  Id: 0
+  ItemType: 0
+  CashType: 0
+  Price: 0
+  Icon: {fileID: 21300000, guid: 37c6a65a9f19f5a4487a1c79f2151a89, type: 3}
+  ShopPreview: {fileID: 2997233945214461580, guid: 89160d766f7a8cd48a1054c9e2374e41, type: 3}
+  YanId: 0
+  IsDynamic: 1
