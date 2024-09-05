@@ -422,6 +422,8 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 2048
   _distanceToCheck: 0.3
 --- !u!1 &9196140201672641680
 GameObject:
