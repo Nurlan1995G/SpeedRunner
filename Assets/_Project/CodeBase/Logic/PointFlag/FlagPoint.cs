@@ -10,6 +10,9 @@ public class FlagPoint : InteractableEnter
         if (other.TryGetComponent(out BotView bot))
             bot.SetRespawnPosition(transform.position);
 
+        if (other.TryGetComponent(out BotController botController))
+            botController.SetRespawnPosition(transform.position);
+
         if (other.TryGetComponent(out Player player))
             FlagChange(player);
     }
