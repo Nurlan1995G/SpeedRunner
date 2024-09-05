@@ -12,7 +12,6 @@ public class Player : MonoBehaviour, IRespawned
     private Language _language;
 
     private Vector3 _respawnPosition;
-    private bool _respawn;
     private int _score = 0;
 
     private Action<Player> PlayerDied;
@@ -63,7 +62,6 @@ public class Player : MonoBehaviour, IRespawned
         transform.position = _respawnPosition;
         gameObject.SetActive(true);
         _effectSpawnPlayer.Play();
-        _respawn = false;
         _soundhandler.PlayWin();
     }
 }

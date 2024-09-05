@@ -23,6 +23,7 @@ public class DeadZone : InteractableEnter
             if (respawned is Player)
                 SoundHandler.Instance.PlayLose();
 
+            Debug.Log("respawned");
             respawned.Respawn();
         }
     }

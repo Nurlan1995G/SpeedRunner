@@ -18,6 +18,6 @@ public class GroundChecker : MonoBehaviour
         IsGrounded = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[0]);
         IsOnTrampoline = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[1]);
         IsOnBoostUp = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[2]);
-        IsOnBoostUp = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[3]);
+        IsOnJumpBot = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[3]);
     }
 }
