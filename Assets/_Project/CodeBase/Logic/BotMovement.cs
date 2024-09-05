@@ -38,4 +38,14 @@ public class BotMovement : MonoBehaviour
 
     private void MoveCharacterController(Vector3 direction) => 
         _botController.CharacterController.Move(direction);
+
+    public void Rotate(Vector3 direction, float rotateSpeed)
+    {
+        if (direction != Vector3.zero) 
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion restrictedRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, restrictedRotation, rotateSpeed * Time.deltaTime);
+        }
+    }
 }

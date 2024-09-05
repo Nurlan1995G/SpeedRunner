@@ -11,7 +11,7 @@ public class BotController : MonoBehaviour, IRespawned
     [SerializeField] private GameConfig _characterBot;
 
     private TargetPoint _currentTarget;
-    private bool _isAchievedTarget;
+    private bool _isAchievedTarget;   //достигнута ли цель
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -26,19 +26,57 @@ public class BotController : MonoBehaviour, IRespawned
     private void Update()
     {
         GravityHandling();
+        CheckAndMoveToTarget();
+    }
 
+    public void SetRespawnPosition(Vector3 position) =>
+        RespawnPosition = position;
+
+    public void Respawn()
+    {
+        if (_currentTarget != null)
+        {
+            _currentTarget.Diactivate = false;
+            _currentTarget.IsBusy = false;
+            _isAchievedTarget = false;
+        }
+
+        gameObject.SetActive(false);
+        transform.position = RespawnPosition;
+        gameObject.SetActive(true);
+
+        if (_currentTarget != null)
+        {
+            _currentTarget.IsBusy = true;
+            MoveTowardsTarget();
+        }
+    }
+
+    private void CheckAndMoveToTarget()
+    {
         if (_currentTarget == null || _isAchievedTarget)
         {
-            _currentTarget = FindNearestFreePoint();
-            _isAchievedTarget = false;
-
-            if (_currentTarget != null)
+            if (_isAchievedTarget && _currentTarget != null)
             {
-                _currentTarget.IsBusy = true; 
+                _currentTarget.Diactivate = false;
+                _currentTarget.IsBusy = false;
+
+                _currentTarget = null;
+                _isAchievedTarget = false;
+            }
+
+            if (_currentTarget == null)
+            {
+                _currentTarget = FindNearestFreePoint();
+
+                if (_currentTarget != null)
+                {
+                    _currentTarget.IsBusy = true;
+                }
             }
         }
 
-        if (_currentTarget != null && _currentTarget.Diactivate == false)
+        if (_currentTarget != null && !_currentTarget.Diactivate)
         {
             MoveTowardsTarget();
         }
@@ -48,12 +86,14 @@ public class BotController : MonoBehaviour, IRespawned
     {
         Vector3 direction = (_currentTarget.transform.position - transform.position).normalized;
         _movement.Move(direction);
+        _movement.Rotate(direction, _characterBot.CharacterData.RotateSpeed);
 
         if (Vector3.Distance(transform.position, _currentTarget.transform.position) < 0.5f)
         {
             _isAchievedTarget = true;
             _currentTarget.Diactivate = true;
-            //DeactivateZone(_currentTarget.transform.parent.GetComponent<PointSpawnZone>());
+
+            _currentTarget = null;
             _movement.Jump();
         }
     }
@@ -98,17 +138,5 @@ public class BotController : MonoBehaviour, IRespawned
         {
             _movement.ResetVerticalVelocity();
         }
-    }
-
-    public void SetRespawnPosition(Vector3 position)
-    {
-       RespawnPosition = position;
-    }
-
-    public void Respawn()
-    {
-        gameObject.SetActive(false);
-        transform.position = RespawnPosition;
-        gameObject.SetActive(true);
     }
 }
