@@ -1,5 +1,4 @@
-﻿using Assets._Project.CodeBase.Player.Skin;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SkinHandler : MonoBehaviour
