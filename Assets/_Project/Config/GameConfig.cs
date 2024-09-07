@@ -21,6 +21,9 @@ namespace Assets._Project.Config
         [Header("Other")]
         public float JumpGravity = 1.5f;
         public float FallGravity = 2.5f;
+
+        public float FallDelay = 0.5f;
+
         public float HeightJump;
         public float JumpStep = 1.5f;
         public float JumpDuration;

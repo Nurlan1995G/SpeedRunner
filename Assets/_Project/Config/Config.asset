@@ -17,6 +17,7 @@ MonoBehaviour:
     RotateSpeed: 20
     JumpGravity: 80
     FallGravity: 100
+    FallDelay: 1
     HeightJump: 20
     JumpStep: 1.5
     JumpDuration: 3

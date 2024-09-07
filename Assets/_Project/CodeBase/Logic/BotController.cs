@@ -75,7 +75,7 @@ public class BotController : MonoBehaviour, IRespawned
     {
         if (!GroundChecker.IsGrounded)
         {
-            _movement.ApplyGravity(_characterBot.CharacterData.JumpGravity);
+            _movement.ApplyGravity(_characterBot.CharacterData.JumpGravity, _characterBot.CharacterData.FallDelay);
         }
         else
         {

@@ -6,7 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
-    [SerializeField] private Animator _playerAnimator;
+    //[SerializeField] private SkinHandler _skinHandler;
+    [SerializeField] private Animator _animator;
 
     private SoundHandler _soundhandler;
     private Language _language;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour, IRespawned
         _language = language;
         CharacterData = characterData;
 
-        CharacterAnimation characterAnimation = new(_playerAnimator);
+        CharacterAnimation characterAnimation = new(_animator);
         CharacterAnimation = characterAnimation;
 
         playerMover.Construct(this);

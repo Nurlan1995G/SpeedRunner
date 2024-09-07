@@ -33,7 +33,7 @@ public class BotMovement : MonoBehaviour
         MoveCharacterController(_velocity * Time.deltaTime);
     }
 
-    public void ApplyGravity(float jumpGravity)
+    public void ApplyGravity(float jumpGravity, float fallDelay)
     {
         _velocity.y -= jumpGravity * Time.deltaTime;
     }

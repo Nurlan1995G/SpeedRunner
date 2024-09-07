@@ -6,8 +6,12 @@ public class SkinHandler : MonoBehaviour
     [SerializeField] private Shop _shop;
     [SerializeField] private List<RewardModel> _skins;
 
-    private void OnEnable() =>
+    public RewardModel CurrentSkin { get; private set; }
+
+    private void OnEnable()
+    {
         _shop.SkinCangedInShop += LoadSkins;
+    }
 
     private void Start() =>
         LoadSkins();
@@ -28,7 +32,10 @@ public class SkinHandler : MonoBehaviour
         foreach (var skin in skins)
         {
             if (idSkinPlayer == skin.ItemInfo.Id)
+            {
+                CurrentSkin = skin;
                 skin.ChangeState(true);
+            }
             else
                 skin.ChangeState(false);
         }
