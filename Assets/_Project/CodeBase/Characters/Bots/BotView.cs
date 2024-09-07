@@ -66,10 +66,10 @@ public class BotView : MonoBehaviour, IRespawned
     {
         _botSkinHendler.EnableRandomSkin();
         BotMover botMover = new(this);
-        _botAnimator = new(_botSkinHendler.CurrentSkin.Animator, this);
-        _randomMoving = new(_botAnimator, botMover);
-        _moveToFinish = new(botMover, _targetPoint, _botAnimator);
-        _idleBehavior = new(_botAnimator, botMover);
+        _botAnimator = new BotAnimator(_botSkinHendler.CurrentSkin.Animator, this);
+        _randomMoving = new RandomBehaviour(_botAnimator, botMover);
+        _moveToFinish = new MoveToPoint(botMover, _targetPoint, _botAnimator);
+        _idleBehavior = new IdleBehavior(_botAnimator, botMover);
 
         _behaviours = new List<IBehaviour>
         {
