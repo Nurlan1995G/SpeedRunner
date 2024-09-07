@@ -87,6 +87,8 @@ MonoBehaviour:
   - {fileID: 0}
   _skinHendler: {fileID: 8655212338280228967}
   _characterBot: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
+  _targetFlag: {fileID: 0}
+  BotSkinHendler: {fileID: 8655212338280228967}
   <GroundChecker>k__BackingField: {fileID: 6543734882555251913}
   <CharacterController>k__BackingField: {fileID: 5917520407493118353}
 --- !u!114 &2748656056958153237
@@ -102,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 45
-  _jumpForce: 80
+  _jumpForce: 60
   _jumpTrampoline: 100
 --- !u!143 &5917520407493118353
 CharacterController:

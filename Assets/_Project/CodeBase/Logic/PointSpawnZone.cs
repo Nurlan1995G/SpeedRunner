@@ -12,7 +12,7 @@ public class PointSpawnZone : MonoBehaviour
 
     public List<TargetPoint> TargetPoints => _points;
 
-    private void Start()
+    private void Awake()
     {
         SpawnPoints();
     }
@@ -35,7 +35,7 @@ public class PointSpawnZone : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 1, 0, 0.3f); 
+        Gizmos.color = new Color(200, 3, 230, 30f); 
         Gizmos.DrawCube(transform.position, _spawnAreaSize);
     }
 }

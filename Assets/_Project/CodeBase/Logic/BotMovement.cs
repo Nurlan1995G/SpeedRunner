@@ -5,6 +5,7 @@ public class BotMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _jumpTrampoline = 10f;
+    [SerializeField] private float _boostUp = 100f;
 
     private BotController _botController;
     private Vector3 _velocity;
@@ -22,16 +23,20 @@ public class BotMovement : MonoBehaviour
 
     public void Jump()
     {
-        if(_botController.GroundChecker.IsOnJumpBot)
+        if (_botController.GroundChecker.IsOnJumpBot)
             _velocity.y = _jumpForce;
-        else if(_botController.GroundChecker.IsOnTrampoline)
+        else if (_botController.GroundChecker.IsOnTrampoline)
             _velocity.y = _jumpTrampoline;
+        else if (_botController.GroundChecker.IsOnBoostUp)
+            _velocity.y = _boostUp;
 
         MoveCharacterController(_velocity * Time.deltaTime);
     }
 
-    public void ApplyGravity(float jumpGravity) => 
+    public void ApplyGravity(float jumpGravity)
+    {
         _velocity.y -= jumpGravity * Time.deltaTime;
+    }
 
     public void ResetVerticalVelocity() => 
         _velocity.y = 0;
