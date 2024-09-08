@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
-    //[SerializeField] private SkinHandler _skinHandler;
-    [SerializeField] private Animator _animator;
+    
+    private SkinHandler _skinHandler;
 
     private SoundHandler _soundhandler;
     private Language _language;
@@ -25,14 +25,15 @@ public class Player : MonoBehaviour, IRespawned
     public int Score => _score;
 
     public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
-         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper)
+         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper, SkinHandler skinHandler)
     {
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         _language = language;
         CharacterData = characterData;
 
-        CharacterAnimation characterAnimation = new(_animator);
+        _skinHandler = skinHandler;
+        CharacterAnimation characterAnimation = new(_skinHandler, this);
         CharacterAnimation = characterAnimation;
 
         playerMover.Construct(this);

@@ -7,22 +7,60 @@ public class CharacterAnimation
     private const string IsJumping = "IsJumping";
     private const string IsFalling = "IsFalling";
 
-    private Animator _animator;
+    private SkinHandler _skinHandler;
+    private Player _player;
 
-    public CharacterAnimation(Animator animator)
+    public CharacterAnimation(SkinHandler skinHandler, Player player)
     {
-        _animator = animator;
+        _skinHandler = skinHandler;
+        _player = player;
     }
 
-    public void StartIdle() => _animator.SetBool(IsIdling, true);
-    public void StopIdle() => _animator.SetBool(IsIdling, false);
+    public void StartIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, true);
+    public void StopIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, false);
 
-    public void StartRunning() => _animator.SetBool(IsRunning, true);
-    public void StopRunning() => _animator.SetBool(IsRunning, false);
+    public void StartRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, true);
+    public void StopRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, false);
 
-    public void StartJumping() => _animator.SetBool(IsJumping, true);
-    public void StopJumping() => _animator.SetBool(IsJumping, false);
+    public void StartJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, true);
+    public void StopJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, false);
 
-    public void StartFalling() => _animator.SetBool(IsFalling, true);
-    public void StopFalling() => _animator.SetBool(IsFalling, false);
+    public void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
+    public void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
+
+    public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection)
+    {
+        if (_player.GroundChecker.IsGrounded)
+        {
+            StopFalling();
+            StopJumping();
+
+            if (moveDirection != Vector2.zero)
+            {
+                StartRunning();
+                StopIdle();
+            }
+            else
+            {
+                StopRunning();
+                StartIdle();
+            }
+        }
+        else
+        {
+            StopRunning();
+            StopIdle();
+
+            if (velocityDirection.y > 0)
+            {
+                StartJumping();
+                StopFalling();
+            }
+            else
+            {
+                StopJumping();
+                StartFalling();
+            }
+        }
+    }
 }

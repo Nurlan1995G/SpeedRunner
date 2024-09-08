@@ -19,7 +19,6 @@ public class TimerLevel : MonoBehaviour
         if (_timer <= 0)
         {
             _timer = 0;
-            SceneManager.LoadScene("Game2"); 
         }
 
         UpdateTimerDisplay();

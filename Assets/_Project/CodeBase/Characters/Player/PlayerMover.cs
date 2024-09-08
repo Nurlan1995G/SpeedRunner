@@ -26,7 +26,7 @@ public class PlayerMover : MonoBehaviour
         Vector2 moveDirection = _player.PlayerInputs.MoveDirection;
         Move(moveDirection);
 
-        HandleAnimations(moveDirection);
+        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection);
     }
 
     public void TakeJumpDirection(float jumpDirection) => 
@@ -49,42 +49,6 @@ public class PlayerMover : MonoBehaviour
         _boostBoxUp = boostBoxUp;
 
         _boostBoxUp.PlayerBoostJump += OnBoostJump;
-    }
-
-    private void HandleAnimations(Vector2 moveDirection)
-    {
-        if (_player.GroundChecker.IsGrounded)
-        {
-            _player.CharacterAnimation.StopFalling();
-            _player.CharacterAnimation.StopJumping();
-
-            if (moveDirection != Vector2.zero)
-            {
-                _player.CharacterAnimation.StartRunning();
-                _player.CharacterAnimation.StopIdle();
-            }
-            else
-            {
-                _player.CharacterAnimation.StopRunning();
-                _player.CharacterAnimation.StartIdle();
-            }
-        }
-        else
-        {
-            _player.CharacterAnimation.StopRunning();
-            _player.CharacterAnimation.StopIdle();
-
-            if (_velocityDirection.y > 0)
-            {
-                _player.CharacterAnimation.StartJumping();
-                _player.CharacterAnimation.StopFalling();
-            }
-            else
-            {
-                _player.CharacterAnimation.StopJumping();
-                _player.CharacterAnimation.StartFalling();
-            }
-        }
     }
 
     private void Move(Vector2 direction)
