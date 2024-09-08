@@ -57,6 +57,18 @@ public class BotView : MonoBehaviour, IRespawned
     {
         Agent.Warp(RespawnPosition);
         ChangeBehaviour(_currentBehaviour);
+
+        /*if (NavMesh.SamplePosition(RespawnPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+        {
+            Agent.Warp(hit.position);
+            Debug.Log($"Agent {name} деформирован до состояния навмешивания в {hit.position}");
+        }
+        else
+        {
+            Debug.LogError($"Agent {name} не удалось преобразовать в навигационную сетку при {RespawnPosition}");
+        }
+
+        ChangeBehaviour(_currentBehaviour);*/
     }
 
     public void SetRespawnPosition(Vector3 position) => 
@@ -77,6 +89,11 @@ public class BotView : MonoBehaviour, IRespawned
             _idleBehavior,
             _randomMoving
         };
+
+        if (!Agent.isOnNavMesh)
+        {
+            Debug.LogError($"Agent {name} \r\nпосле инициализации его нет в NavMesh.");
+        }
     }
 
     private void SelectBehaviourType()
@@ -97,6 +114,8 @@ public class BotView : MonoBehaviour, IRespawned
 
     private void ChangeBehaviour(IBehaviour behaviour)
     {
+        Debug.Log($"Изменение поведения для {this.name} to {behaviour.GetType().Name}");
+
         _currentBehaviour?.Deactivate();
         _currentBehaviour = behaviour;
         _currentBehaviour.Activate();

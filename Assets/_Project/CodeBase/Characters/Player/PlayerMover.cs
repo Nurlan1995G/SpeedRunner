@@ -125,6 +125,8 @@ public class PlayerMover : MonoBehaviour
                 _velocityDirection.y -= _playerData.JumpGravity * Time.deltaTime;
             else
                 _velocityDirection.y -= _playerData.FallGravity * Time.deltaTime;
+
+            _velocityDirection.y = Mathf.Max(_velocityDirection.y, -_playerData.MaxFallGravitySpeed);
         }
 
         _player.CharacterController.Move(_velocityDirection * Time.deltaTime);

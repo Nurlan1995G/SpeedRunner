@@ -9,18 +9,18 @@ public class GameActivator : MonoBehaviour
     private void OnEnable()
     {
         _startButton.onClick.AddListener(ActivateGame);
-        _shopButton.onClick.AddListener(DeacrivateGame);
+        _shopButton.onClick.AddListener(DeactivateGame);
     }
 
     private void OnDisable()
     {
-        _shopButton.onClick.RemoveListener(DeacrivateGame);
+        _shopButton.onClick.RemoveListener(DeactivateGame);
         _startButton.onClick.RemoveListener(ActivateGame);
     }
 
     private void ActivateGame() =>
         Time.timeScale = 1;
 
-    private void DeacrivateGame() =>
+    private void DeactivateGame() =>
         Time.timeScale = 0;
 }
