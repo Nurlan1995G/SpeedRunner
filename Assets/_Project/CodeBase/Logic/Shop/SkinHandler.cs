@@ -8,12 +8,9 @@ public class SkinHandler : MonoBehaviour
 
     public RewardModel CurrentSkin { get; private set; }
 
-    private void OnEnable()
-    {
-        Debug.Log("OnEnable - SkinHandler");
+    private void OnEnable() =>
         _shop.SkinCangedInShop += LoadSkins;
-    }
-
+    
     private void Start() =>
         LoadSkins();
 
@@ -23,23 +20,16 @@ public class SkinHandler : MonoBehaviour
     private void LoadSkins()
     {
         int selectedSkin = YandexSDK.Instance.Data.SelectedSkin;
-        int selectedObject = YandexSDK.Instance.Data.SelectedObject;
 
-        Load(selectedSkin,selectedObject, _skins);
+        Load(selectedSkin, _skins);
     }
 
-    private void Load(int idSkinPlayer, int idHat, List<RewardModel> skins)
+    private void Load(int idSkinPlayer, List<RewardModel> skins)
     {
-        Debug.Log("Load");
-
         foreach (var skin in skins)
         {
-            Debug.Log("Load - foreach");
-
             if (idSkinPlayer == skin.ItemInfo.Id)
             {
-                Debug.Log(idSkinPlayer + " - idSkinPlayer = " + skin.ItemInfo.Id + "Id");
-
                 CurrentSkin = skin;
                 skin.ChangeState(true);
             }

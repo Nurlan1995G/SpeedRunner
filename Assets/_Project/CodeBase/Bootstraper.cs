@@ -18,6 +18,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private TimerLevel _timerLevel;
     [SerializeField] private CoroutineRunner _coroutineRunner;
     [SerializeField] private NavMeshSurface _meshSurface;
+    [SerializeField] private SkinHandler _skinHandler;
 
     private Language _language;
 
@@ -63,7 +64,7 @@ public class Bootstraper : MonoBehaviour
     private void InitPlayer(PlayerInputs playerInputs)
     {
         _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language,
-            playerInputs, _playerMover, _playerJumper);
+            playerInputs, _playerMover, _playerJumper, _skinHandler);
     }
 
     private void InitCamera(RotateInput input) =>

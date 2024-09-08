@@ -49,9 +49,9 @@ public class Shop : MonoBehaviour
 
         if (_animalButton != null)
             _animalButton.Click += OnAnimalButtonClick;
-/*
+
         if (_skinButton != null)
-            _softButton.Click += OnSoftButtonClick;*/
+            _softButton.Click += OnSoftButtonClick;
 
         _buyButton.Click += OnBuyButtonClick;
         _shopPanel.ItemViewClicked += OnItemViewClicked;
@@ -76,9 +76,9 @@ public class Shop : MonoBehaviour
 
         if (_animalButton != null)
             _animalButton.Click -= OnAnimalButtonClick;
-/*
+
         if (_skinButton != null)
-            _softButton.Click -= OnSoftButtonClick;*/
+            _softButton.Click -= OnSoftButtonClick;
 
         _shopPanel.ItemViewClicked -= OnItemViewClicked;
 
@@ -262,7 +262,7 @@ public class Shop : MonoBehaviour
         //_objectButton.Select();
         _trailButton.UnSelect();
         _animalButton.UnSelect();
-        //_softButton.UnSelect();
+        _softButton.UnSelect();
 
         _shopPanel.Show(_shopContent.ObjectItemInfos.Cast<ItemInfo>());
     }
@@ -273,7 +273,7 @@ public class Shop : MonoBehaviour
         //_objectButton.UnSelect();
         _trailButton.Select();
         _animalButton.UnSelect();
-        //_softButton.UnSelect();
+        _softButton.UnSelect();
 
         _shopPanel.Show(_shopContent.TrailItemInfos.Cast<ItemInfo>());
     }
@@ -284,7 +284,7 @@ public class Shop : MonoBehaviour
         //_objectButton.UnSelect();
         _trailButton.UnSelect();
         _animalButton.Select();
-        //_softButton.UnSelect();
+        _softButton.UnSelect();
 
         _shopPanel.Show(_shopContent.AnimalItemInfos.Cast<ItemInfo>());
     }
@@ -295,7 +295,7 @@ public class Shop : MonoBehaviour
         //_objectButton.UnSelect();
         _trailButton.UnSelect();
         _animalButton.UnSelect();
-        //_softButton.Select();
+        _softButton.Select();
 
         _shopPanel.Show(_shopContent.SoftItemInfos.Cast<ItemInfo>());
     }
@@ -303,6 +303,7 @@ public class Shop : MonoBehaviour
     private void SelectItem()
     {
         _itemSelector.Visit(_shopItemView.ItemInfo);
+        SkinCangedInShop?.Invoke();
         _shopPanel.Select(_shopItemView);
         ShowSelectedButton();
     }
