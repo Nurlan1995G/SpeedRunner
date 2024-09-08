@@ -15,6 +15,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
     [SerializeField] private List<BotView> _botViews;
+    [SerializeField] private List<BotController> _botControllers;
     [SerializeField] private TimerLevel _timerLevel;
     [SerializeField] private CoroutineRunner _coroutineRunner;
     [SerializeField] private NavMeshSurface _meshSurface;
@@ -30,15 +31,17 @@ public class Bootstraper : MonoBehaviour
         AssetProvider assetProvider = new();
         PlayerInputs playerInputs = new(playerInput);
         RotateInput rotateInput = new();
+        CharacterAnimation characterAnimation = new(_skinHandler, _player);
 
         //InitMobileUI();
         //ClearNavMesh();
         //BakeNavMesh();
+
         _timerLevel.Construct(_gameConfig.LogicConfig);
-        InitPlayer(playerInputs);
+        InitPlayer(playerInputs, characterAnimation);
         InitCamera(rotateInput);
         InitCoroutine();
-        InitBot();
+        InitBot(characterAnimation);
     }
 
     private void BakeNavMesh()
@@ -61,10 +64,10 @@ public class Bootstraper : MonoBehaviour
             _language = Language.English;
     }
 
-    private void InitPlayer(PlayerInputs playerInputs)
+    private void InitPlayer(PlayerInputs playerInputs, CharacterAnimation characterAnimation)
     {
-        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, _language,
-            playerInputs, _playerMover, _playerJumper, _skinHandler);
+        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler,
+            playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
     }
 
     private void InitCamera(RotateInput input) =>
@@ -85,11 +88,16 @@ public class Bootstraper : MonoBehaviour
     private void InitCoroutine() =>
         _coroutineRunner.Initialize();
 
-    private void InitBot()
+    private void InitBot(CharacterAnimation characterAnimation)
     {
         foreach (var bot in _botViews)
         {
             bot.Construct(_gameConfig.CharacterBotData);
+        }
+
+        foreach (var botController in _botControllers)
+        {
+            botController.Construct(_gameConfig.BotControllerData);
         }
     }
 }

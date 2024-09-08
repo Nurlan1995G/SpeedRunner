@@ -73,22 +73,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 2748656056958153237}
-  _spawnZones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _skinHendler: {fileID: 8655212338280228967}
   _characterBot: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
-  _targetFlag: {fileID: 0}
-  BotSkinHendler: {fileID: 8655212338280228967}
+  _currentZone: {fileID: 0}
   <GroundChecker>k__BackingField: {fileID: 6543734882555251913}
   <CharacterController>k__BackingField: {fileID: 5917520407493118353}
 --- !u!114 &2748656056958153237
@@ -103,9 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b08d67dc60aae41af8dc8b99aa37a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 45
+  _moveSpeed: 40
   _jumpForce: 60
   _jumpTrampoline: 100
+  _boostUp: 100
 --- !u!143 &5917520407493118353
 CharacterController:
   m_ObjectHideFlags: 0
@@ -572,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 2621095875956774105, guid: bf9a4d1eb1083bf4b8cbcb19edef04f3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
+      objectReference: {fileID: 9100000, guid: 028736d73a973e54381aa79ab114e2ab, type: 2}
     - target: {fileID: 2845561393647825679, guid: bf9a4d1eb1083bf4b8cbcb19edef04f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -6,23 +6,25 @@ public class BotController : MonoBehaviour, IRespawned
 {
     [SerializeField] private BotMovement _movement;
     [SerializeField] private BotSkinHendler _skinHendler;
-    [SerializeField] private GameConfig _characterBot;
     [SerializeField] private PointSpawnZone _currentZone;
 
     private BotAnimatorr _botAnimator;
     private TargetPoint _currentTarget;
     private PointSpawnZone _previousZone;
     
+    private Vector3 _respawnPosition;
     private bool _isAchievedTarget;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
-    public Vector3 RespawnPosition { get; private set; }
+    public BotControllerData BotControllerData { get; private set; }
 
-    public void Awake()
+    public void Construct(BotControllerData botControllerData)
     {
+        BotControllerData = botControllerData;
+
         _movement.Construct(this);
-        RespawnPosition = transform.position;
+        _respawnPosition = transform.position;
         _skinHendler.EnableRandomSkin();
         _botAnimator = new BotAnimatorr(_skinHendler.CurrentSkin.Animator, this);
     }
@@ -46,14 +48,14 @@ public class BotController : MonoBehaviour, IRespawned
 
     public void SetRespawnPosition(Vector3 position)
     {
-        RespawnPosition = position;
+        _respawnPosition = position;
         _previousZone = _currentZone;
     }
 
     public void Respawn()
     {
         gameObject.SetActive(false);
-        transform.position = RespawnPosition;
+        transform.position = _respawnPosition;
         gameObject.SetActive(true);
         _currentTarget = null;
         _currentZone = _previousZone;
@@ -68,19 +70,15 @@ public class BotController : MonoBehaviour, IRespawned
 
         Vector3 direction = (_currentTarget.transform.position - transform.position).normalized;
         _movement.Move(direction);
-        _movement.Rotate(direction, _characterBot.CharacterData.RotateSpeed);
+        _movement.Rotate(direction, BotControllerData.RotateSpeed);
     }
 
     private void GravityHandling()
     {
         if (!GroundChecker.IsGrounded)
-        {
-            _movement.ApplyGravity(_characterBot.CharacterData.JumpGravity, _characterBot.CharacterData.FallDelay);
-        }
+            _movement.ApplyGravity(BotControllerData.JumpGravity, BotControllerData.MaxFallGravitySpeed);
         else
-        {
             _movement.ResetVerticalVelocity();
-        }
     }
 
     private void SelectRandomTargetInCurrentZone()

@@ -6,6 +6,7 @@ public class BotAnimatorr
     private readonly int _idleHash = Animator.StringToHash("Idle");
     private readonly int _runningHash = Animator.StringToHash("RunningBot");
     private readonly int _fallingHash = Animator.StringToHash("FallingBot");
+    private readonly int _jumpingHash = Animator.StringToHash("JumpBot");
 
     private Vector3 _position;
     private BotController _bot;
@@ -41,6 +42,9 @@ public class BotAnimatorr
         Play(_idleHash);
 
     public void PlayJump() =>
+        Play(_jumpingHash);
+
+    public void PlayFall() =>
         Play(_fallingHash);
 
     public void PlayRun() =>

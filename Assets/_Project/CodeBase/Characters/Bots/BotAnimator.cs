@@ -6,9 +6,12 @@ public class BotAnimator
     private readonly int _idleHash = Animator.StringToHash("Idle");
     private readonly int _runningHash = Animator.StringToHash("RunningBot");
     private readonly int _fallingHash = Animator.StringToHash("FallingBot");
+    private readonly int _jumpingHash = Animator.StringToHash("JumpBot");
 
     private Vector3 _position;
     private BotView _bot;
+    private bool _isJumping;
+    private bool _isFalling;
 
     public BotAnimator(Animator animator, BotView bot)
     {
@@ -16,17 +19,37 @@ public class BotAnimator
         _bot = bot;
     }
 
-    public void Update(bool IsActivateJetpack)
+    public void Update()
     {
-        if (_bot.transform.position == _position)
+        Vector3 currentPosition = _bot.transform.position;
+        bool isGrounded = _bot.GroundChecker.IsGrounded;
+        Vector3 velocity = (currentPosition - _position) / Time.deltaTime;
+
+        if (!isGrounded && velocity.y > 0 && !_isJumping && !_isFalling)
         {
-            PlayIdle();
+            _isJumping = true;
+            _isFalling = false;
+            PlayJump();
         }
-        else
+
+        if (!isGrounded && velocity.y < 0 && !_isFalling)
         {
-            if (IsActivateJetpack && _bot.GroundChecker.IsGrounded == false)
+            _isJumping = false;
+            _isFalling = true;
+            PlayFall();
+        }
+
+        if (isGrounded)
+        {
+            if (_isFalling || _isJumping)
             {
-                PlayJump();
+                _isFalling = false;
+                _isJumping = false;
+                PlayRun(); 
+            }
+            else if (velocity.magnitude < 0.1f)
+            {
+                PlayIdle();
             }
             else
             {
@@ -34,17 +57,20 @@ public class BotAnimator
             }
         }
 
-        _position = _bot.transform.position;
+        _position = currentPosition;
     }
 
     public void PlayIdle() =>
         Play(_idleHash);
 
-    public void PlayJump() =>
+    public void PlayFall() =>
         Play(_fallingHash);
 
     public void PlayRun() =>
         Play(_runningHash);
+
+    public void PlayJump() =>
+        Play(_jumpingHash);
 
     private void Play(int hash) =>
         _animator.Play(hash);

@@ -2,11 +2,6 @@
 
 public class BotMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _jumpForce = 5f;
-    [SerializeField] private float _jumpTrampoline = 10f;
-    [SerializeField] private float _boostUp = 100f;
-
     private BotController _botController;
     private Vector3 _velocity;
 
@@ -17,28 +12,29 @@ public class BotMovement : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        Vector3 move = direction * _moveSpeed * Time.deltaTime;
+        Vector3 move = direction * _botController.BotControllerData.MoveSpeed * Time.deltaTime;
         MoveCharacterController(move + _velocity * Time.deltaTime);
     }
 
     public void Jump()
     {
         if (_botController.GroundChecker.IsOnJumpBot)
-            _velocity.y = _jumpForce;
+            _velocity.y =  _botController.BotControllerData.JumpForce;
         else if (_botController.GroundChecker.IsOnTrampoline)
-            _velocity.y = _jumpTrampoline;
+            _velocity.y = _botController.BotControllerData.JumpTrampoline;
         else if (_botController.GroundChecker.IsOnBoostUp)
-            _velocity.y = _boostUp;
+            _velocity.y = _botController.BotControllerData.BoostUp;
 
         MoveCharacterController(_velocity * Time.deltaTime);
     }
 
-    public void ApplyGravity(float jumpGravity, float fallDelay)
+    public void ApplyGravity(float jumpGravity, float maxGravitySpeed)
     {
         _velocity.y -= jumpGravity * Time.deltaTime;
+        _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
     }
 
-    public void ResetVerticalVelocity() => 
+    public void ResetVerticalVelocity() =>
         _velocity.y = 0;
 
     private void MoveCharacterController(Vector3 direction) => 
