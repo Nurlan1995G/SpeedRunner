@@ -5,7 +5,7 @@ public class PlayerJumper : MonoBehaviour
 {
     private PlayerMover _playerMover;
     private Player _player;
-    private CharacterData _playerData;
+    private PlayerData _playerData;
 
     public void Construct(Player player, PlayerMover playerMover)
     {

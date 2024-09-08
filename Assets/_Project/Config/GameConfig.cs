@@ -6,14 +6,15 @@ namespace Assets._Project.Config
     [CreateAssetMenu(fileName = "Config", menuName = "Config/Data")]
     public class GameConfig : ScriptableObject
     {
-        public CharacterData CharacterData;
-        public CharacterBotData CharacterBotData;
+        public PlayerData CharacterData;
+        public BotAgentData CharacterBotData;
+        public BotControllerData BotControllerData;
         public CameraRotateData CameraRotateData;
         public LogicConfig LogicConfig;
     }
 
     [Serializable]
-    public class CharacterData
+    public class PlayerData
     {
         [Header("Speed")]
         public float MoveSpeed;
@@ -36,7 +37,7 @@ namespace Assets._Project.Config
     }
 
     [Serializable]
-    public class CharacterBotData
+    public class BotAgentData
     {
         [Header("Speed")]
         public float BotMoveSpeed;
@@ -51,6 +52,22 @@ namespace Assets._Project.Config
         public float BotBoostDuration = 0.5f;
         public float BotBoostHeightUp = 1.2f;
         public float BotBoostWaitTime = 0.5f;
+    }
+
+    [Serializable]
+    public class BotControllerData
+    {
+        [Header("Speed")]
+        public float MoveSpeed;
+        public float RotateSpeed;
+        [Header("Other")]
+        public float JumpGravity = 1.5f;
+        public float FallGravity = 2.5f;
+        public float MaxFallGravitySpeed = 50f;
+        [Header("Jump")]
+        public float JumpForce = 60f;
+        public float JumpTrampoline = 100f;
+        public float BoostUp = 100f;
     }
 
     [Serializable]

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private Player _player;
-    private CharacterData _playerData;
+    private PlayerData _playerData;
 
     private Vector3 _velocityDirection;
     private Coroutine _speedBoostCoroutine;

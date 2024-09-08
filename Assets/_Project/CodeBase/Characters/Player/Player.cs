@@ -7,33 +7,27 @@ public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
     
-    private SkinHandler _skinHandler;
-
     private SoundHandler _soundhandler;
-    private Language _language;
 
     private Vector3 _respawnPosition;
     private int _score = 0;
-
-    private Action<Player> PlayerDied;
 
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     public CharacterAnimation CharacterAnimation { get; private set; }
     public PlayerInputs PlayerInputs { get; private set; }
-    public CharacterData CharacterData { get; private set; }
+    public PlayerData CharacterData { get; private set; }
     public int Score => _score;
+    
+    private Action<Player> PlayerDied;
 
-    public void Construct(PositionStaticData positionStaticData, CharacterData characterData,
-         SoundHandler soundHandler, Language language, PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper, SkinHandler skinHandler)
+    public void Construct(PositionStaticData positionStaticData, PlayerData characterData,
+         SoundHandler soundHandler,PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper, SkinHandler skinHandler, CharacterAnimation characterAnimation)
     {
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
-        _language = language;
         CharacterData = characterData;
 
-        _skinHandler = skinHandler;
-        CharacterAnimation characterAnimation = new(_skinHandler, this);
         CharacterAnimation = characterAnimation;
 
         playerMover.Construct(this);

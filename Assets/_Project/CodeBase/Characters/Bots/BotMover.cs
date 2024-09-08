@@ -19,16 +19,6 @@ public class BotMover
     {
          _botView.Agent.isStopped = false;
          _botView.Agent.destination = flagPoint.transform.position;
-
-        /*if (_botView.Agent.enabled && _botView.Agent.isOnNavMesh)
-        {
-            _botView.Agent.isStopped = false;
-            _botView.Agent.destination = flagPoint.transform.position;
-        }
-        else
-        {
-            Debug.LogWarning($"Agent {_botView.name} is not on the NavMesh or is disabled.");
-        }*/
     }
 
     public void StopMovement()
