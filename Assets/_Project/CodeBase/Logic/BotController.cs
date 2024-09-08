@@ -26,7 +26,7 @@ public class BotController : MonoBehaviour, IRespawned
         _movement.Construct(this);
         _respawnPosition = transform.position;
         _skinHendler.EnableRandomSkin();
-        _botAnimator = new BotAnimatorr(_skinHendler.CurrentSkin.Animator, this);
+        _botAnimator = new BotAnimatorr(_skinHendler.CurrentSkin.Animator, this, _movement);
     }
 
     private void Start()
@@ -43,7 +43,7 @@ public class BotController : MonoBehaviour, IRespawned
         if (_currentZone != null)
             MoveTowardsTarget();
 
-        _botAnimator?.Update(_isAchievedTarget);
+        _botAnimator?.Update();
     }
 
     public void SetRespawnPosition(Vector3 position)

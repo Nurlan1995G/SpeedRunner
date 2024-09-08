@@ -8,34 +8,38 @@ public class BotAnimatorr
     private readonly int _fallingHash = Animator.StringToHash("FallingBot");
     private readonly int _jumpingHash = Animator.StringToHash("JumpBot");
 
-    private Vector3 _position;
+    private Vector3 _previousPosition;
     private BotController _bot;
+    private BotMovement _botMovement;
 
-    public BotAnimatorr(Animator animator, BotController bot)
+    public BotAnimatorr(Animator animator, BotController bot, BotMovement botMovement)
     {
         _animator = animator;
         _bot = bot;
+        _botMovement = botMovement;
     }
 
-    public void Update(bool IsActivateJetpack)
+    public void Update()
     {
-        if (_bot.transform.position == _position)
+        Vector3 currentPosition = _bot.transform.position;
+        float verticalVelocity = (_botMovement.Velocity.y);
+
+        if (_bot.GroundChecker.IsGrounded)
         {
-            PlayIdle();
+            if (currentPosition == _previousPosition)
+                PlayIdle();
+            else
+                PlayRun();
         }
         else
         {
-            if (IsActivateJetpack && _bot.GroundChecker.IsGrounded == false)
-            {
+            if (verticalVelocity > 0)
                 PlayJump();
-            }
-            else
-            {
-                PlayRun();
-            }
+            else if (verticalVelocity < 0)
+                PlayFall();
         }
 
-        _position = _bot.transform.position;
+        _previousPosition = currentPosition;
     }
 
     public void PlayIdle() =>

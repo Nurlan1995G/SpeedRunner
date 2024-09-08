@@ -5,6 +5,8 @@ public class BotMovement : MonoBehaviour
     private BotController _botController;
     private Vector3 _velocity;
 
+    public Vector3 Velocity => _velocity;
+
     public void Construct(BotController botController)
     {
         _botController = botController;
