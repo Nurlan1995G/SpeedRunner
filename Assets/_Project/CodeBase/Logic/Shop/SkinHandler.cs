@@ -10,6 +10,7 @@ public class SkinHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable - SkinHandler");
         _shop.SkinCangedInShop += LoadSkins;
     }
 
@@ -29,10 +30,16 @@ public class SkinHandler : MonoBehaviour
 
     private void Load(int idSkinPlayer, int idHat, List<RewardModel> skins)
     {
+        Debug.Log("Load");
+
         foreach (var skin in skins)
         {
+            Debug.Log("Load - foreach");
+
             if (idSkinPlayer == skin.ItemInfo.Id)
             {
+                Debug.Log(idSkinPlayer + " - idSkinPlayer = " + skin.ItemInfo.Id + "Id");
+
                 CurrentSkin = skin;
                 skin.ChangeState(true);
             }

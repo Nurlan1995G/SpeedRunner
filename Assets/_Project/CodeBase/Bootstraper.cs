@@ -2,6 +2,7 @@
 using Assets._Project.Config;
 using Assets.Project.AssetProviders;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class Bootstraper : MonoBehaviour
@@ -16,6 +17,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private List<BotView> _botViews;
     [SerializeField] private TimerLevel _timerLevel;
     [SerializeField] private CoroutineRunner _coroutineRunner;
+    [SerializeField] private NavMeshSurface _meshSurface;
 
     private Language _language;
 
@@ -29,11 +31,25 @@ public class Bootstraper : MonoBehaviour
         RotateInput rotateInput = new();
 
         //InitMobileUI();
+        //ClearNavMesh();
+        //BakeNavMesh();
         _timerLevel.Construct(_gameConfig.LogicConfig);
         InitPlayer(playerInputs);
         InitCamera(rotateInput);
         InitCoroutine();
         InitBot();
+    }
+
+    private void BakeNavMesh()
+    {
+        if (_meshSurface != null)
+            _meshSurface.BuildNavMesh();
+    }
+
+    private void ClearNavMesh()
+    {
+        if (_meshSurface != null && _meshSurface.navMeshData != null)
+            _meshSurface.RemoveData();
     }
 
     private void CheckLanguage()

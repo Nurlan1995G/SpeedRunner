@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2c57e29046b454585d00f15cafca51, type: 3}
   m_Name: TrailItemInfo
   m_EditorClassIdentifier: 
-  Id: -47344
-  ItemType: 0
+  Id: 26296
+  ItemType: 1
   CashType: 0
   Price: 0
   Icon: {fileID: 21300000, guid: c7d526d0195eda14e816d2a5d305369c, type: 3}
