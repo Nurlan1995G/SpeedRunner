@@ -11,7 +11,7 @@ public class BotView : MonoBehaviour, IRespawned
     [SerializeField] private BotSkinHendler _botSkinHendler;
     [SerializeField] private BehaviourType _behaviourType;
 
-    private BotAnimator _botAnimator;
+    private BotAgentAnimator _botAnimator;
     private MoveToPoint _moveToFinish;
     private IdleBehavior _idleBehavior;
     private RandomBehaviour _randomMoving;
@@ -63,7 +63,7 @@ public class BotView : MonoBehaviour, IRespawned
     {
         _botSkinHendler.EnableRandomSkin();
         BotMover botMover = new(this);
-        _botAnimator = new BotAnimator(_botSkinHendler.CurrentSkin.Animator, this);
+        _botAnimator = new BotAgentAnimator(_botSkinHendler.CurrentSkin.Animator, this);
         _randomMoving = new RandomBehaviour(_botAnimator, botMover);
         _moveToFinish = new MoveToPoint(botMover, _targetPoint, _botAnimator);
         _idleBehavior = new IdleBehavior(_botAnimator, botMover);

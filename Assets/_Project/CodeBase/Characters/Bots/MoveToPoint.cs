@@ -2,9 +2,9 @@
 {
     private readonly BotMover _botMover;
     private readonly FlagPoint _targetPoint;
-    private readonly BotAnimator _botAnimator;
+    private readonly BotAgentAnimator _botAnimator;
 
-    public MoveToPoint(BotMover botMover, FlagPoint targetPoint, BotAnimator botAnimator)
+    public MoveToPoint(BotMover botMover, FlagPoint targetPoint, BotAgentAnimator botAnimator)
     {
         _botMover = botMover;
         _targetPoint = targetPoint;

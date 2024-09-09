@@ -1,9 +1,9 @@
 ﻿public class RandomBehaviour : IBehaviour
 {
-    private BotAnimator _botAnimator;
+    private BotAgentAnimator _botAnimator;
     private BotMover _botMover;
 
-    public RandomBehaviour(BotAnimator botAnimator, BotMover botMover)
+    public RandomBehaviour(BotAgentAnimator botAnimator, BotMover botMover)
     {
         _botAnimator = botAnimator;
         _botMover = botMover;

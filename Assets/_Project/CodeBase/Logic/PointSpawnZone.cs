@@ -4,8 +4,8 @@ using UnityEngine;
 public class PointSpawnZone : MonoBehaviour
 {
     [Header("Настройки зоны спавна")]
-    [SerializeField] private TargetPoint _pointPrefab; 
-    [SerializeField] private int _pointsCount = 10; 
+    [SerializeField] private TargetPoint _pointPrefab;
+    [SerializeField] private int _pointsCount = 10;
     [SerializeField] private Vector3 _spawnAreaSize = new Vector3(10, 0, 10);
 
     private List<TargetPoint> _points = new List<TargetPoint>();
@@ -21,13 +21,15 @@ public class PointSpawnZone : MonoBehaviour
     {
         for (int i = 0; i < _pointsCount; i++)
         {
-            Vector3 spawnPosition = new Vector3(
+            Vector3 localSpawnPosition = new Vector3(
                 Random.Range(-_spawnAreaSize.x / 2, _spawnAreaSize.x / 2),
-                0, 
+                0,
                 Random.Range(-_spawnAreaSize.z / 2, _spawnAreaSize.z / 2)
             );
 
-            TargetPoint targetPoint = Instantiate(_pointPrefab, transform.position + spawnPosition, Quaternion.identity, transform);
+            Vector3 worldSpawnPosition = transform.TransformPoint(localSpawnPosition);
+
+            TargetPoint targetPoint = Instantiate(_pointPrefab, worldSpawnPosition, Quaternion.identity, transform);
 
             _points.Add(targetPoint);
         }
@@ -35,7 +37,8 @@ public class PointSpawnZone : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(200, 3, 230, 30f); 
-        Gizmos.DrawCube(transform.position, _spawnAreaSize);
+        Gizmos.color = new Color(200 / 255f, 3 / 255f, 230 / 255f, 0.3f);
+        Gizmos.matrix = transform.localToWorldMatrix; 
+        Gizmos.DrawCube(Vector3.zero, _spawnAreaSize);
     }
 }
