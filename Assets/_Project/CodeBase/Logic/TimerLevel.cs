@@ -1,7 +1,6 @@
 using Assets._Project.Config;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TimerLevel : MonoBehaviour
 {

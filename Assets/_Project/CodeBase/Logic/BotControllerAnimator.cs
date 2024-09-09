@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BotAnimatorr
+public class BotControllerAnimator
 {
     private readonly Animator _animator;
     private readonly int _idleHash = Animator.StringToHash("Idle");
@@ -12,7 +12,7 @@ public class BotAnimatorr
     private BotController _bot;
     private BotMovement _botMovement;
 
-    public BotAnimatorr(Animator animator, BotController bot, BotMovement botMovement)
+    public BotControllerAnimator(Animator animator, BotController bot, BotMovement botMovement)
     {
         _animator = animator;
         _bot = bot;
@@ -22,21 +22,32 @@ public class BotAnimatorr
     public void Update()
     {
         Vector3 currentPosition = _bot.transform.position;
-        float verticalVelocity = (_botMovement.Velocity.y);
+        float verticalVelocity = _botMovement.Velocity.y;
+        Vector3 horizontalSpeed = _botMovement.Movement;
+
+        float speedMagnitude = horizontalSpeed.magnitude;
 
         if (_bot.GroundChecker.IsGrounded)
         {
-            if (currentPosition == _previousPosition)
+            if (speedMagnitude < 0.1f)
+            {
                 PlayIdle();
+            }
             else
+            {
                 PlayRun();
+            }
         }
         else
         {
             if (verticalVelocity > 0)
+            {
                 PlayJump();
-            else if (verticalVelocity < 0)
+            }
+            else if (verticalVelocity < -0.1f)
+            {
                 PlayFall();
+            }
         }
 
         _previousPosition = currentPosition;

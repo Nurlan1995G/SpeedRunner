@@ -20,4 +20,13 @@ public class GroundChecker : MonoBehaviour
         IsOnBoostUp = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[2]);
         IsOnJumpBot = Physics.CheckSphere(transform.position, _distanceToCheck, _layerMasks[3]);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;  
+        Gizmos.DrawWireSphere(transform.position, _distanceToCheck);
+
+        Gizmos.color = new Color(0, 1, 0, 0.2f); 
+        Gizmos.DrawSphere(transform.position, _distanceToCheck);
+    }
 }

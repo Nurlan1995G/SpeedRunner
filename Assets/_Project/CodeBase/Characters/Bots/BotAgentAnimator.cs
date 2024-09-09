@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BotAnimator
+public class BotAgentAnimator
 {
     private readonly Animator _animator;
     private readonly int _idleHash = Animator.StringToHash("Idle");
@@ -13,7 +13,7 @@ public class BotAnimator
     private bool _isJumping;
     private bool _isFalling;
 
-    public BotAnimator(Animator animator, BotView bot)
+    public BotAgentAnimator(Animator animator, BotView bot)
     {
         _animator = animator;
         _bot = bot;

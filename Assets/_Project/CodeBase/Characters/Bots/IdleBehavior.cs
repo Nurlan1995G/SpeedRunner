@@ -1,9 +1,9 @@
 ﻿public class IdleBehavior : IBehaviour
 {
-    private BotAnimator _botAnimator;
+    private BotAgentAnimator _botAnimator;
     private BotMover _botMover;
 
-    public IdleBehavior(BotAnimator botAnimator, BotMover botMover)
+    public IdleBehavior(BotAgentAnimator botAnimator, BotMover botMover)
     {
         _botAnimator = botAnimator;
         _botMover = botMover;
