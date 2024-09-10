@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2906314034620522715}
-  - component: {fileID: 432490793160054481}
   - component: {fileID: 4346053690617444519}
   - component: {fileID: 2748656056958153237}
   - component: {fileID: 5917520407493118353}
@@ -39,27 +38,6 @@ Transform:
   - {fileID: 9007904504086553990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &432490793160054481
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498490333067494464}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 3, z: 2}
-  m_Center: {x: 0, y: 1.67, z: 0}
 --- !u!114 &4346053690617444519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 2748656056958153237}
   _skinHendler: {fileID: 8655212338280228967}
-  _characterBot: {fileID: 11400000, guid: c55328db5801c4b43b0d4e6a500c7e60, type: 2}
   _currentZone: {fileID: 0}
   <GroundChecker>k__BackingField: {fileID: 6543734882555251913}
   <CharacterController>k__BackingField: {fileID: 5917520407493118353}
@@ -90,10 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b08d67dc60aae41af8dc8b99aa37a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
-  _jumpForce: 60
-  _jumpTrampoline: 100
-  _boostUp: 100
 --- !u!143 &5917520407493118353
 CharacterController:
   m_ObjectHideFlags: 0

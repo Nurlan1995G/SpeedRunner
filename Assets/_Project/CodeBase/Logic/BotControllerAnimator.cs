@@ -2,69 +2,67 @@
 
 public class BotControllerAnimator
 {
-    private readonly Animator _animator;
-    private readonly int _idleHash = Animator.StringToHash("Idle");
-    private readonly int _runningHash = Animator.StringToHash("RunningBot");
-    private readonly int _fallingHash = Animator.StringToHash("FallingBot");
-    private readonly int _jumpingHash = Animator.StringToHash("JumpBot");
+    private const string IsIdling = "IsIdling";
+    private const string IsRunning = "IsRunning";
+    private const string IsJumping = "IsJumping";
+    private const string IsFalling = "IsFalling";
 
-    private Vector3 _previousPosition;
-    private BotController _bot;
-    private BotMovement _botMovement;
+    private BotSkinHendler _skinHandler;
+    private BotController _botController;
+    private BotMovement _movement;
 
-    public BotControllerAnimator(Animator animator, BotController bot, BotMovement botMovement)
+    public BotControllerAnimator(BotSkinHendler skinHandler, BotController botController, BotMovement movement)
     {
-        _animator = animator;
-        _bot = bot;
-        _botMovement = botMovement;
+        _skinHandler = skinHandler;
+        _botController = botController;
+        _movement = movement;
     }
 
-    public void Update()
+    public void StartIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, true);
+    public void StopIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, false);
+
+    public void StartRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, true);
+    public void StopRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, false);
+
+    public void StartJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, true);
+    public void StopJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, false);
+
+    public void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
+    public void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
+
+    public void HandleAnimations(float moveDirection, Vector3 velocityDirection)
     {
-        Vector3 currentPosition = _bot.transform.position;
-        float verticalVelocity = _botMovement.Velocity.y;
-        Vector3 horizontalSpeed = _botMovement.Movement;
-
-        float speedMagnitude = horizontalSpeed.magnitude;
-
-        if (_bot.GroundChecker.IsGrounded)
+        if (_botController.GroundChecker.IsGrounded)
         {
-            if (speedMagnitude < 0.1f)
+            StopFalling();
+            StopJumping();
+
+            if (moveDirection != 0)
             {
-                PlayIdle();
+                StartRunning();
+                StopIdle();
             }
             else
             {
-                PlayRun();
+                StopRunning();
+                StartIdle();
             }
         }
         else
         {
-            if (verticalVelocity > 0)
+            StopRunning();
+            StopIdle();
+
+            if (velocityDirection.y > 0)
             {
-                PlayJump();
+                StartJumping();
+                StopFalling();
             }
-            else if (verticalVelocity < -0.1f)
+            else
             {
-                PlayFall();
+                StopJumping();
+                StartFalling();
             }
         }
-
-        _previousPosition = currentPosition;
     }
-
-    public void PlayIdle() =>
-        Play(_idleHash);
-
-    public void PlayJump() =>
-        Play(_jumpingHash);
-
-    public void PlayFall() =>
-        Play(_fallingHash);
-
-    public void PlayRun() =>
-        Play(_runningHash);
-
-    private void Play(int hash) =>
-        _animator.Play(hash);
 }
