@@ -34,8 +34,7 @@ public class Bootstraper : MonoBehaviour
         CharacterAnimation characterAnimation = new(_skinHandler, _player);
 
         //InitMobileUI();
-        //ClearNavMesh();
-        //BakeNavMesh();
+        BakeNavMesh();
 
         _timerLevel.Construct(_gameConfig.LogicConfig);
         InitPlayer(playerInputs, characterAnimation);
@@ -48,12 +47,6 @@ public class Bootstraper : MonoBehaviour
     {
         if (_meshSurface != null)
             _meshSurface.BuildNavMesh();
-    }
-
-    private void ClearNavMesh()
-    {
-        if (_meshSurface != null && _meshSurface.navMeshData != null)
-            _meshSurface.RemoveData();
     }
 
     private void CheckLanguage()

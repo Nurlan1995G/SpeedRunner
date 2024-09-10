@@ -5,10 +5,8 @@ public class BotMovement : MonoBehaviour
     private BotController _botController;
 
     private Vector3 _velocity;
-    private Vector3 _movement;
 
     public float MovementSpeed { get; private set; }
-    public Vector3 Movement => _movement;
     public Vector3 Velocity => _velocity;
 
     public void Construct(BotController botController)
@@ -18,11 +16,19 @@ public class BotMovement : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        Vector3 move = direction * _botController.BotControllerData.MoveSpeed * Time.deltaTime;
-        _movement = move;
+        Vector3 move = direction * RandomMove() * Time.deltaTime;
         MovementSpeed = move.magnitude;
-        //Debug.Log(move.magnitude + " - move");
         MoveCharacterController(move + _velocity * Time.deltaTime);
+    }
+
+    public void Rotate(Vector3 direction, float rotateSpeed)
+    {
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion restrictedRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, restrictedRotation, rotateSpeed * Time.deltaTime);
+        }
     }
 
     public void Jump()
@@ -49,13 +55,5 @@ public class BotMovement : MonoBehaviour
     private void MoveCharacterController(Vector3 direction) => 
         _botController.CharacterController.Move(direction);
 
-    public void Rotate(Vector3 direction, float rotateSpeed)
-    {
-        if (direction != Vector3.zero) 
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            Quaternion restrictedRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, restrictedRotation, rotateSpeed * Time.deltaTime);
-        }
-    }
+    private float RandomMove() => Random.Range(_botController.BotControllerData.MinMoveSpeed, _botController.BotControllerData.MaxMoveSpeed);
 }

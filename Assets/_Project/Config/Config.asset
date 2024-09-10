@@ -38,7 +38,8 @@ MonoBehaviour:
     BotBoostHeightUp: 1.2
     BotBoostWaitTime: 0.5
   BotControllerData:
-    MoveSpeed: 40
+    MinMoveSpeed: 40
+    MaxMoveSpeed: 45
     RotateSpeed: 20
     JumpGravity: 80
     FallGravity: 2.5
