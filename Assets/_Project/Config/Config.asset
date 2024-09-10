@@ -17,15 +17,15 @@ MonoBehaviour:
     RotateSpeed: 20
     JumpGravity: 80
     FallGravity: 100
-    MaxFallGravitySpeed: 50
+    MaxFallGravitySpeed: 70
     FallDelay: 1
     HeightJump: 20
     JumpStep: 2
     JumpDuration: 3
     BoostMultiplier: 2
     BoostDuration: 0.8
-    BoostHeightUp: 30
-    BoostWaitTime: 0.1
+    BoostHeightUp: 40
+    BoostWaitTime: 0.2
   CharacterBotData:
     BotMoveSpeed: 70
     BotRotateSpeed: 20
@@ -39,7 +39,7 @@ MonoBehaviour:
     BotBoostWaitTime: 0.5
   BotControllerData:
     MinMoveSpeed: 40
-    MaxMoveSpeed: 45
+    MaxMoveSpeed: 50
     RotateSpeed: 20
     JumpGravity: 80
     FallGravity: 2.5
