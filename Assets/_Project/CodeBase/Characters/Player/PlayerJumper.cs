@@ -20,11 +20,12 @@ public class PlayerJumper : MonoBehaviour
         HandleJump();
     }
 
+    public void TrampolineJumpUp() => 
+        _playerMover.TakeJumpDirection(_playerData.HeightJump * _playerData.JumpStep);
+
     private void HandleJump()
     {
         if (_player.GroundChecker.IsGrounded && _player.PlayerInputs.JumpTriggered)
             _playerMover.TakeJumpDirection(_playerData.HeightJump);
-        else if (_player.GroundChecker.IsOnTrampoline) 
-            _playerMover.TakeJumpDirection(_playerData.HeightJump * _playerData.JumpStep);
     }
 }

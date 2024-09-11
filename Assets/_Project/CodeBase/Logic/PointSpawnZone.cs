@@ -12,7 +12,7 @@ public class PointSpawnZone : MonoBehaviour
 
     public List<TargetPoint> TargetPoints => _points;
 
-    private void Awake()
+    public void Initialize()
     {
         SpawnPoints();
     }

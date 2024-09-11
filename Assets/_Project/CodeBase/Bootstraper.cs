@@ -20,6 +20,8 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CoroutineRunner _coroutineRunner;
     [SerializeField] private NavMeshSurface _meshSurface;
     [SerializeField] private SkinHandler _skinHandler;
+    [SerializeField] private List<TriggerZone> _triggerZones;
+    [SerializeField] private List<PointSpawnZone> _pointSpawnZones;
 
     private Language _language;
 
@@ -40,8 +42,11 @@ public class Bootstraper : MonoBehaviour
         InitPlayer(playerInputs, characterAnimation);
         InitCamera(rotateInput);
         InitCoroutine();
+        InitTriggerZone();
+        InitSpawnZone();
         InitBot(characterAnimation);
     }
+
 
     private void BakeNavMesh()
     {
@@ -92,5 +97,27 @@ public class Bootstraper : MonoBehaviour
         {
             botController.Construct(_gameConfig.BotControllerData);
         }
+    }
+
+    private void InitTriggerZone()
+    {
+        for (int i = 0; i < _triggerZones.Count; i++)
+        {
+            var currentTriggerZone = _triggerZones[i];
+
+            if (i + 1 < _pointSpawnZones.Count)
+            {
+                var correspondingPointSpawnZone = _pointSpawnZones[i + 1];
+                currentTriggerZone.SetNextZone(correspondingPointSpawnZone);
+            }
+            else
+                Debug.Log($"Триггерная зона {i} не имеет соответствующей зоны возрождения.");
+        }
+    }
+
+    private void InitSpawnZone()
+    {
+        foreach (var spawnZone in _pointSpawnZones)
+            spawnZone.Initialize();
     }
 }

@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class DisappearingBox : InteractableEnter
 {
-    [SerializeField] private float _transparencyDelay = 1f; 
-    [SerializeField] private float _transparencyDuration = 1f; 
-    [SerializeField] private float _deactivateDelay = 1f; 
-    [SerializeField] private float _reactivateDelay = 3f; 
-    [SerializeField] private float _visibilityDuration = 1f; 
+    [SerializeField] private float _transparencyDelay = 1f;
+    [SerializeField] private float _transparencyDuration = 1f;
+    [SerializeField] private float _deactivateDelay = 1f;
+    [SerializeField] private float _reactivateDelay = 3f;
+    [SerializeField] private float _visibilityDuration = 1f;
     [SerializeField] private Renderer _objectRenderer;
-    [SerializeField] private Reactivator _reactivator; 
+    [SerializeField] private MeshCollider _meshCollider;
 
-    private Color _originalColor; 
-    private Material _material; 
+    private Color _originalColor;
+    private Material _material;
 
     private void Start()
     {
-         _material = _objectRenderer.material;
-         _originalColor = _material.color; 
-         SetMaterialTransparent(); 
+        _material = _objectRenderer.material;
+        _originalColor = _material.color;
+        SetMaterialTransparent();
     }
 
     public override void InteractEnter(Collider other)
@@ -27,29 +27,11 @@ public class DisappearingBox : InteractableEnter
             StartCoroutine(Disappear());
     }
 
-    public IEnumerator Reactivator()
-    {
-        float elapsed;
-
-        elapsed = 0f;
-
-        while (elapsed < _visibilityDuration)
-        {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, elapsed / _visibilityDuration);
-            SetTransparency(alpha);
-            yield return null;
-        }
-
-        SetTransparency(1f);
-    }
-
     private IEnumerator Disappear()
     {
         yield return new WaitForSeconds(_transparencyDelay);
 
         float elapsed = 0f;
-
         while (elapsed < _transparencyDuration)
         {
             elapsed += Time.deltaTime;
@@ -62,9 +44,27 @@ public class DisappearingBox : InteractableEnter
 
         yield return new WaitForSeconds(_deactivateDelay);
 
-        gameObject.SetActive(false);
+        _meshCollider.enabled = false;
 
-        _reactivator.ReactivateObject(this, _reactivateDelay);
+        yield return new WaitForSeconds(_reactivateDelay);
+
+        StartCoroutine(Reactivate());
+    }
+
+    private IEnumerator Reactivate()
+    {
+        _meshCollider.enabled = true;
+
+        float elapsed = 0f;
+        while (elapsed < _visibilityDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsed / _visibilityDuration);
+            SetTransparency(alpha);
+            yield return null;
+        }
+
+        SetTransparency(1f);
     }
 
     private void SetTransparency(float alpha)
@@ -81,7 +81,7 @@ public class DisappearingBox : InteractableEnter
     {
         if (_material != null)
         {
-            _material.SetFloat("_Mode", 2); 
+            _material.SetFloat("_Mode", 2);
             _material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             _material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             _material.SetInt("_ZWrite", 0);
