@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 258513008689147560}
   - component: {fileID: 7247542444798414999}
   - component: {fileID: 7242265273156554099}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointPrefab: {fileID: 6799956356012284148, guid: 67cb340c540e6084b9c9d7bc8c1d233b, type: 3}
-  _pointsCount: 10
-  _spawnAreaSize: {x: 20, y: 0, z: 10}
+  _pointsCount: 15
+  _spawnAreaSize: {x: 10, y: 0, z: 10}
 --- !u!65 &7242265273156554099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,5 +67,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 2, z: 10}
+  m_Size: {x: 10, y: 2, z: 10}
   m_Center: {x: 0, y: 0.54, z: 0}

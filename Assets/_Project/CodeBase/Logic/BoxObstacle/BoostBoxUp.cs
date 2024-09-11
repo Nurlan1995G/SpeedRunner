@@ -10,7 +10,8 @@ public class BoostBoxUp : Interactable
         if (other.TryGetComponent(out PlayerMover playerMover))
             playerMover.InitBoostBoxUp(this);
 
-       // if(other.TryGetComponent(out BotController botController))
+        if (other.TryGetComponent(out BotController botController))
+            botController.BoostBoxUp();
     }
 
     public override void InteractExit(Collider other)

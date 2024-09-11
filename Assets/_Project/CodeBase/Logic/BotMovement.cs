@@ -9,14 +9,12 @@ public class BotMovement : MonoBehaviour
     public float MovementSpeed { get; private set; }
     public Vector3 Velocity => _velocity;
 
-    public void Construct(BotController botController)
-    {
+    public void Construct(BotController botController) => 
         _botController = botController;
-    }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float currentSpeed)
     {
-        Vector3 move = direction * RandomMove() * Time.deltaTime;
+        Vector3 move = direction * currentSpeed * Time.deltaTime;
         MovementSpeed = move.magnitude;
         MoveCharacterController(move + _velocity * Time.deltaTime);
     }
@@ -31,14 +29,9 @@ public class BotMovement : MonoBehaviour
         }
     }
 
-    public void Jump()
+    public void Jump(float jumpValue)
     {
-        if (_botController.GroundChecker.IsOnJumpBot)
-            _velocity.y = _botController.BotControllerData.JumpForce;
-        else if (_botController.GroundChecker.IsOnTrampoline)
-            _velocity.y = _botController.BotControllerData.JumpTrampoline;
-        else if (_botController.GroundChecker.IsOnBoostUp)
-            _velocity.y = _botController.BotControllerData.BoostUp;
+        _velocity.y = jumpValue;
 
         MoveCharacterController(_velocity * Time.deltaTime);
     }
@@ -46,14 +39,9 @@ public class BotMovement : MonoBehaviour
     public void ApplyGravity(float jumpGravity, float maxGravitySpeed)
     {
         _velocity.y -= jumpGravity * Time.deltaTime;
-        _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
+        //_velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
     }
-
-    public void ResetVerticalVelocity() =>
-        _velocity.y = 0;
 
     private void MoveCharacterController(Vector3 direction) => 
         _botController.CharacterController.Move(direction);
-
-    private float RandomMove() => Random.Range(_botController.BotControllerData.MinMoveSpeed, _botController.BotControllerData.MaxMoveSpeed);
 }

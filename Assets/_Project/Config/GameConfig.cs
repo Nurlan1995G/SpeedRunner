@@ -58,6 +58,7 @@ namespace Assets._Project.Config
     public class BotControllerData
     {
         [Header("Speed")]
+        public float MoveSpeed;
         [Range(10,50)]public float MinMoveSpeed;
         [Range(10, 50)] public float MaxMoveSpeed;
         public float RotateSpeed;
@@ -67,8 +68,11 @@ namespace Assets._Project.Config
         public float MaxFallGravitySpeed = 50f;
         [Header("Jump")]
         public float JumpForce = 60f;
-        public float JumpTrampoline = 100f;
-        public float BoostUp = 100f;
+        public float JumpTrampoline = 3f;
+        public float BoostUp = 2f;
+        [Header("Boost")]
+        public float BoostMultiplier = 2f;
+        public float BoostDuration = 0.5f;
     }
 
     [Serializable]

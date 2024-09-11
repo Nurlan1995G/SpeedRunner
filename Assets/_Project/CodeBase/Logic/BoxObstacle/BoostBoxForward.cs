@@ -6,5 +6,8 @@ public class BoostBoxForward : InteractableEnter
     {
         if(other.TryGetComponent(out PlayerMover playerMover))
             playerMover.ActivateSpeedBoost();
+
+        if (other.TryGetComponent(out BotController botController))
+            botController.ActivateBoostForward();
     }
 }
