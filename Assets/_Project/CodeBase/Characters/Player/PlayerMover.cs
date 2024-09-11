@@ -12,6 +12,8 @@ public class PlayerMover : MonoBehaviour
     private float _currentSpeed;
     private BoostBoxUp _boostBoxUp;
 
+    private bool _isClimbing;
+
     public void Construct(Player player)
     {
         _player = player;
