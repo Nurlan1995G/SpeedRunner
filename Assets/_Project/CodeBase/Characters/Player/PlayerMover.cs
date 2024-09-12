@@ -53,13 +53,40 @@ public class PlayerMover : MonoBehaviour
         _boostBoxUp.PlayerBoostJump += OnBoostJump;
     }
 
-    private void Move(Vector2 direction)
+    public void SetClimbing(bool isClimbing)
+    {
+        _isClimbing = isClimbing;
+
+        if (_isClimbing)
+            _velocityDirection = Vector3.zero;
+        else
+            GravityHandling();
+    }
+
+    /*private void Move(Vector2 direction)
     {
        Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
         Quaternion cameraRotationY = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
         MoveCharacter(newDirection, cameraRotationY);
         RotateCharacter(newDirection, cameraRotationY);
+    }*/
+
+    private void Move(Vector2 direction)
+    {
+        if (_isClimbing)
+        {
+            Vector3 climbDirection = new Vector3(direction.x, 1, direction.y);
+            MoveCharacter(climbDirection, Quaternion.identity); 
+        }
+        else
+        {
+            Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
+            Quaternion cameraRotationY = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+
+            MoveCharacter(newDirection, cameraRotationY);
+            RotateCharacter(newDirection, cameraRotationY);
+        }
     }
 
     private void MoveCharacter(Vector3 moveDirection, Quaternion cameraRotation)
