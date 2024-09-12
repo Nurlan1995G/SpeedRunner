@@ -21,6 +21,7 @@ public class BotController : MonoBehaviour, IRespawned
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     public BotControllerData BotControllerData { get; private set; }
+    public Vector3 StartPosition { get; private set; }
 
     public void Construct(BotControllerData botControllerData)
     {
@@ -28,12 +29,16 @@ public class BotController : MonoBehaviour, IRespawned
 
         _botControllerAnimator = new BotControllerAnimator(_skinHendler, this, _movement);
         _movement.Construct(this);
-        _respawnPosition = transform.position;
+
+        StartPosition = transform.position;
+        InitPosition();
+
         _skinHendler.EnableRandomSkin();
-        BotControllerData.MoveSpeed = RandomSpeed();
-        _currentSpeed = BotControllerData.MoveSpeed;
+
+        InitMove();
+
         _previousZone = _currentZone;
-        
+
         SelectRandomTargetInCurrentZone();
     }
 
@@ -51,6 +56,12 @@ public class BotController : MonoBehaviour, IRespawned
     {
         _respawnPosition = position;
         _previousZone = _currentZone;
+    }
+
+    public void ActivateForRace()
+    {
+        transform.position = StartPosition;
+        _respawnPosition = transform.position;
     }
 
     public void Respawn()
@@ -86,6 +97,18 @@ public class BotController : MonoBehaviour, IRespawned
 
         _speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(BotControllerData.BoostMultiplier,
                 BotControllerData.BoostDuration));
+    }
+
+    private void InitMove()
+    {
+        BotControllerData.MoveSpeed = RandomSpeed();
+        _currentSpeed = BotControllerData.MoveSpeed;
+    }
+
+    private void InitPosition()
+    {
+        StartPosition = transform.position;
+        _respawnPosition = transform.position;
     }
 
     private void MoveTowardsTarget()

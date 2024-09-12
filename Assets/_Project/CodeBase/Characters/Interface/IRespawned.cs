@@ -3,5 +3,6 @@
     public interface IRespawned
     {
         void Respawn();
+        void ActivateForRace();
     }
 }

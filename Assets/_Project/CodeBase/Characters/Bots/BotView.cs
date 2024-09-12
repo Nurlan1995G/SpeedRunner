@@ -18,6 +18,7 @@ public class BotView : MonoBehaviour, IRespawned
     private IBehaviour _currentBehaviour;
     private List<IBehaviour> _behaviours;
     private BoostBoxUp _boostBoxUp;
+    private Vector3 _respawnPosition;
 
     private bool _isActivateJetpack = false;
 
@@ -25,21 +26,21 @@ public class BotView : MonoBehaviour, IRespawned
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
     public BotAgentData CharacterBotData { get; private set; }
+    public Vector3 StartPosition { get; private set; }
 
-
-    public Vector3 RespawnPosition { get; private set; }
 
     public event Action Respawned;
 
     public void Construct(BotAgentData character)
     {
         CharacterBotData = character;
+        StartPosition = transform.position;
 
         InitializeBotBehavior();
 
         SelectBehaviourType();
 
-        RespawnPosition = transform.position;
+        InitStartPosition();
     }
 
     private void Update()
@@ -47,17 +48,23 @@ public class BotView : MonoBehaviour, IRespawned
         _botAnimator?.Update();
     }
 
+    public void ActivateForRace()
+    {
+        transform.position = StartPosition;
+        _respawnPosition = transform.position;
+    }
+
     public void Respawn() =>
         Respawned.Invoke();
 
     public void ChagePosition()
     {
-        Agent.Warp(RespawnPosition);
+        Agent.Warp(_respawnPosition);
         ChangeBehaviour(_currentBehaviour);
     }
 
     public void SetRespawnPosition(Vector3 position) => 
-        RespawnPosition = position;
+        _respawnPosition = position;
 
     private void InitializeBotBehavior()
     {
@@ -74,6 +81,12 @@ public class BotView : MonoBehaviour, IRespawned
             _idleBehavior,
             _randomMoving
         };
+    }
+
+    private void InitStartPosition()
+    {
+        StartPosition = transform.position;
+        _respawnPosition = transform.position;
     }
 
     private void SelectBehaviourType()

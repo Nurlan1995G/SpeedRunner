@@ -1,26 +1,45 @@
 using Assets._Project.Config;
+using System;
 using TMPro;
 using UnityEngine;
 
 public class TimerLevel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textTimer;
+    private LogicConfig _logicConfig;
 
     private float _timer;
+    private bool _raceStarted = false;
 
-    public void Construct(LogicConfig logicConfig) =>
+    public event Action ChangeLevel;
+
+    public void Construct(LogicConfig logicConfig)
+    {
+        _logicConfig = logicConfig;
         _timer = logicConfig.Timer;
+    }
 
     private void Update()
     {
-        _timer -= Time.deltaTime;
-
-        if (_timer <= 0)
+        if (_raceStarted)
         {
-            _timer = 0;
-        }
+            _timer -= Time.deltaTime;
 
-        UpdateTimerDisplay();
+            if (_timer <= 0)
+            {
+                _timer = 0;
+                ChangeLevel?.Invoke();
+                _raceStarted = false;
+            }
+
+            UpdateTimerDisplay();
+        }
+    }
+
+    public void SetStarted()
+    {
+        _timer = _logicConfig.Timer;
+        _raceStarted = true;
     }
 
     private void UpdateTimerDisplay()

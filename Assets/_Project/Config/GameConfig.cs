@@ -94,5 +94,6 @@ namespace Assets._Project.Config
     public class LogicConfig
     {
         public float Timer;
+        public int CountdownControllerTime = 3;
     }
 }
