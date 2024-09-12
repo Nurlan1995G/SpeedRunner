@@ -20,15 +20,13 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CoroutineRunner _coroutineRunner;
     [SerializeField] private NavMeshSurface _meshSurface;
     [SerializeField] private SkinHandler _skinHandler;
-    [SerializeField] private List<TriggerZone> _triggerZones;
-    [SerializeField] private List<PointSpawnZone> _pointSpawnZones;
+    [SerializeField] private LevelLoader _levelLoader;
+    [SerializeField] private CountdownController _countdownController;
 
     private Language _language;
 
     private void Awake()
     {
-        CheckLanguage();
-
         PlayerInput playerInput = new();
         AssetProvider assetProvider = new();
         PlayerInputs playerInputs = new(playerInput);
@@ -36,22 +34,23 @@ public class Bootstraper : MonoBehaviour
         CharacterAnimation characterAnimation = new(_skinHandler, _player);
 
         //InitMobileUI();
-        BakeNavMesh();
+        CheckLanguage();
 
-        _timerLevel.Construct(_gameConfig.LogicConfig);
         InitPlayer(playerInputs, characterAnimation);
         InitCamera(rotateInput);
         InitCoroutine();
-        InitTriggerZone();
-        InitSpawnZone();
         InitBot(characterAnimation);
+        
+        _timerLevel.Construct(_gameConfig.LogicConfig);
+        _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig);
+        
+        InitLevelLoader();
     }
 
-
-    private void BakeNavMesh()
+    private void InitLevelLoader()
     {
-        if (_meshSurface != null)
-            _meshSurface.BuildNavMesh();
+        _levelLoader.Construct(_timerLevel, _botControllers, _countdownController, _player, _meshSurface);
+        _levelLoader.StartLevelSequence();
     }
 
     private void CheckLanguage()
@@ -97,27 +96,5 @@ public class Bootstraper : MonoBehaviour
         {
             botController.Construct(_gameConfig.BotControllerData);
         }
-    }
-
-    private void InitTriggerZone()
-    {
-        for (int i = 0; i < _triggerZones.Count; i++)
-        {
-            var currentTriggerZone = _triggerZones[i];
-
-            if (i + 1 < _pointSpawnZones.Count)
-            {
-                var correspondingPointSpawnZone = _pointSpawnZones[i + 1];
-                currentTriggerZone.SetNextZone(correspondingPointSpawnZone);
-            }
-            else
-                Debug.Log($"Триггерная зона {i} не имеет соответствующей зоны возрождения.");
-        }
-    }
-
-    private void InitSpawnZone()
-    {
-        foreach (var spawnZone in _pointSpawnZones)
-            spawnZone.Initialize();
     }
 }

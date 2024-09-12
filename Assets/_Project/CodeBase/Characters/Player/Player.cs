@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, IRespawned
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
     
     private SoundHandler _soundhandler;
+    private PositionStaticData _positionStaticData;
 
     private Vector3 _respawnPosition;
     private int _score = 0;
@@ -27,12 +28,13 @@ public class Player : MonoBehaviour, IRespawned
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         CharacterData = characterData;
+        _positionStaticData = positionStaticData;
 
         CharacterAnimation = characterAnimation;
 
         playerMover.Construct(this);
         playerJumper.Construct(this, playerMover);
-        RespawnPosition(positionStaticData.InitPlayerPosition);
+        RespawnPosition(_positionStaticData.InitPlayerPosition);
     }
 
     private void OnEnable() =>
@@ -40,6 +42,12 @@ public class Player : MonoBehaviour, IRespawned
 
     private void OnDisable() =>
         PlayerInputs.DisableInput();
+
+    public void ActivateForRace()
+    {
+        RespawnPosition(_positionStaticData.InitPlayerPosition);
+        Respawn();
+    }
 
     public void Respawn()
     {
