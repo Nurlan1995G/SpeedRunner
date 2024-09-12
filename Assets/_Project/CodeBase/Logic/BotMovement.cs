@@ -1,5 +1,4 @@
-﻿using Assets._Project.Config;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
@@ -17,9 +16,17 @@ public class BotMovement : MonoBehaviour
 
     public void Move(Vector3 direction, float currentSpeed)
     {
-        Vector3 move = direction * currentSpeed * Time.deltaTime;
-        MovementSpeed = move.magnitude;
-        MoveCharacterController(move + _velocity * Time.deltaTime);
+        if (_isClimbing)
+        {
+            Vector3 climbMove = direction * currentSpeed * Time.deltaTime;
+            MoveCharacterController(climbMove);
+        }
+        else
+        {
+            Vector3 move = direction * currentSpeed * Time.deltaTime;
+            MovementSpeed = move.magnitude;
+            MoveCharacterController(move + _velocity * Time.deltaTime);
+        }
     }
 
     public void Rotate(Vector3 direction, float rotateSpeed)
