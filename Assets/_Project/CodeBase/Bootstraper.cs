@@ -1,6 +1,5 @@
 ﻿using Assets._Project.CodeBase.CameraLogic;
 using Assets._Project.Config;
-using Assets.Project.AssetProviders;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -27,48 +26,46 @@ public class Bootstraper : MonoBehaviour
 
     private void Awake()
     {
+        InitializeComponents();
+        CheckLanguage();
+        InitCoroutine();
+        InitBots();
+        InitLevelLoader();
+    }
+
+    private void CheckLanguage() =>
+        _language = Localization.CurrentLanguage == ".ru" ? Language.Russian : Language.English;
+
+    private void InitializeComponents()
+    {
         PlayerInput playerInput = new();
-        AssetProvider assetProvider = new();
-        PlayerInputs playerInputs = new(playerInput);
         RotateInput rotateInput = new();
         CharacterAnimation characterAnimation = new(_skinHandler, _player);
+        PlayerInputs playerInputs = new(playerInput);
 
-        //InitMobileUI();
-        CheckLanguage();
+        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
+        _cameraRotater.Construct(_gameConfig, rotateInput);
+    }
 
-        InitPlayer(playerInputs, characterAnimation);
-        InitCamera(rotateInput);
-        InitCoroutine();
-        InitBot(characterAnimation);
-        
-        _timerLevel.Construct(_gameConfig.LogicConfig);
-        _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig);
-        
-        InitLevelLoader();
+    private void InitCoroutine() => 
+        _coroutineRunner.Initialize();
+
+    private void InitBots()
+    {
+        foreach (var bot in _botViews)
+            bot.Construct(_gameConfig.CharacterBotData);
+
+        foreach (var botController in _botControllers)
+            botController.Construct(_gameConfig.BotControllerData);
     }
 
     private void InitLevelLoader()
     {
-        _levelLoader.Construct(_timerLevel, _botControllers, _countdownController, _player, _meshSurface);
+        _timerLevel.Construct(_gameConfig.LogicConfig);
+        _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig);
+        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface);
         _levelLoader.StartLevelSequence();
     }
-
-    private void CheckLanguage()
-    {
-        if (Localization.CurrentLanguage == ".ru")
-            _language = Language.Russian;
-        else
-            _language = Language.English;
-    }
-
-    private void InitPlayer(PlayerInputs playerInputs, CharacterAnimation characterAnimation)
-    {
-        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler,
-            playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
-    }
-
-    private void InitCamera(RotateInput input) =>
-        _cameraRotater.Construct(_gameConfig, input);
 
     private void InitMobileUI()
     {
@@ -79,22 +76,6 @@ public class Bootstraper : MonoBehaviour
             //_boostButtonUI.SetMobilePlatform();
             //_moveJostick.gameObject.SetActive(true);
             //_boostButtonUI.gameObject.SetActive(true);
-        }
-    }
-
-    private void InitCoroutine() =>
-        _coroutineRunner.Initialize();
-
-    private void InitBot(CharacterAnimation characterAnimation)
-    {
-        foreach (var bot in _botViews)
-        {
-            bot.Construct(_gameConfig.CharacterBotData);
-        }
-
-        foreach (var botController in _botControllers)
-        {
-            botController.Construct(_gameConfig.BotControllerData);
         }
     }
 }

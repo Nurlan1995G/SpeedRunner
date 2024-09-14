@@ -1,46 +1,24 @@
 ﻿using UnityEngine;
 
-public class RockClimbing : MonoBehaviour
+public class RockClimbing : Interactable
 {
-    private void OnTriggerEnter(Collider other)
+    public override void InteractEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Bot"))
+        /*if (other.gameObject.TryGetComponent(out PlayerMover playerMover))
         {
-            if (other.TryGetComponent(out CharacterController characterController))
-                EnableClimbing(characterController);
-        }
+            Debug.Log("Соприкосновение произошло");
+            Vector3 normal = (other.transform.position - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(-normal);
+            playerMover.StartClimbing(targetRotation);
+        }*/
     }
 
-    private void OnTriggerExit(Collider other)
+    public override void InteractExit(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Bot"))
+        /*if (other.gameObject.TryGetComponent(out PlayerMover playerMover))
         {
-            if (other.TryGetComponent(out CharacterController characterController))
-                DisableClimbing(characterController);
-        }
-    }
-
-    private void EnableClimbing(CharacterController characterController)
-    {
-        if (characterController.TryGetComponent(out BotMovement botMovement))
-        {
-            botMovement.SetClimbing(true);
-        }
-        else if (characterController.TryGetComponent(out PlayerMover playerMover))
-        {
-            playerMover.SetClimbing(true);
-        }
-    }
-
-    private void DisableClimbing(CharacterController characterController)
-    {
-        if (characterController.TryGetComponent(out BotMovement botMovement))
-        {
-            botMovement.SetClimbing(false);
-        }
-        else if (characterController.TryGetComponent(out PlayerMover playerMover))
-        {
-            playerMover.SetClimbing(false);
-        }
+            Debug.Log("Выход от стены");
+            playerMover.StopClimbing();
+        }*/
     }
 }
