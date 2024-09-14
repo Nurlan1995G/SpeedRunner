@@ -49,7 +49,7 @@ public class BotMovement : MonoBehaviour
     public void ApplyGravity(float jumpGravity, float maxGravitySpeed)
     {
         _velocity.y -= jumpGravity * Time.deltaTime;
-        //_velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
+        _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
     }
 
     public void SetClimbing(bool isClimbing)

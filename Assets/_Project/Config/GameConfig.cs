@@ -63,8 +63,7 @@ namespace Assets._Project.Config
         [Range(10, 50)] public float MaxMoveSpeed;
         public float RotateSpeed;
         [Header("Other")]
-        public float JumpGravity = 1.5f;
-        public float FallGravity = 2.5f;
+        public float JumpGravity = 80f;
         public float MaxFallGravitySpeed = 50f;
         [Header("Jump")]
         public float JumpForce = 60f;

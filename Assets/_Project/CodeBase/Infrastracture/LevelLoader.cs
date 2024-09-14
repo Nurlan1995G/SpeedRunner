@@ -9,95 +9,124 @@ public class LevelLoader : MonoBehaviour
 
     private TimerLevel _timerLevel;
     private List<BotController> _botControllers;
+    private List<BotView> _botViews;
     private CountdownController _countdownController;
     private Player _player;
     private NavMeshSurface _navMeshSurface;
+    private int _currentLevelIndex;
 
-    public void Construct(TimerLevel timerLevel, List<BotController> botControllers,
-        CountdownController countdownController, Player player, NavMeshSurface navMeshSurface)
+    public void Construct(TimerLevel timerLevel, List<BotController> botControllers, List<BotView> botViews,
+    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface)
     {
-        Debug.Log("Construct - LevelLoader");
-
         _timerLevel = timerLevel;
         _botControllers = botControllers;
+        _botViews = botViews;
         _countdownController = countdownController;
         _player = player;
         _navMeshSurface = navMeshSurface;
-        
-        _timerLevel.ChangeLevel += OnChangeLevel;
     }
 
-    private void OnDisable()
-    {
+    private void OnEnable() => 
+        _timerLevel.ChangeLevel += OnChangeLevel;
+
+    private void OnDisable() =>
         _timerLevel.ChangeLevel -= OnChangeLevel;
-    }
 
     public void StartLevelSequence()
     {
-        OnChangeLevel();
+        LoadNextLevel();
+        SetupLevel();
     }
 
     private void OnChangeLevel()
     {
-        Debug.Log("OnChangeLevel - LevelLoader");
+        DeactivateLevel();
+        LoadNextLevel();
+        SetupLevel();
+    }
 
-        int randomLevel = RandomLevel();
+    private void LoadNextLevel()
+    {
+        _currentLevelIndex = (_currentLevelIndex + 1) % _levelsScene.Count;
+        ActivateScene(_currentLevelIndex);
+    }
 
-        for (int i = 0; i < _levelsScene.Count; i++)
-        {
-            _levelsScene[i].gameObject.SetActive(i == randomLevel);
-        }
-
-        _navMeshSurface.BuildNavMesh();
-
-        LevelScene activeLevel = _levelsScene[randomLevel];
+    private void SetupLevel()
+    {
+        LevelScene activeLevel = _levelsScene[_currentLevelIndex];
         List<PointSpawnZone> pointSpawnZones = activeLevel.PointSpawnZones;
         List<TriggerZone> triggerZones = activeLevel.TriggerZones;
 
         _player.ActivateForRace();
-        InitPointSpawnZones(pointSpawnZones);
-        InitializeBots(pointSpawnZones);
 
-        InitTriggerZone(pointSpawnZones, triggerZones);
+        InitSpawnZones(pointSpawnZones);
+        ActivateBots(true);
+        InitializeBots(pointSpawnZones);
+        InitTriggerZones(pointSpawnZones, triggerZones);
 
         _countdownController.ResetBarrier();
         _countdownController.ActivateStart();
     }
 
-    private void InitPointSpawnZones(List<PointSpawnZone> pointSpawnZones)
+    private void ActivateScene(int levelIndex)
     {
-        foreach (var point in pointSpawnZones)
+        for (int i = 0; i < _levelsScene.Count; i++)
         {
-            Debug.Log("InitPointSpawnZones - point.Initialize");
+            _levelsScene[i].gameObject.SetActive(i == levelIndex);
+            _levelsScene[i].SetBusy(i == levelIndex);
+        }
+
+        _navMeshSurface.BuildNavMesh();
+    }
+
+    private void InitSpawnZones(List<PointSpawnZone> spawnZones)
+    {
+        foreach (var point in spawnZones)
             point.Initialize();
-        }
     }
 
-    private void InitializeBots(List<PointSpawnZone> pointSpawnZones)
+    private void ActivateBots(bool active)
     {
-        foreach (var botController in _botControllers)
+        foreach (var bot in _botViews)
+            bot.gameObject.SetActive(active);
+    }
+
+    private void InitializeBots(List<PointSpawnZone> spawnZones)
+    {
+        foreach (BotController botController in _botControllers)
         {
+            botController.gameObject.SetActive(true);
             botController.ActivateForRace();
-            botController.SetZone(pointSpawnZones[0]);
+
+            if (spawnZones != null)
+                botController.SetZone(spawnZones[0]);
+            else
+            {
+                Debug.LogError("Нет доступной зоны спавна для бота на активной сцене.");
+                botController.gameObject.SetActive(false); 
+            }
         }
     }
 
-    private int RandomLevel() =>
-        Random.Range(0, _levelsScene.Count);
-
-    private void InitTriggerZone(List<PointSpawnZone> pointSpawnZones, List<TriggerZone> triggerZones)
+    private void InitTriggerZones(List<PointSpawnZone> spawnZones, List<TriggerZone> triggerZones)
     {
         for (int i = 0; i < triggerZones.Count; i++)
         {
-            var currentTriggerZone = triggerZones[i];
-
-            if (i + 1 < pointSpawnZones.Count)
-            {
-                var correspondingPointSpawnZone = pointSpawnZones[i + 1];
-                currentTriggerZone.SetNextZone(correspondingPointSpawnZone);
-            }
+            if (i + 1 < spawnZones.Count)
+                triggerZones[i].SetNextZone(spawnZones[i + 1]);
             else
-                Debug.Log($"Триггерная зона {i} не имеет соответствующей зоны возрождения.");
+                Debug.LogWarning($"Триггерная зона {i} не имеет соответствующей зоны возрождения.");
         }
+    }
+
+    private void DeactivateLevel()
+    {
+        ActivateBots(false);
+
+        foreach (var botController in _botControllers)
+            botController.gameObject.SetActive(false);
+
+        _levelsScene[_currentLevelIndex].gameObject.SetActive(false);
+        _levelsScene[_currentLevelIndex].SetBusy(false);
     }
 }
