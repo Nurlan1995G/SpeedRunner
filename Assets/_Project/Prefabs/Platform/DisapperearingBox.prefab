@@ -147,4 +147,4 @@ MonoBehaviour:
   _reactivateDelay: 3
   _visibilityDuration: 1
   _objectRenderer: {fileID: 3673184872713338601}
-  _meshCollider: {fileID: 0}
+  _meshCollider: {fileID: 484934280150327634}

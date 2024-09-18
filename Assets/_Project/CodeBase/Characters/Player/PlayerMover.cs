@@ -14,6 +14,7 @@ public class PlayerMover : MonoBehaviour
     private BoostBoxUp _boostBoxUp;
 
     private bool _isClimbing;
+    private bool _isDance;
 
     public void Construct(Player player)
     {
@@ -26,21 +27,19 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        if (_player.GroundChecker.IsTouchingWall)
-        {
-            if (!_isClimbing)
-                StartClimbing(Quaternion.LookRotation(-_player.GroundChecker.transform.forward));
-        }
-        else if (_isClimbing)
-            StopClimbing();
-
         Vector2 moveDirection = _player.PlayerInputs.MoveDirection;
-        Move(moveDirection);
 
-        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection);
+        if (_isClimbing)
+        {
+            MoveClimbing(moveDirection);
 
-        if (_isClimbing && _player.PlayerInputs.JumpTriggered)
-            DetachFromWall(); 
+            if (_player.PlayerInputs.JumpTriggered)
+                DetachFromWall();
+        }
+        else
+            Move(moveDirection);
+
+        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isDance);
 
         if (!_isClimbing)
             GravityHandling();
@@ -72,14 +71,26 @@ public class PlayerMover : MonoBehaviour
     {
         _isClimbing = true;
         _velocityDirection = Vector3.zero;
-        //_player.CharacterController.detectCollisions = true; 
 
         transform.rotation = targetRotation;
     }
 
-    public void StopClimbing()
-    {
+    public void StopClimbing() => 
         _isClimbing = false;
+
+    public void SetDance(bool isDance) =>
+        _isDance = isDance;
+
+    public void StopMovement()
+    {
+        _currentSpeed = 0;
+        _velocityDirection = Vector3.zero;
+    }
+
+    private void MoveClimbing(Vector2 direction)
+    {
+        Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
+        MoveCharacter(climbDirection, Quaternion.identity);
     }
 
     private void DetachFromWall()

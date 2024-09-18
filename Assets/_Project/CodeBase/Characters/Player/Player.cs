@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, IRespawned
     
     private SoundHandler _soundhandler;
     private PositionStaticData _positionStaticData;
-
+    private PlayerMover _playerMover;
     private Vector3 _respawnPosition;
     private int _score = 0;
 
@@ -29,10 +29,11 @@ public class Player : MonoBehaviour, IRespawned
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
         CharacterData = characterData;
         _positionStaticData = positionStaticData;
+        _playerMover = playerMover;
 
         CharacterAnimation = characterAnimation;
 
-        playerMover.Construct(this);
+        _playerMover.Construct(this);
         playerJumper.Construct(this, playerMover);
         RespawnPosition(_positionStaticData.InitPlayerPosition);
     }
@@ -60,6 +61,12 @@ public class Player : MonoBehaviour, IRespawned
 
     public void SetScore(int score) =>
         _score = score;
+
+    public void SetFinish(bool isDance)
+    {
+        _playerMover.SetDance(isDance);
+        _playerMover.StopMovement();
+    }
 
     private void Teleport()
     {

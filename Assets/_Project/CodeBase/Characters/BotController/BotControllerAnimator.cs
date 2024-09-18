@@ -6,6 +6,7 @@ public class BotControllerAnimator
     private const string IsRunning = "IsRunning";
     private const string IsJumping = "IsJumping";
     private const string IsFalling = "IsFalling";
+    private const string IsDance = "IsDance";
 
     private BotSkinHendler _skinHandler;
     private BotController _botController;
@@ -30,39 +31,52 @@ public class BotControllerAnimator
     public void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
     public void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
 
-    public void HandleAnimations(float moveDirection, Vector3 velocityDirection)
-    {
-        if (_botController.GroundChecker.IsGrounded)
-        {
-            StopFalling();
-            StopJumping();
+    public void StartDance() => _skinHandler.CurrentSkin.Animator.SetBool(IsDance, true);
+    public void StopDance() => _skinHandler.CurrentSkin.Animator.SetBool(IsDance, true);
 
-            if (moveDirection != 0)
+    public void HandleAnimations(float moveDirection, Vector3 velocityDirection, bool isDance)
+    {
+        if (isDance == false)
+        {
+            StopDance();
+
+            if (_botController.GroundChecker.IsGrounded)
             {
-                StartRunning();
-                StopIdle();
+                StopFalling();
+                StopJumping();
+
+                if (moveDirection != 0)
+                {
+                    StartRunning();
+                    StopIdle();
+                }
+                else
+                {
+                    StopRunning();
+                    StartIdle();
+                }
             }
             else
             {
                 StopRunning();
-                StartIdle();
+                StopIdle();
+
+                if (velocityDirection.y > 0)
+                {
+                    StartJumping();
+                    StopFalling();
+                }
+                else
+                {
+                    StopJumping();
+                    StartFalling();
+                }
             }
         }
         else
         {
-            StopRunning();
-            StopIdle();
-
-            if (velocityDirection.y > 0)
-            {
-                StartJumping();
-                StopFalling();
-            }
-            else
-            {
-                StopJumping();
-                StartFalling();
-            }
+            StartDance();
+            isDance = false;
         }
     }
 }
