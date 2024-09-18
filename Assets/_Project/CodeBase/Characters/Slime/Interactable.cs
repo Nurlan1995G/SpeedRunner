@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public abstract class BaseInteractable : MonoBehaviour { }
 
 public abstract class Interactable : BaseInteractable, IInteractableEnter, IInteractableExit

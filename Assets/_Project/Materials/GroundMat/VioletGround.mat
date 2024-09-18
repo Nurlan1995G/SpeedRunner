@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow
+  m_Name: VioletGround
   m_Shader: {fileID: 4800000, guid: 0a6da58fb245a9a4192c27c7c5ce9b8d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -103,12 +103,12 @@ Material:
     - __dummy__: 0
     m_Colors:
     - _BumpSpeed: {r: 0.2, g: 0.2, b: 0.3, a: 0.3}
-    - _Color: {r: 0.90188676, g: 0.8610771, b: 0.16165885, a: 1}
-    - _DepthColor: {r: 0, g: 0.37459263, b: 0.778, a: 1}
+    - _Color: {r: 0.93962264, g: 0.38116762, b: 0.92484874, a: 1}
+    - _DepthColor: {r: 0.8792453, g: 0.36994657, b: 0.86638427, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _FoamSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _HColor: {r: 1, g: 0.8829234, b: 0.13396227, a: 1}
+    - _HColor: {r: 0.7025527, g: 0, b: 0.79622644, a: 1}
     - _RimColor: {r: 0.04411763, g: 0.6440159, b: 1, a: 0.27450982}
-    - _SColor: {r: 0.89433956, g: 0.7628986, b: 0.079309314, a: 1}
+    - _SColor: {r: 0.357847, g: 0.10079739, b: 0.3735848, a: 1}
   m_BuildTextureStacks: []

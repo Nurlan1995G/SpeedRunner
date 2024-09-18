@@ -17,6 +17,12 @@ public class FlagPoint : InteractableEnter
             FlagChange(player);
     }
 
+    public void ResetFlag()
+    {
+        _redFlag.SetActive(true);
+        _blueFlag.SetActive(false);
+    }
+
     private void FlagChange(Player player)
     {
         if (_blueFlag.activeSelf == false)

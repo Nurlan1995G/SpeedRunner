@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Red
+  m_Name: Blue 1Ground
   m_Shader: {fileID: 4800000, guid: 0a6da58fb245a9a4192c27c7c5ce9b8d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -50,7 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 5930a2cf4b06d4747878f6bdaad8d95f, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask1:
         m_Texture: {fileID: 0}
@@ -72,10 +72,10 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DepthDistance: 0.01
+    - _DepthDistance: 1.53
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FoamSmooth: 0
+    - _FoamSmooth: 0.02
     - _FoamSpread: 0.01
     - _FoamStrength: 0.01
     - _GlossMapScale: 1
@@ -85,8 +85,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RampSmooth: 0.001
-    - _RampThreshold: 0
+    - _RampSmooth: 0.77
+    - _RampThreshold: 0.5
     - _RimMax: 1
     - _RimMin: 0.4
     - _SmoothnessTextureChannel: 0
@@ -103,12 +103,12 @@ Material:
     - __dummy__: 0
     m_Colors:
     - _BumpSpeed: {r: 0.2, g: 0.2, b: 0.3, a: 0.3}
-    - _Color: {r: 0.9169811, g: 0.1076461, b: 0.088237785, a: 1}
-    - _DepthColor: {r: 0.7764706, g: 0.046106953, b: 0, a: 1}
+    - _Color: {r: 0.33182615, g: 0.46152252, b: 0.90188676, a: 1}
+    - _DepthColor: {r: 0, g: 0.37459263, b: 0.778, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _FoamSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _HColor: {r: 1, g: 0.16251025, b: 0.13333333, a: 1}
+    - _HColor: {r: 0.44073334, g: 0.6325587, b: 0.97735846, a: 1}
     - _RimColor: {r: 0.04411763, g: 0.6440159, b: 1, a: 0.27450982}
-    - _SColor: {r: 0.89411765, g: 0.12090647, b: 0.07843139, a: 1}
+    - _SColor: {r: 0.30746162, g: 0.44268927, b: 0.81886786, a: 1}
   m_BuildTextureStacks: []

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2906314034620522715}
   - component: {fileID: 4346053690617444519}
-  - component: {fileID: 2748656056958153237}
   - component: {fileID: 5917520407493118353}
   - component: {fileID: -6348225499836989187}
+  - component: {fileID: 9072267912565120354}
   m_Layer: 0
   m_Name: BotRunner
   m_TagString: Untagged
@@ -53,23 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1ef56ea718f0243afecff99770d0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 2748656056958153237}
+  _movement: {fileID: 9072267912565120354}
   _skinHendler: {fileID: 8655212338280228967}
   _currentZone: {fileID: 0}
   <GroundChecker>k__BackingField: {fileID: 6543734882555251913}
   <CharacterController>k__BackingField: {fileID: 5917520407493118353}
---- !u!114 &2748656056958153237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498490333067494464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b08d67dc60aae41af8dc8b99aa37a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &5917520407493118353
 CharacterController:
   m_ObjectHideFlags: 0
@@ -123,6 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9072267912565120354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498490333067494464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86c824838bae4a48a601b835b0038db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &733669577019571068
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class LevelLoader : MonoBehaviour
     private CountdownController _countdownController;
     private Player _player;
     private NavMeshSurface _navMeshSurface;
+
     private int _currentLevelIndex;
 
     public void Construct(TimerLevel timerLevel, List<BotController> botControllers, List<BotView> botViews,
@@ -56,6 +57,7 @@ public class LevelLoader : MonoBehaviour
         LevelScene activeLevel = _levelsScene[_currentLevelIndex];
         List<PointSpawnZone> pointSpawnZones = activeLevel.PointSpawnZones;
         List<TriggerZone> triggerZones = activeLevel.TriggerZones;
+        List<FlagPoint> flagPoints = activeLevel.FlagPoints;
 
         _player.ActivateForRace();
 
@@ -63,6 +65,7 @@ public class LevelLoader : MonoBehaviour
         ActivateBots(true);
         InitializeBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
+        DeactivateFlags(flagPoints);
 
         _countdownController.ResetBarrier();
         _countdownController.ActivateStart();
@@ -117,6 +120,12 @@ public class LevelLoader : MonoBehaviour
             else
                 Debug.LogWarning($"Триггерная зона {i} не имеет соответствующей зоны возрождения.");
         }
+    }
+
+    private void DeactivateFlags(List<FlagPoint> flagPoints)
+    {
+        foreach (var flag in flagPoints)
+            flag.ResetFlag();
     }
 
     private void DeactivateLevel()

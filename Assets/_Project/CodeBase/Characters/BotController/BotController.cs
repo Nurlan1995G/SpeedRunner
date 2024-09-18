@@ -16,7 +16,9 @@ public class BotController : MonoBehaviour, IRespawned
     private bool _isAchievedTarget;
     private BotControllerAnimator _botControllerAnimator;
     private Coroutine _speedBoostCoroutine;
+    
     private float _currentSpeed;
+    private bool _isDance;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -49,7 +51,7 @@ public class BotController : MonoBehaviour, IRespawned
         if (_currentZone != null)
             MoveTowardsTarget();
 
-        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity);
+        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, _isDance);
     }
 
     public void SetRespawnPosition(Vector3 position)
@@ -98,6 +100,15 @@ public class BotController : MonoBehaviour, IRespawned
         _speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(BotControllerData.BoostMultiplier,
                 BotControllerData.BoostDuration));
     }
+
+    public void StopMovement()
+    {
+        _currentSpeed = 0;
+        _movement.Move(Vector3.zero, 0);
+    }
+
+    public void SetDance(bool isDance) =>
+        _isDance = isDance;
 
     private void InitMove()
     {

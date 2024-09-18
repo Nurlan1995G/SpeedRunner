@@ -13,14 +13,17 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
+
     [SerializeField] private List<BotView> _botViews;
     [SerializeField] private List<BotController> _botControllers;
+
     [SerializeField] private TimerLevel _timerLevel;
     [SerializeField] private CoroutineRunner _coroutineRunner;
     [SerializeField] private NavMeshSurface _meshSurface;
     [SerializeField] private SkinHandler _skinHandler;
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private CountdownController _countdownController;
+    [SerializeField] private Finish _finish;
 
     private Language _language;
 
@@ -42,9 +45,11 @@ public class Bootstraper : MonoBehaviour
         RotateInput rotateInput = new();
         CharacterAnimation characterAnimation = new(_skinHandler, _player);
         PlayerInputs playerInputs = new(playerInput);
+        RaceManager raceManager = new RaceManager(_positionStaticData);
 
         _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
         _cameraRotater.Construct(_gameConfig, rotateInput);
+        _finish.Construct(raceManager);
     }
 
     private void InitCoroutine() => 
