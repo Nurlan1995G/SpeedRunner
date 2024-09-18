@@ -13977,6 +13977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockClimbing (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3396972623500986775, guid: ba417a290a3e8b04d89f4a7b25462b0a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5063266955993694320, guid: ba417a290a3e8b04d89f4a7b25462b0a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -36681,6 +36685,10 @@ PrefabInstance:
       value: RockClimbing
       objectReference: {fileID: 0}
     - target: {fileID: 3396972623500986775, guid: ba417a290a3e8b04d89f4a7b25462b0a, type: 3}
+      propertyPath: m_Center.z
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396972623500986775, guid: ba417a290a3e8b04d89f4a7b25462b0a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -36836,6 +36844,10 @@ PrefabInstance:
     - target: {fileID: 5713578871723098760, guid: 0d1efd4faf0d38c44a955297eafef807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476231631661614125, guid: 0d1efd4faf0d38c44a955297eafef807, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 640
       objectReference: {fileID: 0}
     - target: {fileID: 8720886906786839227, guid: 0d1efd4faf0d38c44a955297eafef807, type: 3}
       propertyPath: _shop

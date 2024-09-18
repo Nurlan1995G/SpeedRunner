@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    [SerializeField] private LayerMask wallLayer;  
+    [SerializeField] private float wallCheckDistance = 1f; 
+
     private Player _player;
     private PlayerData _playerData;
 
@@ -25,6 +28,7 @@ public class PlayerMover : MonoBehaviour
         _camera = Camera.main;
     }
 
+
     private void Update()
     {
         Vector2 moveDirection = _player.PlayerInputs.MoveDirection;
@@ -39,10 +43,9 @@ public class PlayerMover : MonoBehaviour
         else
             Move(moveDirection);
 
-        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isDance);
+        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isDance, _isClimbing);
 
-        if (!_isClimbing)
-            GravityHandling();
+        GravityHandling();
     }
 
     public void TakeJumpDirection(float jumpDirection) => 
@@ -67,16 +70,16 @@ public class PlayerMover : MonoBehaviour
         _boostBoxUp.PlayerBoostJump += OnBoostJump;
     }
 
-    public void StartClimbing(Quaternion targetRotation)
+    public void StartClimbing()
     {
         _isClimbing = true;
         _velocityDirection = Vector3.zero;
-
-        transform.rotation = targetRotation;
     }
 
-    public void StopClimbing() => 
+    public void StopClimbing()
+    {
         _isClimbing = false;
+    }
 
     public void SetDance(bool isDance) =>
         _isDance = isDance;
@@ -87,12 +90,6 @@ public class PlayerMover : MonoBehaviour
         _velocityDirection = Vector3.zero;
     }
 
-    private void MoveClimbing(Vector2 direction)
-    {
-        Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
-        MoveCharacter(climbDirection, Quaternion.identity);
-    }
-
     private void DetachFromWall()
     {
         StopClimbing();
@@ -101,12 +98,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        if (_isClimbing)
-        {
-            Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
-            MoveCharacter(climbDirection, Quaternion.identity);
-        }
-        else
+        if (!_isClimbing)
         {
             Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
             Quaternion cameraRotationY = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
@@ -116,13 +108,19 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    private void MoveClimbing(Vector2 direction)
+    {
+        Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
+        MoveCharacter(climbDirection, Quaternion.identity);
+    }
+
     private void MoveCharacter(Vector3 moveDirection, Quaternion cameraRotation)
     {
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
-        if(_player.GroundChecker.IsGrounded)
+        if (_player.GroundChecker.IsGrounded || _isClimbing)
             _player.CharacterController.Move(finalDirection * _currentSpeed * Time.deltaTime);
-        else if(_isClimbing == false)
+        else if (!_isClimbing)
             _player.CharacterController.Move(finalDirection * _currentSpeed / 2 * Time.deltaTime);
     }
 
