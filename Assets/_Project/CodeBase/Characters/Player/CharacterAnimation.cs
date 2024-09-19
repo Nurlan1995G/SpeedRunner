@@ -63,10 +63,12 @@ public class CharacterAnimation
             {
                 if (moveDirection != Vector2.zero)
                 {
+                    StopFalling();
                     StartClimb();
                 }
                 else
                 {
+                    StartFalling();
                     StopClimb();
                 }
             }

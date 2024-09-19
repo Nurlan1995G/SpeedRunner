@@ -60,15 +60,8 @@ public class PlayerMover : MonoBehaviour
                 _player.CharacterData.BoostDuration));
     }
 
-    public void InitBoostBoxUp(BoostBoxUp boostBoxUp)
-    {
-        if (_boostBoxUp != null)
-            _boostBoxUp.PlayerBoostJump -= OnBoostJump;
-
-        _boostBoxUp = boostBoxUp;
-
-        _boostBoxUp.PlayerBoostJump += OnBoostJump;
-    }
+    public void BoostBoxUp() => 
+        TakeJumpDirection(_player.CharacterData.BoostHeightUp);
 
     public void StartClimbing()
     {
@@ -150,32 +143,10 @@ public class PlayerMover : MonoBehaviour
         _player.CharacterController.Move(_velocityDirection * Time.deltaTime);
     }
 
-    private void OnBoostJump() => 
-        StartCoroutine(WaitForJumpInput());
-
     private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
     {
         _currentSpeed = _playerData.MoveSpeed * multiplier;
         yield return new WaitForSeconds(duration);
         _currentSpeed = _playerData.MoveSpeed;
-    }
-
-    private IEnumerator WaitForJumpInput()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < _player.CharacterData.BoostWaitTime)
-        {
-            if (_player.PlayerInputs.JumpTriggered)
-            {
-                TakeJumpDirection(_player.CharacterData.BoostHeightUp * _player.CharacterData.JumpStep);
-                yield break;
-            }
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        TakeJumpDirection(_player.CharacterData.BoostHeightUp);
     }
 }
