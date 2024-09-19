@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6666082878638396409}
   - component: {fileID: 1522606895229122454}
   - component: {fileID: 2952600788907680112}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BoostUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,8 +107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 8, z: 1}
-  m_Center: {x: 0, y: 2.2767353, z: 0}
+  m_Size: {x: 1, y: 13, z: 1}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &2952600788907680112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4393640946123684194}
   - component: {fileID: 1163759371876780586}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Arrouw (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5619461135058122701}
   - component: {fileID: 1220264265533099496}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Arrouw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 919870205182615086}
   - component: {fileID: 3701361509905955422}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Arrouw (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
