@@ -102,7 +102,7 @@ public class LevelLoader : MonoBehaviour
             botController.ActivateForRace();
 
             if (spawnZones != null)
-                botController.SetZone(spawnZones[0]);
+                botController.SetStartZone(spawnZones[0]);
             else
             {
                 Debug.LogError("Нет доступной зоны спавна для бота на активной сцене.");

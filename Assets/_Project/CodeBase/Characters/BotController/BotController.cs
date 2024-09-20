@@ -77,6 +77,13 @@ public class BotController : MonoBehaviour, IRespawned
         SelectRandomTargetInCurrentZone();
     }
 
+    public void SetStartZone(PointSpawnZone zone)
+    {
+        _currentZone = zone;
+        _previousZone = _currentZone;
+        SelectRandomTargetInCurrentZone();
+    }
+
     public void SetZone(PointSpawnZone zone)
     {
         _currentZone = zone;
