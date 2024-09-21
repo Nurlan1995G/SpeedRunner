@@ -19,6 +19,7 @@ public class BotController : MonoBehaviour, IRespawned
     
     private float _currentSpeed;
     private bool _isDance;
+    private bool _isClimbing;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -51,7 +52,7 @@ public class BotController : MonoBehaviour, IRespawned
         if (_currentZone != null)
             MoveTowardsTarget();
 
-        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, _isDance);
+        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, _isDance, _isClimbing);
     }
 
     public void SetRespawnPosition(Vector3 position)
