@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CharacterAnimation
+public class PlayerAnimation
 {
     private const string IsIdling = "IsIdling";
     private const string IsRunning = "IsRunning";
@@ -12,7 +12,7 @@ public class CharacterAnimation
     private SkinHandler _skinHandler;
     private Player _player;
 
-    public CharacterAnimation(SkinHandler skinHandler, Player player)
+    public PlayerAnimation(SkinHandler skinHandler, Player player)
     {
         _skinHandler = skinHandler;
         _player = player;
@@ -36,10 +36,9 @@ public class CharacterAnimation
     private void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
     private void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
 
-    public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection, bool isDance, 
-        bool isClimbing)
+    public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection, bool isDance, bool isClimbing)
     {
-        if (isDance == false)
+        if (!isDance)
         {
             StopDance();
 
@@ -59,26 +58,26 @@ public class CharacterAnimation
                     StartIdle();
                 }
             }
-            else if (isClimbing) 
+            else if (isClimbing)
             {
-                if (moveDirection != Vector2.zero)
+                StopJumping();
+                StopFalling();
+
+                if (moveDirection != Vector2.zero)  
                 {
-                    StopFalling();
+                    StopIdle();  
                     StartClimb();
-                }
-                else
-                {
-                    StartFalling();
-                    StopClimb();
                 }
             }
             else
             {
+                StopClimb();
                 StopRunning();
-                StopIdle();
+                StopIdle();  
 
                 if (velocityDirection.y > 0)
                 {
+                    StopIdle();  
                     StartJumping();
                     StopFalling();
                 }

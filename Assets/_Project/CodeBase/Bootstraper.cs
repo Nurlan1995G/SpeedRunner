@@ -43,7 +43,7 @@ public class Bootstraper : MonoBehaviour
     {
         PlayerInput playerInput = new();
         RotateInput rotateInput = new();
-        CharacterAnimation characterAnimation = new(_skinHandler, _player);
+        PlayerAnimation characterAnimation = new(_skinHandler, _player);
         PlayerInputs playerInputs = new(playerInput);
         RaceManager raceManager = new RaceManager(_positionStaticData);
 

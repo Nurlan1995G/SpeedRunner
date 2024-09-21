@@ -96,7 +96,7 @@ public class PlayerMover : MonoBehaviour
             Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
             Quaternion cameraRotationY = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
 
-            MoveCharacter(newDirection, cameraRotationY);
+            MoveCharacter(newDirection, cameraRotationY, 1);
             RotateCharacter(newDirection, cameraRotationY);
         }
     }
@@ -104,15 +104,15 @@ public class PlayerMover : MonoBehaviour
     private void MoveClimbing(Vector2 direction)
     {
         Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
-        MoveCharacter(climbDirection, Quaternion.identity);
+        MoveCharacter(climbDirection, Quaternion.identity, 2);
     }
 
-    private void MoveCharacter(Vector3 moveDirection, Quaternion cameraRotation)
+    private void MoveCharacter(Vector3 moveDirection, Quaternion cameraRotation, float delaySpeedClimb)
     {
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
         if (_player.GroundChecker.IsGrounded || _isClimbing)
-            _player.CharacterController.Move(finalDirection * _currentSpeed * Time.deltaTime);
+            _player.CharacterController.Move(finalDirection * _currentSpeed / delaySpeedClimb * Time.deltaTime);
         else if (!_isClimbing)
             _player.CharacterController.Move(finalDirection * _currentSpeed / 2 * Time.deltaTime);
     }
