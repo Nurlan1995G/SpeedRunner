@@ -6,8 +6,6 @@ public class BotMovement : MonoBehaviour
 
     private Vector3 _velocity;
 
-    private bool _isClimbing;
-
     public float MovementSpeed { get; private set; }
     public Vector3 Velocity => _velocity;
 
@@ -16,10 +14,11 @@ public class BotMovement : MonoBehaviour
 
     public void Move(Vector3 direction, float currentSpeed)
     {
-        if (_isClimbing)
+        if (_botController.IsClimbing)
         {
-            Vector3 climbMove = direction * currentSpeed * Time.deltaTime;
-            MoveCharacterController(climbMove);
+            Vector3 horizontal = new Vector3(direction.x, 0, 0);
+            Vector3 climbMove = horizontal * currentSpeed * Time.deltaTime;
+            MoveCharacterController(climbMove * Time.deltaTime);
         }
         else
         {
@@ -48,18 +47,13 @@ public class BotMovement : MonoBehaviour
 
     public void ApplyGravity(float jumpGravity, float maxGravitySpeed)
     {
-        _velocity.y -= jumpGravity * Time.deltaTime;
-        _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
-    }
-
-    public void SetClimbing(bool isClimbing)
-    {
-        _isClimbing = isClimbing;
-
-        if (_isClimbing)
+        if (_botController.IsClimbing)
             _velocity = Vector3.zero;
         else
-            ApplyGravity(_botController.BotControllerData.JumpGravity, _botController.BotControllerData.MaxFallGravitySpeed);
+        {
+            _velocity.y -= jumpGravity * Time.deltaTime;
+            _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
+        }
     }
 
     private void MoveCharacterController(Vector3 direction) => 

@@ -63,7 +63,7 @@ public class PlayerMover : MonoBehaviour
     public void BoostBoxUp() => 
         TakeJumpDirection(_player.CharacterData.BoostHeightUp);
 
-    public void StartClimbing()
+    public void StartClimbing(Quaternion targetRotation)
     {
         _isClimbing = true;
         _velocityDirection = Vector3.zero;
@@ -103,7 +103,7 @@ public class PlayerMover : MonoBehaviour
 
     private void MoveClimbing(Vector2 direction)
     {
-        Vector3 climbDirection = new Vector3(direction.x, 0, direction.y);
+        Vector3 climbDirection = new Vector3(direction.x, 0, 0);
         MoveCharacter(climbDirection, Quaternion.identity, 2);
     }
 
