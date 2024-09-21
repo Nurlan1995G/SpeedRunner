@@ -7,9 +7,9 @@ public class BotController : MonoBehaviour, IRespawned
 {
     [SerializeField] private BotMovement _movement;
     [SerializeField] private BotSkinHendler _skinHendler;
-    [SerializeField] private PointSpawnZone _currentZone;
 
     private TargetPoint _currentTarget;
+    private PointSpawnZone _currentZone;
     private PointSpawnZone _previousZone;
     
     private Vector3 _respawnPosition;
@@ -18,13 +18,12 @@ public class BotController : MonoBehaviour, IRespawned
     private Coroutine _speedBoostCoroutine;
     
     private float _currentSpeed;
-    private bool _isDance;
-    private bool _isClimbing;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     public BotControllerData BotControllerData { get; private set; }
     public Vector3 StartPosition { get; private set; }
+    public bool IsClimbing { get; private set; }
 
     public void Construct(BotControllerData botControllerData)
     {
@@ -52,7 +51,7 @@ public class BotController : MonoBehaviour, IRespawned
         if (_currentZone != null)
             MoveTowardsTarget();
 
-        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, _isDance, _isClimbing);
+        _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, IsClimbing);
     }
 
     public void SetRespawnPosition(Vector3 position)
@@ -91,6 +90,12 @@ public class BotController : MonoBehaviour, IRespawned
         SelectRandomTargetInCurrentZone();
     }
 
+    public void StartClimbing() => 
+        IsClimbing = true;
+
+    public void StopClimbing() => 
+        IsClimbing = false;
+
     public void BoostBoxUp() =>
         _movement.Jump(BotControllerData.JumpForce * BotControllerData.BoostUp);
 
@@ -114,9 +119,6 @@ public class BotController : MonoBehaviour, IRespawned
         _currentSpeed = 0;
         _movement.Move(Vector3.zero, 0);
     }
-
-    public void SetDance(bool isDance) =>
-        _isDance = isDance;
 
     private void InitMove()
     {

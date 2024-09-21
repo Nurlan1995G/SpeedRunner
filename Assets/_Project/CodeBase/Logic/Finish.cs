@@ -17,7 +17,6 @@ public class Finish : InteractableEnter
 
         if (other.TryGetComponent(out BotController botController))
         {
-            botController.SetDance(true);
             botController.StopMovement();
             _raceManager.RegisterFinish(botController);
         }
