@@ -62,11 +62,8 @@ public class Player : MonoBehaviour, IRespawned
     public void SetScore(int score) =>
         _score = score;
 
-    public void SetFinish(bool isDance)
-    {
-        _playerMover.SetDance(isDance);
+    public void StopMovement() => 
         _playerMover.StopMovement();
-    }
 
     private void Teleport()
     {

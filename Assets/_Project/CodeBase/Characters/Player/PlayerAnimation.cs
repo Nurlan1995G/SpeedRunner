@@ -6,7 +6,6 @@ public class PlayerAnimation
     private const string IsRunning = "IsRunning";
     private const string IsJumping = "IsJumping";
     private const string IsFalling = "IsFalling";
-    private const string IsDance = "IsDance";
     private const string IsClimbing = "IsClimbing";
 
     private SkinHandler _skinHandler;
@@ -30,68 +29,55 @@ public class PlayerAnimation
     private void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
     private void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
 
-    private void StartDance() => _skinHandler.CurrentSkin.Animator.SetBool(IsDance, true);
-    private void StopDance() => _skinHandler.CurrentSkin.Animator.SetBool(IsDance, false);
-
     private void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
     private void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
 
     public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection, bool isDance, bool isClimbing)
     {
-        if (!isDance)
+        if (_player.GroundChecker.IsGrounded)
         {
-            StopDance();
+            StopFalling();
+            StopJumping();
 
-            if (_player.GroundChecker.IsGrounded)
+            if (moveDirection != Vector2.zero)
             {
-                StopFalling();
-                StopJumping();
-
-                if (moveDirection != Vector2.zero)
-                {
-                    StartRunning();
-                    StopIdle();
-                }
-                else
-                {
-                    StopRunning();
-                    StartIdle();
-                }
-            }
-            else if (isClimbing)
-            {
-                StopJumping();
-                StopFalling();
-
-                if (moveDirection != Vector2.zero)  
-                {
-                    StopIdle();  
-                    StartClimb();
-                }
+                StartRunning();
+                StopIdle();
             }
             else
             {
-                StopClimb();
                 StopRunning();
-                StopIdle();  
+                StartIdle();
+            }
+        }
+        else if (isClimbing)
+        {
+            StopJumping();
+            StopFalling();
 
-                if (velocityDirection.y > 0)
-                {
-                    StopIdle();  
-                    StartJumping();
-                    StopFalling();
-                }
-                else
-                {
-                    StopJumping();
-                    StartFalling();
-                }
+            if (moveDirection != Vector2.zero)
+            {
+                StopIdle();
+                StartClimb();
             }
         }
         else
         {
-            StartDance();
-            isDance = false;
+            StopClimb();
+            StopRunning();
+            StopIdle();
+
+            if (velocityDirection.y > 0)
+            {
+                StopIdle();
+                StartJumping();
+                StopFalling();
+            }
+            else
+            {
+                StopJumping();
+                StartFalling();
+            }
         }
     }
 }

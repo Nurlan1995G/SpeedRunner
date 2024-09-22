@@ -1,11 +1,10 @@
-﻿using Assets._Project.CodeBase.Characters.Interface;
-using Assets._Project.Config;
+﻿using Assets._Project.Config;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotView : MonoBehaviour, IRespawned
+public class BotView : MonoBehaviour
 {
     [SerializeField] private FlagPoint _targetPoint;
     [SerializeField] private BotSkinHendler _botSkinHendler;
@@ -47,15 +46,6 @@ public class BotView : MonoBehaviour, IRespawned
     {
         _botAnimator?.Update();
     }
-
-    public void ActivateForRace()
-    {
-        transform.position = StartPosition;
-        _respawnPosition = transform.position;
-    }
-
-    public void Respawn() =>
-        Respawned.Invoke();
 
     public void ChagePosition()
     {
@@ -111,6 +101,7 @@ public class BotView : MonoBehaviour, IRespawned
         _currentBehaviour = behaviour;
         _currentBehaviour.Activate();
     }
+
 }
 
 public enum BehaviourType
