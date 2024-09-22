@@ -4,5 +4,6 @@
     {
         void Respawn();
         void ActivateForRace();
+        void StopMovement();
     }
 }

@@ -55,6 +55,8 @@ public class RaceManager
         if (finisher is Player player)
         {
             Debug.Log("finisher is Player player");
+            Debug.Log(position + " - position");
+            Debug.Log(player.transform.position + " - player.position");
             player.transform.position = position;
             player.transform.rotation = rotation;
         }

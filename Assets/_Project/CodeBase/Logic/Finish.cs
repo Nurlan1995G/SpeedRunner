@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets._Project.CodeBase.Characters.Interface;
+using UnityEngine;
 
 public class Finish : InteractableEnter
 {
@@ -9,16 +10,10 @@ public class Finish : InteractableEnter
 
     public override void InteractEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out IRespawned character))
         {
-            player.SetFinish(true);
-            _raceManager.RegisterFinish(player);
-        }
-
-        if (other.TryGetComponent(out BotController botController))
-        {
-            botController.StopMovement();
-            _raceManager.RegisterFinish(botController);
+            character.StopMovement();
+            _raceManager.RegisterFinish(character);
         }
     }
 }
