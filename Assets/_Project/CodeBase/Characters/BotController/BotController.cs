@@ -90,8 +90,11 @@ public class BotController : MonoBehaviour, IRespawned
         SelectRandomTargetInCurrentZone();
     }
 
-    public void StartClimbing() => 
+    public void StartClimbing()
+    {
         IsClimbing = true;
+        _movement.SetVelocityZero();
+    }
 
     public void StopClimbing() => 
         IsClimbing = false;
