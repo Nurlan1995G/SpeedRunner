@@ -43,7 +43,7 @@ public class MovingPlatform : Interactable
     {
         if (other.TryGetComponent(out Player player))
         {
-            _characterController = player.CharacterController;
+            //_characterController = player.CharacterController;
         }
     }
 
@@ -51,7 +51,7 @@ public class MovingPlatform : Interactable
     {
         if (other.TryGetComponent(out Player player))
         {
-            _characterController = null;
+            //_characterController = null;
         }
     }
 }

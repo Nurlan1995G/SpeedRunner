@@ -71,9 +71,6 @@ public class PlayerMover : MonoBehaviour
         _isClimbing = false;
     }
 
-    public void SetDance(bool isDance) =>
-        _isDance = isDance;
-
     public void StopMovement()
     {
         _currentSpeed = 0;

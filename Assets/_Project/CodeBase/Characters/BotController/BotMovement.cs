@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
     private BotController _botController;
-
     private Vector3 _velocity;
 
     public float MovementSpeed { get; private set; }
@@ -47,14 +47,17 @@ public class BotMovement : MonoBehaviour
 
     public void ApplyGravity(float jumpGravity, float maxGravitySpeed)
     {
-        if (_botController.IsClimbing)
-            _velocity = Vector3.zero;
-        else
+        if (_botController.IsClimbing == false)
         {
             _velocity.y -= jumpGravity * Time.deltaTime;
             _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
         }
+
+        //_botController.CharacterController.Move(_velocity * Time.deltaTime);
     }
+
+    public void SetVelocityZero() =>
+        _velocity = Vector3.zero;
 
     private void MoveCharacterController(Vector3 direction) => 
         _botController.CharacterController.Move(direction);
