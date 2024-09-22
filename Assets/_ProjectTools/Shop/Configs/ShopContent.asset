@@ -37,6 +37,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b4b71481de400c469cc48de80af9c97, type: 2}
   - {fileID: 11400000, guid: c3bdea2620cbdb041b8bb19e7350cd8e, type: 2}
   - {fileID: 11400000, guid: 30b36b7f313a7bd45b2587abbc7251b2, type: 2}
+  - {fileID: 11400000, guid: fa8ce43748dadea42b99d22f96bd552c, type: 2}
   _animalItemInfos:
   - {fileID: 11400000, guid: 5d09330de34284148b3dbfd0d01208c9, type: 2}
   - {fileID: 11400000, guid: 58f91e1f955170348ab448a372518772, type: 2}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2382028960508375721}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: NoPet MenuPrevios
   m_TagString: Untagged
   m_Icon: {fileID: 0}
