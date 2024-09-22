@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private LayerMask wallLayer;  
-    [SerializeField] private float wallCheckDistance = 1f; 
-
     private Player _player;
     private PlayerData _playerData;
 
@@ -114,7 +111,7 @@ public class PlayerMover : MonoBehaviour
         if (_player.GroundChecker.IsGrounded || _isClimbing)
             _player.CharacterController.Move(finalDirection * _currentSpeed / delaySpeedClimb * Time.deltaTime);
         else if (!_isClimbing)
-            _player.CharacterController.Move(finalDirection * _currentSpeed / 2 * Time.deltaTime);
+            _player.CharacterController.Move(finalDirection * _currentSpeed / 1.8f * Time.deltaTime);
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
