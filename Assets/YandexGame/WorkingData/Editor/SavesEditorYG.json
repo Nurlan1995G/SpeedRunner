@@ -1,5 +1,5 @@
 {
-    "idSave": 1335,
+    "idSave": 1348,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -38,7 +38,10 @@
         26350,
         26702,
         26116,
-        26200
+        26200,
+        26118,
+        26056,
+        25868
     ],
     "SelectedSkin": 25746,
     "SelectedObject": 0,

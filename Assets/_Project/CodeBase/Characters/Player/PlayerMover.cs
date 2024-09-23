@@ -75,6 +75,14 @@ public class PlayerMover : MonoBehaviour
     {
         _currentSpeed = 0;
         _velocityDirection = Vector3.zero;
+        StartCoroutine(DisableMovementCoroutine(_player.CharacterData.DelayMovement));
+    }
+
+    private IEnumerator DisableMovementCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        _currentSpeed = _playerData.MoveSpeed;
     }
 
     private void DetachFromWall()
