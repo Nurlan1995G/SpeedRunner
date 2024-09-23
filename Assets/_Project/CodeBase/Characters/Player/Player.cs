@@ -53,7 +53,10 @@ public class Player : MonoBehaviour, IRespawned
     public void Respawn()
     {
         gameObject.SetActive(false);
-        Teleport();
+        transform.position = _respawnPosition;
+        gameObject.SetActive(true);
+        _effectSpawnPlayer.Play();
+        _soundhandler.PlayWin();
     }
 
     public void RespawnPosition(Vector3 position) =>
@@ -64,12 +67,4 @@ public class Player : MonoBehaviour, IRespawned
 
     public void StopMovement() => 
         _playerMover.StopMovement();
-
-    private void Teleport()
-    {
-        transform.position = _respawnPosition;
-        gameObject.SetActive(true);
-        _effectSpawnPlayer.Play();
-        _soundhandler.PlayWin();
-    }
 }
