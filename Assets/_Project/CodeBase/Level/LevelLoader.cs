@@ -48,8 +48,8 @@ public class LevelLoader : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        //_currentLevelIndex = (_currentLevelIndex + 1) % _levelsScene.Count;
-        _currentLevelIndex = Random.Range(0, _levelsScene.Count);
+        _currentLevelIndex = (_currentLevelIndex + 1) % _levelsScene.Count;
+        //_currentLevelIndex = Random.Range(0, _levelsScene.Count);
         ActivateScene(_currentLevelIndex);
     }
 

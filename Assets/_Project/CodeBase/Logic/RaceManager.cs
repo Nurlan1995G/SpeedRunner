@@ -16,12 +16,11 @@ public class RaceManager
     {
         if (_finishers.Contains(finisher))
             return;
-        Debug.Log(_finishers.Count + " - finishes count");
+
         _finishers.Add(finisher);
 
         if (_finishers.Count <= 3)
         {
-            Debug.Log("f_finishers.Count <= 3");
             int positionIndex = _finishers.Count - 1;
             AssignFinisherPosition(finisher, positionIndex);
         }
@@ -54,17 +53,15 @@ public class RaceManager
     {
         if (finisher is Player player)
         {
-            Debug.Log("finisher is Player player");
-            Debug.Log(position + " - position");
-            Debug.Log(player.transform.position + " - player.position");
-            player.transform.position = position;
-            player.transform.rotation = rotation;
+            player.RespawnPosition(position);
+            player.Respawn();
+            //player.transform.rotation = rotation;
         }
         else if (finisher is BotController bot)
         {
-            Debug.Log("finisher is BotController bot");
-            bot.transform.position = position;
-            bot.transform.rotation = rotation;
+            bot.SetRespawnPosition(position);
+            bot.Respawn();
+            //bot.transform.rotation = rotation;
         }
     }
 }
