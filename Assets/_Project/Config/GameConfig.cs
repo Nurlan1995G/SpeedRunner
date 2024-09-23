@@ -25,6 +25,7 @@ namespace Assets._Project.Config
         public float MaxFallGravitySpeed;
 
         public float FallDelay = 0.5f;
+        public float DelayMovement = 5f;
 
         public float HeightJump;
         public float JumpStep = 1.5f;
