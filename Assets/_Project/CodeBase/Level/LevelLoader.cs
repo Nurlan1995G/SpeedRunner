@@ -1,4 +1,5 @@
 ﻿using Assets._Project.CodeBase.Infrastracture;
+using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private List<LevelScene> _levelsScene;
 
+    private LevelScene _currentScene;
     private TimerLevel _timerLevel;
     private List<BotController> _botControllers;
     private List<BotView> _botViews;
@@ -39,6 +41,12 @@ public class LevelLoader : MonoBehaviour
         SetupLevel();
     }
 
+    public void DeactivateFlags()
+    {
+        foreach (var flag in _currentScene.FlagPoints)
+            flag.ResetFlag();
+    }
+
     private void OnChangeLevel()
     {
         DeactivateLevel();
@@ -55,10 +63,10 @@ public class LevelLoader : MonoBehaviour
 
     private void SetupLevel()
     {
-        LevelScene activeLevel = _levelsScene[_currentLevelIndex];
-        List<PointSpawnZone> pointSpawnZones = activeLevel.PointSpawnZones;
-        List<TriggerZone> triggerZones = activeLevel.TriggerZones;
-        List<FlagPoint> flagPoints = activeLevel.FlagPoints;
+        _currentScene = _levelsScene[_currentLevelIndex];
+        List<PointSpawnZone> pointSpawnZones = _currentScene.PointSpawnZones;
+        List<TriggerZone> triggerZones = _currentScene.TriggerZones;
+        List<FlagPoint> flagPoints = _currentScene.FlagPoints;
 
         _player.ActivateForRace();
 
@@ -66,11 +74,13 @@ public class LevelLoader : MonoBehaviour
         ActivateBots(true);
         InitializeBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
-        DeactivateFlags(flagPoints);
+        DeactivateFlags();
+        DeactivateCoins();
 
         _countdownController.ResetBarrier();
         _countdownController.ActivateStart();
     }
+
 
     private void ActivateScene(int levelIndex)
     {
@@ -123,12 +133,6 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private void DeactivateFlags(List<FlagPoint> flagPoints)
-    {
-        foreach (var flag in flagPoints)
-            flag.ResetFlag();
-    }
-
     private void DeactivateLevel()
     {
         ActivateBots(false);
@@ -138,5 +142,11 @@ public class LevelLoader : MonoBehaviour
 
         _levelsScene[_currentLevelIndex].gameObject.SetActive(false);
         _levelsScene[_currentLevelIndex].SetBusy(false);
+    }
+
+    private void DeactivateCoins()
+    {
+        foreach (var coin in _currentScene.Coins)
+            coin.gameObject.SetActive(true);
     }
 }

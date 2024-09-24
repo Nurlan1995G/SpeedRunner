@@ -12,7 +12,6 @@ public class Finish : InteractableEnter
     {
         if (other.TryGetComponent(out IRespawned character))
         {
-            character.StopMovement();
             _raceManager.RegisterFinish(character);
         }
     }

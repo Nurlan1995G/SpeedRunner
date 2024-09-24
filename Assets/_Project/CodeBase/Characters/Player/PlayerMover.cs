@@ -14,7 +14,6 @@ public class PlayerMover : MonoBehaviour
     private BoostBoxUp _boostBoxUp;
 
     private bool _isClimbing;
-    private bool _isDance;
 
     public void Construct(Player player)
     {
@@ -24,7 +23,6 @@ public class PlayerMover : MonoBehaviour
 
         _camera = Camera.main;
     }
-
 
     private void Update()
     {
@@ -40,7 +38,7 @@ public class PlayerMover : MonoBehaviour
         else
             Move(moveDirection);
 
-        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isDance, _isClimbing);
+        _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isClimbing);
 
         GravityHandling();
     }
@@ -66,10 +64,8 @@ public class PlayerMover : MonoBehaviour
         _velocityDirection = Vector3.zero;
     }
 
-    public void StopClimbing()
-    {
+    public void StopClimbing() => 
         _isClimbing = false;
-    }
 
     public void StopMovement()
     {
@@ -78,11 +74,13 @@ public class PlayerMover : MonoBehaviour
         StartCoroutine(DisableMovementCoroutine(_player.CharacterData.DelayMovement));
     }
 
+    public void ResetStartSpeed() => 
+        _currentSpeed = _playerData.MoveSpeed;
+
     private IEnumerator DisableMovementCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-
-        _currentSpeed = _playerData.MoveSpeed;
+        ResetStartSpeed();
     }
 
     private void DetachFromWall()
@@ -93,20 +91,18 @@ public class PlayerMover : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        if (!_isClimbing)
-        {
-            Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
-            Quaternion cameraRotationY = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
+        Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
+        Quaternion cameraRotationY = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
 
-            MoveCharacter(newDirection, cameraRotationY, 1);
-            RotateCharacter(newDirection, cameraRotationY);
-        }
+        MoveCharacter(newDirection, cameraRotationY, 1);
+        RotateCharacter(newDirection, cameraRotationY);
     }
 
     private void MoveClimbing(Vector2 direction)
     {
         Vector3 climbDirection = new Vector3(direction.x, 0, 0);
         MoveCharacter(climbDirection, Quaternion.identity, 2);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private void MoveCharacter(Vector3 moveDirection, Quaternion cameraRotation, float delaySpeedClimb)
@@ -114,9 +110,13 @@ public class PlayerMover : MonoBehaviour
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
         if (_player.GroundChecker.IsGrounded || _isClimbing)
+        {
             _player.CharacterController.Move(finalDirection * _currentSpeed / delaySpeedClimb * Time.deltaTime);
+        }
         else if (!_isClimbing)
+        {
             _player.CharacterController.Move(finalDirection * _currentSpeed / 1.8f * Time.deltaTime);
+        }
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
@@ -137,7 +137,9 @@ public class PlayerMover : MonoBehaviour
             if (_velocityDirection.y > 0)
                 _velocityDirection.y -= _playerData.JumpGravity * Time.deltaTime;
             else
+            {
                 _velocityDirection.y -= _playerData.FallGravity * Time.deltaTime;
+            }
 
             _velocityDirection.y = Mathf.Max(_velocityDirection.y, -_playerData.MaxFallGravitySpeed);
         }

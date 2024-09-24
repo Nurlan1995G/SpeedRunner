@@ -55,12 +55,14 @@ public class RaceManager
         {
             player.RespawnPosition(position);
             player.Respawn();
+            player.StopMovement();
             //player.transform.rotation = rotation;
         }
         else if (finisher is BotController bot)
         {
             bot.SetRespawnPosition(position);
             bot.Respawn();
+            bot.StopMovement();
             //bot.transform.rotation = rotation;
         }
     }

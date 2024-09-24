@@ -44,6 +44,7 @@ public class DisappearingBox : InteractableEnter
 
         yield return new WaitForSeconds(_deactivateDelay);
 
+        _objectRenderer.enabled = false;
         _meshCollider.enabled = false;
 
         yield return new WaitForSeconds(_reactivateDelay);
@@ -54,6 +55,7 @@ public class DisappearingBox : InteractableEnter
     private IEnumerator Reactivate()
     {
         _meshCollider.enabled = true;
+        _objectRenderer.enabled = true;
 
         float elapsed = 0f;
         while (elapsed < _visibilityDuration)
