@@ -19,11 +19,12 @@ MonoBehaviour:
     FallGravity: 100
     MaxFallGravitySpeed: 90
     FallDelay: 1
+    DelayMovement: 5
     HeightJump: 20
     JumpStep: 2
     JumpDuration: 3
     BoostMultiplier: 2
-    BoostDuration: 0.8
+    BoostDuration: 1
     BoostHeightUp: 70
     BoostWaitTime: 0.2
   CharacterBotData:
@@ -38,15 +39,15 @@ MonoBehaviour:
     BotBoostHeightUp: 1.2
     BotBoostWaitTime: 0.5
   BotControllerData:
-    MoveSpeed: 46.90845
-    MinMoveSpeed: 40
+    MoveSpeed: 47.05002
+    MinMoveSpeed: 50
     MaxMoveSpeed: 50
     RotateSpeed: 100
     JumpGravity: 80
     MaxFallGravitySpeed: 90
-    JumpForce: 80
+    JumpForce: 70
     JumpTrampoline: 3
-    BoostUp: 2
+    BoostUp: 1.5
     BoostMultiplier: 2
     BoostDuration: 1
   CameraRotateData:
@@ -59,5 +60,5 @@ MonoBehaviour:
     ZoomStep: 0.01
     HideDistance: 50
   LogicConfig:
-    Timer: 400
+    Timer: 300
     CountdownControllerTime: 5

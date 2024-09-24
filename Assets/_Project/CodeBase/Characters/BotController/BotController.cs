@@ -11,13 +11,14 @@ public class BotController : MonoBehaviour, IRespawned
     private TargetPoint _currentTarget;
     private PointSpawnZone _currentZone;
     private PointSpawnZone _previousZone;
-    
+
     private Vector3 _respawnPosition;
     private bool _isAchievedTarget;
     private BotControllerAnimator _botControllerAnimator;
     private Coroutine _speedBoostCoroutine;
-    
+
     private float _currentSpeed;
+    private Coroutine _climbTimeoutCoroutine;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -64,6 +65,11 @@ public class BotController : MonoBehaviour, IRespawned
     {
         transform.position = StartPosition;
         _respawnPosition = transform.position;
+
+        IsClimbing = false;
+        SetStartedSpeed();
+        _movement.SetVelocityZero();  
+        _botControllerAnimator.StartRunning();
     }
 
     public void Respawn()
@@ -93,19 +99,31 @@ public class BotController : MonoBehaviour, IRespawned
     public void StartClimbing()
     {
         IsClimbing = true;
+        _currentSpeed = 800f;
         _movement.SetVelocityZero();
+
+        if (_climbTimeoutCoroutine != null)
+            StopCoroutine(_climbTimeoutCoroutine);
+
+        _climbTimeoutCoroutine = StartCoroutine(ClimbTimeoutCoroutine());
     }
 
-    public void StopClimbing() => 
+    public void StopClimbing()
+    {
         IsClimbing = false;
+        SetStartedSpeed();
+
+        if (_climbTimeoutCoroutine != null)
+            StopCoroutine(_climbTimeoutCoroutine);
+    }
 
     public void BoostBoxUp() =>
         _movement.Jump(BotControllerData.JumpForce * BotControllerData.BoostUp);
 
     public void JumpTrigger() =>
         _movement.Jump(BotControllerData.JumpForce);
-    
-    public void TrampolineJumpUp() => 
+
+    public void TrampolineJumpUp() =>
         _movement.Jump(BotControllerData.JumpForce * BotControllerData.JumpTrampoline);
 
     public void ActivateBoostForward()
@@ -126,8 +144,11 @@ public class BotController : MonoBehaviour, IRespawned
     private void InitMove()
     {
         BotControllerData.MoveSpeed = RandomSpeed();
-        _currentSpeed = BotControllerData.MoveSpeed;
+        SetStartedSpeed();
     }
+
+    private void SetStartedSpeed() => 
+        _currentSpeed = BotControllerData.MoveSpeed;
 
     private void InitPosition()
     {
@@ -157,7 +178,7 @@ public class BotController : MonoBehaviour, IRespawned
         _isAchievedTarget = false;
     }
 
-    private float RandomSpeed() => 
+    private float RandomSpeed() =>
         Random.Range(BotControllerData.MinMoveSpeed, BotControllerData.MaxMoveSpeed);
 
     private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
@@ -165,5 +186,11 @@ public class BotController : MonoBehaviour, IRespawned
         _currentSpeed = BotControllerData.MoveSpeed * multiplier;
         yield return new WaitForSeconds(duration);
         _currentSpeed = BotControllerData.MoveSpeed;
+    }
+
+    private IEnumerator ClimbTimeoutCoroutine()
+    {
+        yield return new WaitForSeconds(BotControllerData.ClimbDuration);
+        StopClimbing(); 
     }
 }

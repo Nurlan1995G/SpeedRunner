@@ -60,12 +60,13 @@ namespace Assets._Project.Config
     {
         [Header("Speed")]
         public float MoveSpeed;
-        [Range(10,50)]public float MinMoveSpeed;
-        [Range(10, 50)] public float MaxMoveSpeed;
+        [Range(50, 60)]public float MinMoveSpeed;
+        [Range(50, 60)] public float MaxMoveSpeed;
         public float RotateSpeed;
         [Header("Other")]
         public float JumpGravity = 80f;
         public float MaxFallGravitySpeed = 50f;
+        public float ClimbDuration = 10f;
         [Header("Jump")]
         public float JumpForce = 60f;
         public float JumpTrampoline = 3f;

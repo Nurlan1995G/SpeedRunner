@@ -17,22 +17,22 @@ public class PlayerAnimation
         _player = player;
     }
 
-    private void StartIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, true);
-    private void StopIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, false);
+    public void StartIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, true);
+    public void StopIdle() => _skinHandler.CurrentSkin.Animator.SetBool(IsIdling, false);
 
-    private void StartRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, true);
-    private void StopRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, false);
+    public void StartRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, true);
+    public void StopRunning() => _skinHandler.CurrentSkin.Animator.SetBool(IsRunning, false);
 
     public void StartJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, true);
     public void StopJumping() => _skinHandler.CurrentSkin.Animator.SetBool(IsJumping, false);
 
-    private void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
-    private void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
+    public void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
+    public void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
 
-    private void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
-    private void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
+    public void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
+    public void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
 
-    public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection, bool isDance, bool isClimbing)
+    public void HandleAnimations(Vector2 moveDirection, Vector3 velocityDirection, bool isClimbing)
     {
         if (_player.GroundChecker.IsGrounded)
         {
@@ -54,12 +54,8 @@ public class PlayerAnimation
         {
             StopJumping();
             StopFalling();
-
-            if (moveDirection != Vector2.zero)
-            {
-                StopIdle();
-                StartClimb();
-            }
+            StopRunning();
+            StartClimb();
         }
         else
         {

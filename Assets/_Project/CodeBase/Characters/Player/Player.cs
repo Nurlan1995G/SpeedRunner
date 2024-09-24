@@ -1,11 +1,13 @@
 using Assets._Project.CodeBase.Characters.Interface;
 using Assets._Project.Config;
+using Cinemachine;
 using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IRespawned
 {
     [SerializeField] private ParticleSystem _effectSpawnPlayer;
+    [SerializeField] private CinemachineFreeLook _cinemachine;
     
     private SoundHandler _soundhandler;
     private PositionStaticData _positionStaticData;
@@ -30,7 +32,6 @@ public class Player : MonoBehaviour, IRespawned
         CharacterData = characterData;
         _positionStaticData = positionStaticData;
         _playerMover = playerMover;
-
         CharacterAnimation = characterAnimation;
 
         _playerMover.Construct(this);
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour, IRespawned
     {
         RespawnPosition(_positionStaticData.InitPlayerPosition);
         Respawn();
+        _playerMover.ResetStartSpeed();
     }
 
     public void Respawn()
@@ -55,6 +57,9 @@ public class Player : MonoBehaviour, IRespawned
         gameObject.SetActive(false);
         transform.position = _respawnPosition;
         gameObject.SetActive(true);
+
+        AdjustCameraPosition();
+
         _effectSpawnPlayer.Play();
         _soundhandler.PlayWin();
     }
@@ -62,9 +67,25 @@ public class Player : MonoBehaviour, IRespawned
     public void RespawnPosition(Vector3 position) =>
         _respawnPosition = position;
 
-    public void SetScore(int score) =>
+    public void SetScore(int score)
+    {
+        Wallet.Add(score);
         _score = score;
+    }
 
     public void StopMovement() => 
         _playerMover.StopMovement();
+
+    private void AdjustCameraPosition()
+    {
+        _cinemachine.gameObject.SetActive(false);
+
+        Vector3 playerPosition = transform.position;
+
+        Vector3 newCameraPosition = new Vector3(playerPosition.x + 50f, playerPosition.y, playerPosition.z); 
+
+        _cinemachine.transform.position = newCameraPosition;
+
+        _cinemachine.gameObject.SetActive(true);
+    }
 }

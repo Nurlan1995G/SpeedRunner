@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class BotMovement : MonoBehaviour
     public float MovementSpeed { get; private set; }
     public Vector3 Velocity => _velocity;
 
-    public void Construct(BotController botController) => 
+    public void Construct(BotController botController) =>
         _botController = botController;
 
     public void Move(Vector3 direction, float currentSpeed)
@@ -19,6 +18,7 @@ public class BotMovement : MonoBehaviour
             Vector3 horizontal = new Vector3(direction.x, 0, 0);
             Vector3 climbMove = horizontal * currentSpeed * Time.deltaTime;
             MoveCharacterController(climbMove * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
@@ -59,6 +59,6 @@ public class BotMovement : MonoBehaviour
     public void SetVelocityZero() =>
         _velocity = Vector3.zero;
 
-    private void MoveCharacterController(Vector3 direction) => 
+    private void MoveCharacterController(Vector3 direction) =>
         _botController.CharacterController.Move(direction);
 }

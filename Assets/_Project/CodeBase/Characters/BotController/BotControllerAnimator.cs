@@ -31,8 +31,8 @@ public class BotControllerAnimator
     public void StartFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, true);
     public void StopFalling() => _skinHandler.CurrentSkin.Animator.SetBool(IsFalling, false);
 
-     private void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
-    private void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
+    public void StartClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, true);
+    public void StopClimb() => _skinHandler.CurrentSkin.Animator.SetBool(IsClimbing, false);
 
     public void HandleAnimations(float moveDirection, Vector3 velocityDirection, bool isClimbing)
     {
@@ -56,16 +56,12 @@ public class BotControllerAnimator
         {
             StopJumping();
             StopFalling();
+            StopRunning();
             StartClimb();
-
-            if (moveDirection != 0)
-            {
-                StopIdle();
-            }
         }
         else
         {
-            StopClimb(); 
+            StopClimb();
             StopRunning();
             StopIdle();
 

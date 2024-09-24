@@ -10,6 +10,7 @@ namespace Assets._Project.CodeBase.Infrastracture
         [field: SerializeField] public List<PointSpawnZone> PointSpawnZones { get; private set; }
         [field: SerializeField] public List<TriggerZone> TriggerZones { get; private set; }
         [field: SerializeField] public List<FlagPoint> FlagPoints { get; private set; }
+        [field: SerializeField] public List<Coin> Coins { get; private set; }
 
         public void SetBusy(bool busy) =>
             _isBusy = busy;

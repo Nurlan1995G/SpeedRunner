@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transparencyDelay: 1
-  _transparencyDuration: 5
+  _transparencyDuration: 1
   _deactivateDelay: 1
   _reactivateDelay: 3
   _visibilityDuration: 1
