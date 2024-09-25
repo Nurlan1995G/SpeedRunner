@@ -6,24 +6,28 @@ using UnityEngine;
 public class CountdownController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _countdownText;
-    [SerializeField] private GameObject _barrier;   
+    [SerializeField] private GameObject _barrier;
     private TimerLevel _timerLevel;
     private LogicConfig _logicConfig;
-    
+    private GameActivator _gameActivator;
+    private Language _language;
+
     private int _countdownTime;
 
-    public void Construct(TimerLevel timerLevel, LogicConfig logicConfig)
+    public void Construct(TimerLevel timerLevel, LogicConfig logicConfig, Language language, GameActivator gameActivator)
     {
         _timerLevel = timerLevel;
         _logicConfig = logicConfig;
         _countdownTime = _logicConfig.CountdownControllerTime;
+        _language = language;
+        _gameActivator = gameActivator;
     }
 
     public void ActivateStart()
     {
         _barrier.SetActive(true);
         _countdownTime = _logicConfig.CountdownControllerTime;
-        StartCoroutine(StartCountdown()); 
+        StartCoroutine(StartCountdown());
     }
 
     private IEnumerator StartCountdown()
@@ -35,13 +39,13 @@ public class CountdownController : MonoBehaviour
             _countdownTime--;
         }
 
-        _countdownText.text = "GO!";
-        _barrier.SetActive(false);  
+        _countdownText.text = _language == Language.Russian ? "Вперёд!" : "GO!"; 
+        _barrier.SetActive(false);
 
         yield return new WaitForSeconds(1);
-        _countdownText.text = "";   
+        _countdownText.text = "";
 
-        _timerLevel.SetStarted();   
+        _timerLevel.SetStarted();
     }
 
     public void ResetBarrier() =>

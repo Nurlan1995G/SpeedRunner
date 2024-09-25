@@ -16,9 +16,10 @@ public class BotController : MonoBehaviour, IRespawned
     private bool _isAchievedTarget;
     private BotControllerAnimator _botControllerAnimator;
     private Coroutine _speedBoostCoroutine;
+    private GameActivator _gameActivator;
 
-    private float _currentSpeed;
     private Coroutine _climbTimeoutCoroutine;
+    private float _currentSpeed;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -26,9 +27,10 @@ public class BotController : MonoBehaviour, IRespawned
     public Vector3 StartPosition { get; private set; }
     public bool IsClimbing { get; private set; }
 
-    public void Construct(BotControllerData botControllerData)
+    public void Construct(BotControllerData botControllerData, GameActivator gameActivator)
     {
         BotControllerData = botControllerData;
+        _gameActivator = gameActivator;
 
         _botControllerAnimator = new BotControllerAnimator(_skinHendler, this, _movement);
         _movement.Construct(this);
@@ -49,7 +51,7 @@ public class BotController : MonoBehaviour, IRespawned
     {
         GravityHandling();
 
-        if (_currentZone != null)
+        if (_currentZone != null && !_gameActivator.IsGamePaused)
             MoveTowardsTarget();
 
         _botControllerAnimator.HandleAnimations(_movement.MovementSpeed, _movement.Velocity, IsClimbing);

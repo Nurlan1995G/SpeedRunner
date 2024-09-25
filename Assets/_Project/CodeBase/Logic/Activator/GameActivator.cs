@@ -6,6 +6,10 @@ public class GameActivator : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _shopButton;
 
+    private bool _isGamePaused = true;
+
+    public bool IsGamePaused => _isGamePaused;
+
     private void OnEnable()
     {
         _startButton.onClick.AddListener(ActivateGame);
@@ -18,9 +22,9 @@ public class GameActivator : MonoBehaviour
         _startButton.onClick.RemoveListener(ActivateGame);
     }
 
-    private void ActivateGame() =>
-        Time.timeScale = 1;
+    private void ActivateGame() => 
+        _isGamePaused = false;
 
-    private void DeactivateGame() =>
-        Time.timeScale = 0;
+    private void DeactivateGame() => 
+        _isGamePaused = true;
 }

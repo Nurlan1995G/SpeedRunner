@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2c57e29046b454585d00f15cafca51, type: 3}
   m_Name: TrailItemInfo
   m_EditorClassIdentifier: 
-  Id: 26296
+  Id: 26816
   ItemType: 1
   CashType: 0
   Price: 0
   Icon: {fileID: 21300000, guid: c7d526d0195eda14e816d2a5d305369c, type: 3}
   ShopPreview: {fileID: 832295078427566018, guid: c5694b18191cb34459d1793aa2af84aa, type: 3}
   YanId: 0
-  IsDynamic: 1
+  IsDynamic: 0

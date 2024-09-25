@@ -7,21 +7,23 @@ public class TimerLevel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textTimer;
     private LogicConfig _logicConfig;
+    private GameActivator _gameActivator;
 
     private float _timer;
     private bool _raceStarted = false;
 
     public event Action ChangeLevel;
 
-    public void Construct(LogicConfig logicConfig)
+    public void Construct(LogicConfig logicConfig, GameActivator gameActivator)
     {
         _logicConfig = logicConfig;
         _timer = logicConfig.Timer;
+        _gameActivator = gameActivator;
     }
 
     private void Update()
     {
-        if (_raceStarted)
+        if (_raceStarted && !_gameActivator.IsGamePaused)
         {
             _timer -= Time.deltaTime;
 

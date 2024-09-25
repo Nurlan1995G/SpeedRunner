@@ -1,4 +1,5 @@
 ﻿using Assets._Project.CodeBase.CameraLogic;
+using Assets._Project.CodeBase.Logic.Move;
 using Assets._Project.Config;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -13,6 +14,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private PlayerJumper _playerJumper;
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
+    [SerializeField] private MoveJoystick _moveJoystick;
 
     [SerializeField] private List<BotView> _botViews;
     [SerializeField] private List<BotController> _botControllers;
@@ -24,8 +26,10 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private CountdownController _countdownController;
     [SerializeField] private Finish _finish;
+    [SerializeField] private GameActivator _gameActivator;
 
     private Language _language;
+    private RaceManager _raceManager;
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class Bootstraper : MonoBehaviour
         CheckLanguage();
         InitCoroutine();
         InitBots();
+        InitMobileUI();
         InitLevelLoader();
     }
 
@@ -45,11 +50,11 @@ public class Bootstraper : MonoBehaviour
         RotateInput rotateInput = new();
         PlayerAnimation characterAnimation = new(_skinHandler, _player);
         PlayerInputs playerInputs = new(playerInput);
-        RaceManager raceManager = new RaceManager(_positionStaticData);
+       _raceManager = new RaceManager(_positionStaticData);
 
         _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
         _cameraRotater.Construct(_gameConfig, rotateInput);
-        _finish.Construct(raceManager);
+        _finish.Construct(_raceManager);
     }
 
     private void InitCoroutine() => 
@@ -61,26 +66,20 @@ public class Bootstraper : MonoBehaviour
             bot.Construct(_gameConfig.CharacterBotData);
 
         foreach (var botController in _botControllers)
-            botController.Construct(_gameConfig.BotControllerData);
+            botController.Construct(_gameConfig.BotControllerData, _gameActivator);
     }
 
     private void InitLevelLoader()
     {
-        _timerLevel.Construct(_gameConfig.LogicConfig);
-        _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig);
-        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface);
+        _timerLevel.Construct(_gameConfig.LogicConfig, _gameActivator);
+        _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig, _language, _gameActivator);
+        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface, _raceManager);
         _levelLoader.StartLevelSequence();
     }
 
     private void InitMobileUI()
     {
         if (Application.isMobilePlatform)
-        {
-            //_input = new MobileInput();
-
-            //_boostButtonUI.SetMobilePlatform();
-            //_moveJostick.gameObject.SetActive(true);
-            //_boostButtonUI.gameObject.SetActive(true);
-        }
+            _moveJoystick.gameObject.SetActive(true);
     }
 }

@@ -52,8 +52,6 @@ public class BotMovement : MonoBehaviour
             _velocity.y -= jumpGravity * Time.deltaTime;
             _velocity.y = Mathf.Max(_velocity.y, -maxGravitySpeed);
         }
-
-        //_botController.CharacterController.Move(_velocity * Time.deltaTime);
     }
 
     public void SetVelocityZero() =>

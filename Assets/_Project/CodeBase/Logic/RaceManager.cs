@@ -26,6 +26,9 @@ public class RaceManager
         }
     }
 
+    public void RemoveFinisher() => 
+        _finishers.Clear();
+
     private void AssignFinisherPosition(IRespawned finisher, int positionIndex)
     {
         Vector3 finishPosition = Vector3.zero;
@@ -56,14 +59,12 @@ public class RaceManager
             player.RespawnPosition(position);
             player.Respawn();
             player.StopMovement();
-            //player.transform.rotation = rotation;
         }
         else if (finisher is BotController bot)
         {
             bot.SetRespawnPosition(position);
             bot.Respawn();
             bot.StopMovement();
-            //bot.transform.rotation = rotation;
         }
     }
 }
