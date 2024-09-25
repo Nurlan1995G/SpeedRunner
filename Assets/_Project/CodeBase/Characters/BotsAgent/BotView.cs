@@ -1,10 +1,11 @@
-﻿using Assets._Project.Config;
+﻿using Assets._Project.CodeBase.Characters.Interface;
+using Assets._Project.Config;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotView : MonoBehaviour
+public class BotView : MonoBehaviour, IRespawned
 {
     [SerializeField] private FlagPoint _targetPoint;
     [SerializeField] private BotSkinHendler _botSkinHendler;
@@ -17,15 +18,12 @@ public class BotView : MonoBehaviour
     private IBehaviour _currentBehaviour;
     private List<IBehaviour> _behaviours;
     private BoostBoxUp _boostBoxUp;
-    private Vector3 _respawnPosition;
-
-    private bool _isActivateJetpack = false;
+    private Vector3 _startPosition;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
     public BotAgentData CharacterBotData { get; private set; }
-    public Vector3 StartPosition { get; private set; }
 
 
     public event Action Respawned;
@@ -33,13 +31,11 @@ public class BotView : MonoBehaviour
     public void Construct(BotAgentData character)
     {
         CharacterBotData = character;
-        StartPosition = transform.position;
+        _startPosition = transform.position;
 
         InitializeBotBehavior();
 
         SelectBehaviourType();
-
-        InitStartPosition();
     }
 
     private void Update()
@@ -49,12 +45,24 @@ public class BotView : MonoBehaviour
 
     public void ChagePosition()
     {
-        Agent.Warp(_respawnPosition);
+        Agent.Warp(_startPosition);
         ChangeBehaviour(_currentBehaviour);
     }
 
-    public void SetRespawnPosition(Vector3 position) => 
-        _respawnPosition = position;
+    public void Respawn()
+    {
+        gameObject.SetActive(false);
+        transform.position = _startPosition;
+        gameObject.SetActive(true);
+    }
+
+    public void ActivateForRace()
+    {
+    }
+
+    public void StopMovement()
+    {
+    }
 
     private void InitializeBotBehavior()
     {
@@ -71,12 +79,6 @@ public class BotView : MonoBehaviour
             _idleBehavior,
             _randomMoving
         };
-    }
-
-    private void InitStartPosition()
-    {
-        StartPosition = transform.position;
-        _respawnPosition = transform.position;
     }
 
     private void SelectBehaviourType()
@@ -101,7 +103,6 @@ public class BotView : MonoBehaviour
         _currentBehaviour = behaviour;
         _currentBehaviour.Activate();
     }
-
 }
 
 public enum BehaviourType

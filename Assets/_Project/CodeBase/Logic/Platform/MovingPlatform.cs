@@ -13,7 +13,7 @@ public class MovingPlatform : Interactable
     private Vector3 _startPosition;
     private CharacterController _characterController;
 
-    private void Start()
+    public void StartMove()
     {
         _startPosition = transform.position;
 

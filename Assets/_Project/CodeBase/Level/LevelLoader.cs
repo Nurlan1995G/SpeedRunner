@@ -1,5 +1,4 @@
 ﻿using Assets._Project.CodeBase.Infrastracture;
-using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -15,11 +14,12 @@ public class LevelLoader : MonoBehaviour
     private CountdownController _countdownController;
     private Player _player;
     private NavMeshSurface _navMeshSurface;
+    private RaceManager _raceManager;
 
     private int _currentLevelIndex;
 
     public void Construct(TimerLevel timerLevel, List<BotController> botControllers, List<BotView> botViews,
-    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface)
+    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface, RaceManager raceManager)
     {
         _timerLevel = timerLevel;
         _botControllers = botControllers;
@@ -27,6 +27,7 @@ public class LevelLoader : MonoBehaviour
         _countdownController = countdownController;
         _player = player;
         _navMeshSurface = navMeshSurface;
+        _raceManager = raceManager;
     }
 
     private void OnEnable() => 
@@ -57,7 +58,6 @@ public class LevelLoader : MonoBehaviour
     private void LoadNextLevel()
     {
         _currentLevelIndex = (_currentLevelIndex + 1) % _levelsScene.Count;
-        //_currentLevelIndex = Random.Range(0, _levelsScene.Count);
         ActivateScene(_currentLevelIndex);
     }
 
@@ -66,7 +66,6 @@ public class LevelLoader : MonoBehaviour
         _currentScene = _levelsScene[_currentLevelIndex];
         List<PointSpawnZone> pointSpawnZones = _currentScene.PointSpawnZones;
         List<TriggerZone> triggerZones = _currentScene.TriggerZones;
-        List<FlagPoint> flagPoints = _currentScene.FlagPoints;
 
         _player.ActivateForRace();
 
@@ -76,11 +75,12 @@ public class LevelLoader : MonoBehaviour
         InitTriggerZones(pointSpawnZones, triggerZones);
         DeactivateFlags();
         DeactivateCoins();
+        InitMovingPlatform();
 
         _countdownController.ResetBarrier();
         _countdownController.ActivateStart();
+        _raceManager.RemoveFinisher();
     }
-
 
     private void ActivateScene(int levelIndex)
     {
@@ -101,8 +101,11 @@ public class LevelLoader : MonoBehaviour
 
     private void ActivateBots(bool active)
     {
-        foreach (var bot in _botViews)
+        foreach (BotView bot in _botViews)
+        {
+            bot.Respawn();
             bot.gameObject.SetActive(active);
+        }
     }
 
     private void InitializeBots(List<PointSpawnZone> spawnZones)
@@ -148,5 +151,11 @@ public class LevelLoader : MonoBehaviour
     {
         foreach (var coin in _currentScene.Coins)
             coin.gameObject.SetActive(true);
+    }
+
+    private void InitMovingPlatform()
+    {
+        foreach (var platform in _currentScene.MovingPlatforms)
+            platform.StartMove();
     }
 }

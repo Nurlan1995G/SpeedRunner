@@ -7,9 +7,6 @@ public class FlagPoint : InteractableEnter
 
     public override void InteractEnter(Collider other)
     {
-        if (other.TryGetComponent(out BotView bot))
-            bot.SetRespawnPosition(transform.position);
-
         if (other.TryGetComponent(out BotController botController))
             botController.SetRespawnPosition(transform.position);
 
