@@ -48,6 +48,12 @@ public class LevelLoader : MonoBehaviour
             flag.ResetFlag();
     }
 
+    public void DeactivateCoins()
+    {
+        foreach (var coin in _currentScene.Coins)
+            coin.ActivateCoin(true);
+    }
+
     private void OnChangeLevel()
     {
         DeactivateLevel();
@@ -75,7 +81,6 @@ public class LevelLoader : MonoBehaviour
         InitTriggerZones(pointSpawnZones, triggerZones);
         DeactivateFlags();
         DeactivateCoins();
-        InitMovingPlatform();
 
         _countdownController.ResetBarrier();
         _countdownController.ActivateStart();
@@ -145,17 +150,5 @@ public class LevelLoader : MonoBehaviour
 
         _levelsScene[_currentLevelIndex].gameObject.SetActive(false);
         _levelsScene[_currentLevelIndex].SetBusy(false);
-    }
-
-    private void DeactivateCoins()
-    {
-        foreach (var coin in _currentScene.Coins)
-            coin.gameObject.SetActive(true);
-    }
-
-    private void InitMovingPlatform()
-    {
-        foreach (var platform in _currentScene.MovingPlatforms)
-            platform.StartMove();
     }
 }

@@ -49,9 +49,13 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private void Update()
         {
-            _rotationCameraAction.Invoke();
-
-            float speed = _cinemachineFreeLook.m_XAxis.m_MaxSpeed;
+            if (Input.GetMouseButton(1)) 
+                _rotationCameraAction.Invoke(); 
+            else
+            {
+                _cinemachineFreeLook.m_XAxis.m_InputAxisValue = 0; 
+                _cinemachineFreeLook.m_YAxis.m_InputAxisValue = 0;
+            }
         }
 
         private void OnDisable()
@@ -67,7 +71,6 @@ namespace Assets._Project.CodeBase.CameraLogic
             {
                 _cinemachineFreeLook.m_XAxis.m_InputAxisValue = _variableJoystick.Horizontal;
                 _cinemachineFreeLook.m_YAxis.m_InputAxisValue = _variableJoystick.Vertical;
-
                 _currentMousePosition = UnityEngine.Input.mousePosition;
             }
             else

@@ -23,6 +23,13 @@ public class PlayerJumper : MonoBehaviour
     public void TrampolineJumpUp() => 
         _playerMover.TakeJumpDirection(_playerData.HeightJump * _playerData.JumpStep);
 
+    public void JumpPressed()
+    {
+        if (_player.GroundChecker.IsGrounded)
+            _playerMover.TakeJumpDirection(_playerData.HeightJump);
+    }
+
+
     private void HandleJump()
     {
         if (_player.GroundChecker.IsGrounded && _player.PlayerInputs.JumpTriggered)

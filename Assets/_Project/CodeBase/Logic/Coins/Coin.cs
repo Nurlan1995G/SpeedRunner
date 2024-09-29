@@ -14,11 +14,14 @@ public class Coin : InteractableEnter
         }
     }
 
+    public void ActivateCoin(bool isActivate) =>
+        _canvasCoin.SetActive(isActivate);
+
     private void SetEffectCoin()
     {
         if (_canvasCoin.activeSelf)
         {
-            _canvasCoin.SetActive(false);
+            ActivateCoin(false);
             _coinEffect.Play();
         }
     } 

@@ -10,6 +10,7 @@ public class Teleport : InteractableEnter
         {
             player.ActivateForRace();
             _levelLoader.DeactivateFlags();
+            _levelLoader.DeactivateCoins();
         }
     }
 }

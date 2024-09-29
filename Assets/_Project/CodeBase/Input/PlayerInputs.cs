@@ -16,6 +16,4 @@ public class PlayerInputs
     public void EnableInput() => _playerInput.Enable();
 
     public void DisableInput() => _playerInput.Disable();
-
-
 }

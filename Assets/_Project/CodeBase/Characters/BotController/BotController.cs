@@ -23,6 +23,7 @@ public class BotController : MonoBehaviour, IRespawned
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
+    [field: SerializeField] public BotNickName BotNickName { get; private set; }
     public BotControllerData BotControllerData { get; private set; }
     public Vector3 StartPosition { get; private set; }
     public bool IsClimbing { get; private set; }

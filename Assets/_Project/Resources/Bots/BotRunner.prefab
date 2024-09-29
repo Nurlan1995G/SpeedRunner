@@ -57,6 +57,7 @@ MonoBehaviour:
   _skinHendler: {fileID: 8655212338280228967}
   <GroundChecker>k__BackingField: {fileID: 6543734882555251913}
   <CharacterController>k__BackingField: {fileID: 5917520407493118353}
+  <BotNickName>k__BackingField: {fileID: 189637645810750573}
 --- !u!143 &5917520407493118353
 CharacterController:
   m_ObjectHideFlags: 0
