@@ -4,6 +4,7 @@ using Assets._Project.Config;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bootstraper : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CameraRotater _cameraRotater;
     [SerializeField] private SoundHandler _soundHandler;
     [SerializeField] private MoveJoystick _moveJoystick;
+    [SerializeField] private Button _jumpButton;
 
     [SerializeField] private List<BotView> _botViews;
     [SerializeField] private List<BotController> _botControllers;
@@ -80,6 +82,9 @@ public class Bootstraper : MonoBehaviour
     private void InitMobileUI()
     {
         if (Application.isMobilePlatform)
+        {
             _moveJoystick.gameObject.SetActive(true);
+            _jumpButton.gameObject.SetActive(true);
+        }
     }
 }

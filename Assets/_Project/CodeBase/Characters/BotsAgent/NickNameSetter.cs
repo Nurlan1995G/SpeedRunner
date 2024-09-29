@@ -11,6 +11,7 @@ namespace Assets.Project.CodeBase.SharkEnemy
     public class NickNameSetter : MonoBehaviour
     {
         [SerializeField] private List<BotView> _bots;
+        [SerializeField] private List<BotController> _botControllers;
         [ReadOnly]
         [SerializeField] private string[] _ruNames;
         [ReadOnly]
@@ -35,14 +36,23 @@ namespace Assets.Project.CodeBase.SharkEnemy
         {
             foreach (BotView bot in _bots)
                 bot.Nickname.Set(names[Random.Range(0, names.Length)]);
+
+            foreach (BotController botController in _botControllers)
+                botController.BotNickName.Set(names[Random.Range(0, names.Length)]);
         }
 
         [Button(), GUIColor("Green")]
-        private void FindBots() =>
+        private void FindBots()
+        {
             _bots = GetComponentsInChildren<BotView>().ToList();
+            _botControllers = GetComponentsInChildren<BotController>().ToList();
+        }
 
         [Button(), GUIColor("Red")]
-        private void ClearList() =>
+        private void ClearList()
+        {
             _bots.Clear();
+            _botControllers.Clear();
+        }
     }
 }
