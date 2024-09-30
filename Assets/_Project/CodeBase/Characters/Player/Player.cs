@@ -25,7 +25,7 @@ public class Player : MonoBehaviour, IRespawned
     private Action<Player> PlayerDied;
 
     public void Construct(PositionStaticData positionStaticData, PlayerData characterData,
-         SoundHandler soundHandler,PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper, SkinHandler skinHandler, PlayerAnimation characterAnimation)
+         SoundHandler soundHandler,PlayerInputs playerInputs, PlayerMover playerMover, PlayerJumper playerJumper, SkinHandler skinHandler, PlayerAnimation characterAnimation, RotateInput rotateInput)
     {
         PlayerInputs = playerInputs ?? throw new ArgumentNullException(nameof(playerInputs));
         _soundhandler = soundHandler ?? throw new ArgumentNullException(nameof(soundHandler));
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, IRespawned
         _playerMover = playerMover;
         CharacterAnimation = characterAnimation;
 
-        _playerMover.Construct(this);
+        _playerMover.Construct(this, rotateInput);
         playerJumper.Construct(this, playerMover);
         RespawnPosition(_positionStaticData.InitPlayerPosition);
     }

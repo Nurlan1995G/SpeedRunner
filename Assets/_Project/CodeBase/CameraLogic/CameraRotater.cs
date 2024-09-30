@@ -22,40 +22,19 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private Action _rotationCameraAction;
 
-        public void Construct(GameConfig gameConfig, RotateInput rotateInput)
+        public void Construct(CameraRotateData cameraRotateData, RotateInput rotateInput)
         {
-            _cameraRotateData = gameConfig.CameraRotateData;
+            _cameraRotateData = cameraRotateData;
             _rotateInput = rotateInput ?? throw new ArgumentNullException(nameof(rotateInput));
-
-            if (Application.isMobilePlatform)
-            {
-                _currentXRotation = _cameraRotateData.RotateSpeedMobileX;
-                _currentYRotation = _cameraRotateData.RotateSpeedMobileY;
-                _rotationCameraAction = HandleTouchInput;
-            }
-            else
-            {
-                _currentXRotation = _cameraRotateData.RotateSpeedKeyboardX;
-                _currentYRotation = _cameraRotateData.RotateSpeedKeyboardY;
-                _rotationCameraAction = ControlRotation;
-            }
-
-            _cinemachineFreeLook.m_XAxis.m_MaxSpeed = _currentXRotation;
-            _cinemachineFreeLook.m_YAxis.m_MaxSpeed = _currentYRotation;
-
+            
             _rotateInput.Enable();
             _rotateInput.Mouse.MouseSrollWheel.performed += OnTouchMouseScrollWheel;
         }
 
         private void Update()
         {
-            if (Input.GetMouseButton(1)) 
-                _rotationCameraAction.Invoke(); 
-            else
-            {
-                _cinemachineFreeLook.m_XAxis.m_InputAxisValue = 0; 
-                _cinemachineFreeLook.m_YAxis.m_InputAxisValue = 0;
-            }
+            if(_rotateInput.Mouse.RightButton.IsPressed())
+                _rotationCameraAction.Invoke();
         }
 
         private void OnDisable()
@@ -63,6 +42,26 @@ namespace Assets._Project.CodeBase.CameraLogic
             _rotateInput.Disable();
 
             _rotateInput.Mouse.MouseSrollWheel.performed -= OnTouchMouseScrollWheel;
+        }
+
+        public void InitializeMobile()
+        {
+            _currentXRotation = _cameraRotateData.RotateSpeedMobileX;
+            _currentYRotation = _cameraRotateData.RotateSpeedMobileY;
+            _rotationCameraAction = HandleTouchInput;
+
+            _cinemachineFreeLook.m_XAxis.m_MaxSpeed = _currentXRotation;
+            _cinemachineFreeLook.m_YAxis.m_MaxSpeed = _currentYRotation;
+        }
+
+        public void InitializeKeyboard()
+        {
+            _currentXRotation = _cameraRotateData.RotateSpeedKeyboardX;
+            _currentYRotation = _cameraRotateData.RotateSpeedKeyboardY;
+            _rotationCameraAction = ControlRotation;
+
+            _cinemachineFreeLook.m_XAxis.m_MaxSpeed = _currentXRotation;
+            _cinemachineFreeLook.m_YAxis.m_MaxSpeed = _currentYRotation;
         }
 
         private void ControlRotation()

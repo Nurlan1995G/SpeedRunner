@@ -78,7 +78,7 @@ public partial class @RotateInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e672e74e-0b14-46fa-baaa-6b65ea7817bd"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse"",

@@ -54,8 +54,8 @@ public class Bootstraper : MonoBehaviour
         PlayerInputs playerInputs = new(playerInput);
        _raceManager = new RaceManager(_positionStaticData);
 
-        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation);
-        _cameraRotater.Construct(_gameConfig, rotateInput);
+        _player.Construct(_positionStaticData, _gameConfig.CharacterData, _soundHandler, playerInputs, _playerMover, _playerJumper, _skinHandler, characterAnimation, rotateInput);
+        _cameraRotater.Construct(_gameConfig.CameraRotateData, rotateInput);
         _finish.Construct(_raceManager);
     }
 
@@ -85,6 +85,9 @@ public class Bootstraper : MonoBehaviour
         {
             _moveJoystick.gameObject.SetActive(true);
             _jumpButton.gameObject.SetActive(true);
+            _cameraRotater.InitializeMobile();
         }
+        else
+            _cameraRotater.InitializeKeyboard();
     }
 }

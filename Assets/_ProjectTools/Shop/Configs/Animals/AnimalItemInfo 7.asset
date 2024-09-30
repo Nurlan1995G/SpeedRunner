@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72af6910af263674c968f9049bac7178, type: 3}
   m_Name: AnimalItemInfo 7
   m_EditorClassIdentifier: 
-  Id: 26216
+  Id: 26722
   ItemType: 2
-  CashType: 0
+  CashType: 1
   Price: 0
   Icon: {fileID: 21300000, guid: 5c05a3212b96be042b78a263bdb1e406, type: 3}
   ShopPreview: {fileID: 6866727874924045774, guid: df5dabbdd2e05604c938451b8a0f990d, type: 3}

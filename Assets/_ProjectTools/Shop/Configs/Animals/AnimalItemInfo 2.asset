@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72af6910af263674c968f9049bac7178, type: 3}
   m_Name: AnimalItemInfo 2
   m_EditorClassIdentifier: 
-  Id: 25786
+  Id: 26172
   ItemType: 2
   CashType: 0
-  Price: 0
+  Price: 4500
   Icon: {fileID: 21300000, guid: ce70fd514d46f284bacb502983289a7a, type: 3}
   ShopPreview: {fileID: 2821588489939005790, guid: 3e46686f5c451b142854f7e3292ec611, type: 3}
   YanId: 0
