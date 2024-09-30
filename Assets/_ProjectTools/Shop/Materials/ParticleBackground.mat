@@ -8,17 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ParticleBackground
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - DR_RIM_ON
-  - _CELPRIMARYMODE_NONE
   - _TEXTUREBLENDINGMODE_MULTIPLY
+  m_InvalidKeywords:
+  - _ALLOWALPHAOVERFLOW_OFF
+  - _CELPRIMARYMODE_NONE
   - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -73,45 +74,58 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AllowAlphaOverflow: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _CameraDistanceFadeClose: 0
+    - _CameraDistanceFadeFar: 10
     - _CelExtraEnabled: 0
     - _CelNumSteps: 3
     - _CelPrimaryMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Depth: 100
     - _DetailNormalMapScale: 1
+    - _DirectionPitch: 0
+    - _DirectionYaw: 0
     - _DstBlend: 0
-    - _FlatRimEdgeSmoothness: 0.092
-    - _FlatRimLightAlign: 0.695
-    - _FlatRimSize: 0.591
-    - _FlatSpecularEdgeSmoothness: 1
-    - _FlatSpecularSize: 0.587
-    - _Flatness: 1
-    - _FlatnessExtra: 1
+    - _EnableHeightBlend: 0
+    - _Exponent: 1
+    - _FlatRimEdgeSmoothness: 0.037
+    - _FlatRimLightAlign: 0.708
+    - _FlatRimSize: 0.592
+    - _FlatSpecularEdgeSmoothness: 0.642
+    - _FlatSpecularSize: 0.612
+    - _Flatness: 0.993
+    - _FlatnessExtra: 0.554
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.159
     - _GlossyReflections: 1
     - _GradientAngle: 0
     - _GradientCenterX: 0
     - _GradientCenterY: 0
     - _GradientEnabled: 0
     - _GradientSize: 10
+    - _HeightTransition: 0
+    - _Intensity: 1
     - _LightContribution: 0
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _Mode: 0
+    - _NumLayersCount: 1
     - _OcclusionStrength: 1
+    - _OutlineDepthOffset: 0
+    - _OutlineWidth: 0.01
     - _OverrideLightmapDir: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RimEnabled: 1
-    - _SelfShadingSize: 0.719
-    - _SelfShadingSizeExtra: 0.6
-    - _ShadowEdgeSize: 0.077
-    - _ShadowEdgeSizeExtra: 0.05
+    - _SelfShadingSize: 0.827
+    - _SelfShadingSizeExtra: 0.575
+    - _ShadowEdgeSize: 0.31
+    - _ShadowEdgeSizeExtra: 0.187
     - _SmoothnessTextureChannel: 0
     - _SpecularEnabled: 0
     - _SpecularHighlights: 1
@@ -123,18 +137,24 @@ Material:
     - _UnityShadowMode: 0
     - _UnityShadowPower: 0.2
     - _UnityShadowSharpness: 1
+    - _UvFadeX: 0.1
+    - _UvFadeY: 0.1
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.702, g: 0.79584926, b: 1, a: 1}
-    - _ColorDim: {r: 0.27058825, g: 0.6745098, b: 0.9411765, a: 1}
-    - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
+    - _Color: {r: 0.7028302, g: 0.79607844, b: 1, a: 1}
+    - _Color1: {r: 0, g: 0.7, b: 0.74, a: 0}
+    - _Color2: {r: 0.96999997, g: 0.67, b: 0.50999993, a: 0}
+    - _ColorDim: {r: 0, g: 0.37338775, b: 0.99215686, a: 1}
+    - _ColorDimCurve: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
+    - _ColorDimExtra: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
     - _ColorDimSteps: {r: 0.2705882, g: 0.6745098, b: 0.94117653, a: 1}
-    - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorGradient: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
+    - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0.019607825, g: 0.24748835, b: 0.6901961, a: 1}
+    - _FlatRimColor: {r: 0, g: 0.22078791, b: 0.6509434, a: 1}
     - _FlatSpecularColor: {r: 0, g: 0.60233927, b: 1, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
+    - _OutlineColor: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
     - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
   m_BuildTextureStacks: []

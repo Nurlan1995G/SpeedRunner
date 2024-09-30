@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TrailItemInfo 4
   m_EditorClassIdentifier: 
   Id: 26078
-  ItemType: 0
+  ItemType: 1
   CashType: 0
-  Price: 0
+  Price: 2500
   Icon: {fileID: 21300000, guid: b8815c3f19b9e15428771c903480d7c0, type: 3}
   ShopPreview: {fileID: 6765480789803388526, guid: d3f682ea2bdcda74a9851d3c5644c4ee, type: 3}
   YanId: 0

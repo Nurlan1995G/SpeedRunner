@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private Player _player;
+    private RotateInput _ratateInput;
     private PlayerData _playerData;
 
     private Vector3 _velocityDirection;
@@ -15,9 +16,10 @@ public class PlayerMover : MonoBehaviour
 
     private bool _isClimbing;
 
-    public void Construct(Player player)
+    public void Construct(Player player, RotateInput ratateInput)
     {
         _player = player;
+        _ratateInput = ratateInput;
         _playerData = _player.CharacterData;
         _currentSpeed = _playerData.MoveSpeed;
 
@@ -26,6 +28,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
+        GravityHandling();
         Vector2 moveDirection = _player.PlayerInputs.MoveDirection;
 
         if (_isClimbing)
@@ -39,8 +42,6 @@ public class PlayerMover : MonoBehaviour
             Move(moveDirection);
 
         _player.CharacterAnimation.HandleAnimations(moveDirection, _velocityDirection, _isClimbing);
-
-        GravityHandling();
     }
 
     public void TakeJumpDirection(float jumpDirection) => 
@@ -110,13 +111,9 @@ public class PlayerMover : MonoBehaviour
         Vector3 finalDirection = (cameraRotation * moveDirection).normalized;
 
         if (_player.GroundChecker.IsGrounded || _isClimbing)
-        {
             _player.CharacterController.Move(finalDirection * _currentSpeed / delaySpeedClimb * Time.deltaTime);
-        }
         else if (!_isClimbing)
-        {
             _player.CharacterController.Move(finalDirection * _currentSpeed / 1.8f * Time.deltaTime);
-        }
     }
 
     private void RotateCharacter(Vector3 moveDirection, Quaternion cameraRotation)
