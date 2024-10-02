@@ -3,6 +3,7 @@ using Cinemachine;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Cinemachine.CinemachineFreeLook;
 
 namespace Assets._Project.CodeBase.CameraLogic
 {
@@ -127,11 +128,16 @@ namespace Assets._Project.CodeBase.CameraLogic
             {
                 CinemachineFreeLook.Orbit orbit = _cinemachineFreeLook.m_Orbits[i];
 
-                orbit.m_Radius = Mathf.Clamp(orbit.m_Radius - deltaMagnitudeDiff * _cameraRotateData.ZoomStep, _cameraRotateData.MinZoomDistance, _cameraRotateData.MaxZoomDistance);
+                orbit.m_Radius = Mathf.Clamp(orbit.m_Radius - deltaMagnitudeDiff * _cameraRotateData.ZoomStep, _cameraRotateData.MinZoomDistanceBottom, _cameraRotateData.MaxZoomDistanceBottom);
 
-                if (i == 2)
+                if(i == 1)
                 {
-                    orbit.m_Height = Mathf.Clamp(orbit.m_Height - deltaMagnitudeDiff * _cameraRotateData.ZoomStep, _cameraRotateData.MinZoomDistance, _cameraRotateData.MaxZoomDistance);
+                    orbit.m_Height = Mathf.Clamp(orbit.m_Height - deltaMagnitudeDiff * 0.005f, _cameraRotateData.MinZoomDistanceMidle, _cameraRotateData.MaxZoomDistanceMidle);
+                }
+
+                if(i == 2)
+                {
+                    orbit.m_Height = Mathf.Clamp(orbit.m_Height - deltaMagnitudeDiff * _cameraRotateData.ZoomStep, _cameraRotateData.MinZoomDistanceBottom, _cameraRotateData.MaxZoomDistanceBottom);
                 }
 
                 _cinemachineFreeLook.m_Orbits[i] = orbit;

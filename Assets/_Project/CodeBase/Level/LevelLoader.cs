@@ -1,4 +1,5 @@
 ﻿using Assets._Project.CodeBase.Infrastracture;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -73,11 +74,13 @@ public class LevelLoader : MonoBehaviour
         List<PointSpawnZone> pointSpawnZones = _currentScene.PointSpawnZones;
         List<TriggerZone> triggerZones = _currentScene.TriggerZones;
 
+        Debug.Log("начало активации");
+
         _player.ActivateForRace();
 
         InitSpawnZones(pointSpawnZones);
-        ActivateBots(true);
-        InitializeBots(pointSpawnZones);
+        //ActivateAgentBots(true);
+        InitializeControllerBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
         DeactivateFlags();
         DeactivateCoins();
@@ -95,7 +98,18 @@ public class LevelLoader : MonoBehaviour
             _levelsScene[i].SetBusy(i == levelIndex);
         }
 
+        StartCoroutine(BuildNavMeshAndActivate());
+    }
+
+    private IEnumerator BuildNavMeshAndActivate()
+    {
         _navMeshSurface.BuildNavMesh();
+        Debug.Log("запекание произошло");
+
+        yield return new WaitForSeconds(1f);
+        Debug.Log("прошло 1 сек");
+
+        SetupLevel();
     }
 
     private void InitSpawnZones(List<PointSpawnZone> spawnZones)
@@ -104,7 +118,7 @@ public class LevelLoader : MonoBehaviour
             point.Initialize();
     }
 
-    private void ActivateBots(bool active)
+    private void ActivateAgentBots(bool active)
     {
         foreach (BotView bot in _botViews)
         {
@@ -113,7 +127,7 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private void InitializeBots(List<PointSpawnZone> spawnZones)
+    private void InitializeControllerBots(List<PointSpawnZone> spawnZones)
     {
         foreach (BotController botController in _botControllers)
         {
@@ -143,7 +157,7 @@ public class LevelLoader : MonoBehaviour
 
     private void DeactivateLevel()
     {
-        ActivateBots(false);
+        ActivateAgentBots(false);
 
         foreach (var botController in _botControllers)
             botController.gameObject.SetActive(false);

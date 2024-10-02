@@ -106,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530046518527013600, guid: b8789ddb8e7cd9249aa8457e47a6fdb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0408
+      value: 0.048
       objectReference: {fileID: 0}
     - target: {fileID: 2530046518527013600, guid: b8789ddb8e7cd9249aa8457e47a6fdb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0572
+      value: 0.0656
       objectReference: {fileID: 0}
     - target: {fileID: 2530046518527013600, guid: b8789ddb8e7cd9249aa8457e47a6fdb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -147,6 +147,10 @@ PrefabInstance:
     - target: {fileID: 5044277661688229001, guid: b8789ddb8e7cd9249aa8457e47a6fdb6, type: 3}
       propertyPath: m_Name
       value: ConfetiPrevie
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044277661688229001, guid: b8789ddb8e7cd9249aa8457e47a6fdb6, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

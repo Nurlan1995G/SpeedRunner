@@ -85,8 +85,10 @@ namespace Assets._Project.Config
         [Header("Keyboard")]
         public float RotateSpeedKeyboardX;
         public float RotateSpeedKeyboardY;
-        public float MinZoomDistance;
-        public float MaxZoomDistance;
+        public float MinZoomDistanceMidle;
+        public float MaxZoomDistanceMidle;
+        public float MinZoomDistanceBottom;
+        public float MaxZoomDistanceBottom;
         public float ZoomStep;
         public float HideDistance;
     }

@@ -13,10 +13,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_RIM_ON
+  - _CELPRIMARYMODE_SINGLE
   - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords:
   - _ALLOWALPHAOVERFLOW_OFF
-  - _CELPRIMARYMODE_NONE
   - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -82,7 +82,7 @@ Material:
     - _CameraDistanceFadeFar: 10
     - _CelExtraEnabled: 0
     - _CelNumSteps: 3
-    - _CelPrimaryMode: 0
+    - _CelPrimaryMode: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _Depth: 100
@@ -142,13 +142,13 @@ Material:
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.7028302, g: 0.79607844, b: 1, a: 1}
+    - _Color: {r: 0.8235294, g: 0.8784314, b: 1, a: 1}
     - _Color1: {r: 0, g: 0.7, b: 0.74, a: 0}
     - _Color2: {r: 0.96999997, g: 0.67, b: 0.50999993, a: 0}
-    - _ColorDim: {r: 0, g: 0.37338775, b: 0.99215686, a: 1}
-    - _ColorDimCurve: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
+    - _ColorDim: {r: 0.17924517, g: 0.4874337, b: 1, a: 1}
+    - _ColorDimCurve: {r: 0.4199999, g: 0.4505619, b: 0.5999999, a: 1}
     - _ColorDimExtra: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
-    - _ColorDimSteps: {r: 0.2705882, g: 0.6745098, b: 0.94117653, a: 1}
+    - _ColorDimSteps: {r: 0.14432889, g: 0.43830603, b: 0.8792453, a: 1}
     - _ColorGradient: {r: 0.6273585, g: 0.7450348, b: 1, a: 1}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

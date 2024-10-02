@@ -1,11 +1,11 @@
 {
-    "idSave": 1624,
+    "idSave": 1685,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "CurrentLevel": 0,
     "CurrentLevelIndex": 0,
-    "Coin": 1380,
+    "Coin": 120,
     "IsMute": true,
     "OpenItemsInfoId": [
         0,
@@ -66,10 +66,15 @@
         26712,
         26272,
         25816,
-        26326
+        26326,
+        26204,
+        26058,
+        26932,
+        25940,
+        26634
     ],
-    "SelectedSkin": 25892,
+    "SelectedSkin": 26058,
     "SelectedObject": 0,
-    "SelectedTrail": 26326,
-    "SelectedAnimal": 25816
+    "SelectedTrail": 26356,
+    "SelectedAnimal": 25864
 }
