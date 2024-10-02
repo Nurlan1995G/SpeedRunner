@@ -45,14 +45,23 @@ public class BotView : MonoBehaviour, IRespawned
 
     public void ChagePosition()
     {
-        Agent.Warp(_startPosition);
-        ChangeBehaviour(_currentBehaviour);
+        if (Agent.isOnNavMesh)
+        {
+            Agent.Warp(_startPosition);
+            ChangeBehaviour(_currentBehaviour);
+        }
     }
 
     public void Respawn()
     {
         gameObject.SetActive(false);
-        transform.position = _startPosition;
+
+        if (Agent.isOnNavMesh)
+        {
+            transform.position = _startPosition;
+            Agent.Warp(_startPosition);
+        }
+
         gameObject.SetActive(true);
     }
 

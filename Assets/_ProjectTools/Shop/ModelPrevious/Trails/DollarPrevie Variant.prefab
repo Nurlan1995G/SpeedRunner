@@ -8,10 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6743553660663619878}
     m_Modifications:
-    - target: {fileID: 2466406624757376555, guid: 06b605ab0df115841b5a7f618742cb34, type: 3}
-      propertyPath: UVModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2530046518527013600, guid: 06b605ab0df115841b5a7f618742cb34, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0408
@@ -56,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dollar
       objectReference: {fileID: 0}
+    - target: {fileID: 5044277661688229001, guid: 06b605ab0df115841b5a7f618742cb34, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,6 +77,10 @@ PrefabInstance:
     - target: {fileID: 832295078427566018, guid: c5694b18191cb34459d1793aa2af84aa, type: 3}
       propertyPath: m_Name
       value: DollarPrevie Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 832295078427566018, guid: c5694b18191cb34459d1793aa2af84aa, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3608224106747426031, guid: c5694b18191cb34459d1793aa2af84aa, type: 3}
       propertyPath: m_Name

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrailGreenPrevie
       objectReference: {fileID: 0}
+    - target: {fileID: 6765480789803388526, guid: d3f682ea2bdcda74a9851d3c5644c4ee, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7241167719832266051, guid: d3f682ea2bdcda74a9851d3c5644c4ee, type: 3}
       propertyPath: m_Name
       value: StarPrevie
@@ -119,13 +123,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3494733756594995394, guid: ab9fa28299553e64682f1cf8fed9a372, type: 3}
-      propertyPath: m_Loop
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3807159760296967713, guid: ab9fa28299553e64682f1cf8fed9a372, type: 3}
       propertyPath: m_Name
       value: TrailGreenPrevie
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807159760296967713, guid: ab9fa28299553e64682f1cf8fed9a372, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011971627326387688, guid: ab9fa28299553e64682f1cf8fed9a372, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

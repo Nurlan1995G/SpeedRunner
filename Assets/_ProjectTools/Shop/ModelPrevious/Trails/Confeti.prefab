@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2530046518527013600}
   - component: {fileID: 2466406624757376555}
   - component: {fileID: 3725010126795522909}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Confeti
   m_TagString: Untagged
   m_Icon: {fileID: 0}

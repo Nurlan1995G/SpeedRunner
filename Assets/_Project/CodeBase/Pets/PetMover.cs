@@ -8,10 +8,8 @@ public class PetMover : MonoBehaviour
 
     private float _timer;
 
-    private void Start()
-    {
+    private void Start() =>
         transform.position = _targetPoint.position;
-    }
 
     private void Update()
     {
@@ -20,12 +18,10 @@ public class PetMover : MonoBehaviour
         if (Vector3.Distance(transform.position, _targetPoint.position) >= _maxDistance)
         {
             transform.position = Vector3.Lerp(transform.position, _targetPoint.position, _timer / _aproachTime);
-
             _timer += Time.deltaTime;
         }
         else
-        {
+        
             _timer = 0;
-        }
     }
 }
