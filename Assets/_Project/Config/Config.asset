@@ -39,7 +39,7 @@ MonoBehaviour:
     BotBoostHeightUp: 1.2
     BotBoostWaitTime: 0.5
   BotControllerData:
-    MoveSpeed: 56.45739
+    MoveSpeed: 51.773323
     MinMoveSpeed: 50
     MaxMoveSpeed: 60
     RotateSpeed: 100
@@ -63,5 +63,5 @@ MonoBehaviour:
     ZoomStep: 0.01
     HideDistance: 50
   LogicConfig:
-    Timer: 100
+    Timer: 480
     CountdownControllerTime: 5
