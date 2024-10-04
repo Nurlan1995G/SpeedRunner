@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e50dfafddd66da41b3a211ed3eb571f, type: 3}
   m_Name: PositionLevel
   m_EditorClassIdentifier: 
-  InitPlayerPosition: {x: 87.2, y: 5.63, z: 59.8}
-  OnePosition: {x: -6194.1094, y: 88.50474, z: -26.023901}
-  TwoPosition: {x: -6193.5293, y: 83.42474, z: -13.083914}
-  ThreePosition: {x: -6194.0693, y: 76.784744, z: -39.603912}
+  InitPlayerPosition: {x: 110.38, y: 8.37, z: 67.52}
+  OnePosition: {x: -6194.1094, y: 92.52, z: -26.023901}
+  TwoPosition: {x: -6193.5293, y: 86.979996, z: -13.083914}
+  ThreePosition: {x: -6194.0693, y: 81.1, z: -39.603912}

@@ -29,6 +29,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private CountdownController _countdownController;
     [SerializeField] private Finish _finish;
     [SerializeField] private GameActivator _gameActivator;
+    [SerializeField] private ADTimer _adTimer;
 
     private Language _language;
     private RaceManager _raceManager;
@@ -75,7 +76,7 @@ public class Bootstraper : MonoBehaviour
     {
         _timerLevel.Construct(_gameConfig.LogicConfig, _gameActivator);
         _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig, _language, _gameActivator);
-        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface, _raceManager);
+        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface, _raceManager, _adTimer);
         _levelLoader.StartLevelSequence();
     }
 
