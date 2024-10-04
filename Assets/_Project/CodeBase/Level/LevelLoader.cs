@@ -15,11 +15,11 @@ public class LevelLoader : MonoBehaviour
     private Player _player;
     private NavMeshSurface _navMeshSurface;
     private RaceManager _raceManager;
-
+    private ADTimer _aDTimer;
     private int _currentLevelIndex;
 
     public void Construct(TimerLevel timerLevel, List<BotController> botControllers, List<BotView> botViews,
-    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface, RaceManager raceManager)
+    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface, RaceManager raceManager, ADTimer aDTimer)
     {
         _timerLevel = timerLevel;
         _botControllers = botControllers;
@@ -28,6 +28,7 @@ public class LevelLoader : MonoBehaviour
         _player = player;
         _navMeshSurface = navMeshSurface;
         _raceManager = raceManager;
+        _aDTimer = aDTimer;
     }
 
     private void OnEnable() => 
@@ -38,8 +39,17 @@ public class LevelLoader : MonoBehaviour
 
     public void StartLevelSequence()
     {
-        LoadNextLevel();
+        ActivateScene(0);
         SetupLevel();
+    }
+
+    public void StartActivateFlag()
+    {
+        foreach (var flag in _currentScene.FlagPoints)
+        {
+            flag.Construct(_aDTimer);
+            flag.ResetFlag();
+        }
     }
 
     public void DeactivateFlags()
@@ -79,7 +89,7 @@ public class LevelLoader : MonoBehaviour
         ActivateAgentBots(true);
         InitializeControllerBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
-        DeactivateFlags();
+        StartActivateFlag();
         DeactivateCoins();
 
         _countdownController.ResetBarrier();

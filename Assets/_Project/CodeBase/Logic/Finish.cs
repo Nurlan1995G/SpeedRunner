@@ -12,6 +12,9 @@ public class Finish : InteractableEnter
     {
         if (other.TryGetComponent(out IRespawned character))
         {
+            if (character is BotController bot)
+                bot.StopMovement();
+
             _raceManager.RegisterFinish(character);
         }
     }

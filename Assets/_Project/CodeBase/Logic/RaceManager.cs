@@ -64,7 +64,6 @@ public class RaceManager
         {
             bot.SetRespawnPosition(position);
             bot.Respawn();
-            bot.StopMovement();
         }
     }
 }

@@ -27,7 +27,8 @@ public class TextTranslate : MonoBehaviour
         }
     }
 
-    private void Awake() => _text.text = Localization.Translate(_ruVariant, _enVariant);
+    private void Awake() => 
+        _text.text = Localization.Translate(_ruVariant, _enVariant);
 }
 
 public enum Language

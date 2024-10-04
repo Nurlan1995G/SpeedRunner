@@ -1,9 +1,15 @@
 using UnityEngine;
+using YG;
 
 public class FlagPoint : InteractableEnter
 {
     [SerializeField] private GameObject _redFlag, _blueFlag;
     [SerializeField] private ParticleSystem _effectPointFlag;
+
+    private ADTimer _adTimer;
+
+    public void Construct(ADTimer aDTimer) =>
+        _adTimer = aDTimer;
 
     public override void InteractEnter(Collider other)
     {
@@ -28,6 +34,7 @@ public class FlagPoint : InteractableEnter
             _redFlag.SetActive(false);
             _blueFlag.SetActive(true);
             player.RespawnPosition(transform.position);
+            _adTimer.ShowAdWithCountdown(() => YandexGame.Instance._FullscreenShow());
         }
     }
 }
