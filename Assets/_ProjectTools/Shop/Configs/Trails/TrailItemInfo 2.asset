@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2c57e29046b454585d00f15cafca51, type: 3}
   m_Name: TrailItemInfo 2
   m_EditorClassIdentifier: 
-  Id: 25786
+  Id: 25840
   ItemType: 1
   CashType: 0
   Price: 200

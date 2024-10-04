@@ -12,6 +12,4 @@ public class GroundSphereChecker : MonoBehaviour
             Debug.Log("Touched the ground!");
         }
     }
-
-
 }

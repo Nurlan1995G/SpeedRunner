@@ -1,5 +1,4 @@
 ﻿using Assets._Project.CodeBase.Infrastracture;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -74,12 +73,10 @@ public class LevelLoader : MonoBehaviour
         List<PointSpawnZone> pointSpawnZones = _currentScene.PointSpawnZones;
         List<TriggerZone> triggerZones = _currentScene.TriggerZones;
 
-        Debug.Log("начало активации");
-
         _player.ActivateForRace();
 
         InitSpawnZones(pointSpawnZones);
-        //ActivateAgentBots(true);
+        ActivateAgentBots(true);
         InitializeControllerBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
         DeactivateFlags();
@@ -98,18 +95,7 @@ public class LevelLoader : MonoBehaviour
             _levelsScene[i].SetBusy(i == levelIndex);
         }
 
-        StartCoroutine(BuildNavMeshAndActivate());
-    }
-
-    private IEnumerator BuildNavMeshAndActivate()
-    {
         _navMeshSurface.BuildNavMesh();
-        Debug.Log("запекание произошло");
-
-        yield return new WaitForSeconds(1f);
-        Debug.Log("прошло 1 сек");
-
-        SetupLevel();
     }
 
     private void InitSpawnZones(List<PointSpawnZone> spawnZones)
