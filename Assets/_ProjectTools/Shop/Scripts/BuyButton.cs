@@ -26,12 +26,12 @@ public class BuyButton : MonoBehaviour
         switch (itemInfo.CashType)
         {
             case CashType.Coin:
+
                 if (Wallet.CoinValue < itemInfo.Price)
                 {
-                    _button.interactable = false;
                     _noMoneyDisplay.SetActive(true);
+                    return;
                 }
-
                 _coinPanel.SetActive(true);
                 _coinPrice.text = itemInfo.Price.ToString();
                 break;
@@ -51,8 +51,11 @@ public class BuyButton : MonoBehaviour
         _coinPanel.SetActive(false);
         _videoAdPanel.SetActive(false);
         _yanPanel.SetActive(false);
-        _button.interactable = true;
     }
 
-    private void OnClick() => Click?.Invoke();
+    private void OnClick()
+    {
+        Click?.Invoke();
+        SoundHandler.Instance.PlayBuy();
+    }
 }
