@@ -7,7 +7,7 @@ namespace Assets._Project.Config
     public class GameConfig : ScriptableObject
     {
         public PlayerData CharacterData;
-        public BotAgentData CharacterBotData;
+        public BotAgentData BotAgentData;
         public BotControllerData BotControllerData;
         public CameraRotateData CameraRotateData;
         public LogicConfig LogicConfig;

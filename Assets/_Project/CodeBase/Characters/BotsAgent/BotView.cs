@@ -23,14 +23,14 @@ public class BotView : MonoBehaviour, IRespawned
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public BotNickName Nickname { get; private set; }
-    public BotAgentData CharacterBotData { get; private set; }
+    public BotAgentData BotAgentData { get; private set; }
 
 
     public event Action Respawned;
 
     public void Construct(BotAgentData character)
     {
-        CharacterBotData = character;
+        BotAgentData = character;
         _startPosition = transform.position;
 
         InitializeBotBehavior();

@@ -27,19 +27,19 @@ MonoBehaviour:
     BoostDuration: 1
     BoostHeightUp: 70
     BoostWaitTime: 0.2
-  CharacterBotData:
-    BotMoveSpeed: 70
-    BotRotateSpeed: 20
-    BotHeightJump: 60
+  BotAgentData:
+    BotMoveSpeed: 0
+    BotRotateSpeed: 0
+    BotHeightJump: 0
     BotJumpStep: 1.5
-    BotJumpDuration: 1.6
+    BotJumpDuration: 0
     BotRangeRandomMoving: 20
     BotBoostMultiplier: 2
     BotBoostDuration: 0.5
     BotBoostHeightUp: 1.2
     BotBoostWaitTime: 0.5
   BotControllerData:
-    MoveSpeed: 51.773323
+    MoveSpeed: 57.755363
     MinMoveSpeed: 50
     MaxMoveSpeed: 60
     RotateSpeed: 100
@@ -52,7 +52,7 @@ MonoBehaviour:
     BoostMultiplier: 2
     BoostDuration: 1
   CameraRotateData:
-    RotateSpeedMobileX: 70
+    RotateSpeedMobileX: 75
     RotateSpeedMobileY: 3
     RotateSpeedKeyboardX: 300
     RotateSpeedKeyboardY: 4.5
@@ -63,5 +63,5 @@ MonoBehaviour:
     ZoomStep: 0.01
     HideDistance: 50
   LogicConfig:
-    Timer: 480
+    Timer: 360
     CountdownControllerTime: 5

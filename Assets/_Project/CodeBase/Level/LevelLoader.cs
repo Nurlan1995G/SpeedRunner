@@ -1,4 +1,5 @@
 ﻿using Assets._Project.CodeBase.Infrastracture;
+using Assets._Project.Config;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -16,19 +17,21 @@ public class LevelLoader : MonoBehaviour
     private NavMeshSurface _navMeshSurface;
     private RaceManager _raceManager;
     private ADTimer _aDTimer;
+    private GameConfig _gameConfig;
+
     private int _currentLevelIndex;
 
-    public void Construct(TimerLevel timerLevel, List<BotController> botControllers, List<BotView> botViews,
-    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface, RaceManager raceManager, ADTimer aDTimer)
+    public void Construct(TimerLevel timerLevel, List<BotController> botControllers,
+    CountdownController countdownController, Player player, NavMeshSurface navMeshSurface, RaceManager raceManager, ADTimer aDTimer, GameConfig gameConfig)
     {
         _timerLevel = timerLevel;
         _botControllers = botControllers;
-        _botViews = botViews;
         _countdownController = countdownController;
         _player = player;
         _navMeshSurface = navMeshSurface;
         _raceManager = raceManager;
         _aDTimer = aDTimer;
+        _gameConfig = gameConfig;
     }
 
     private void OnEnable() => 
@@ -86,7 +89,7 @@ public class LevelLoader : MonoBehaviour
         _player.ActivateForRace();
 
         InitSpawnZones(pointSpawnZones);
-        ActivateAgentBots(true);
+        //ActivateAgentBots(true);
         InitializeControllerBots(pointSpawnZones);
         InitTriggerZones(pointSpawnZones, triggerZones);
         StartActivateFlag();
@@ -105,7 +108,7 @@ public class LevelLoader : MonoBehaviour
             _levelsScene[i].SetBusy(i == levelIndex);
         }
 
-        _navMeshSurface.BuildNavMesh();
+        //_navMeshSurface.BuildNavMesh();
     }
 
     private void InitSpawnZones(List<PointSpawnZone> spawnZones)
@@ -118,6 +121,7 @@ public class LevelLoader : MonoBehaviour
     {
         foreach (BotView bot in _botViews)
         {
+            bot.Construct(_gameConfig.BotAgentData);
             bot.Respawn();
             bot.gameObject.SetActive(active);
         }
@@ -153,7 +157,7 @@ public class LevelLoader : MonoBehaviour
 
     private void DeactivateLevel()
     {
-        ActivateAgentBots(false);
+       // ActivateAgentBots(false);
 
         foreach (var botController in _botControllers)
             botController.gameObject.SetActive(false);
