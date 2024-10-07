@@ -18,7 +18,7 @@ public class Bootstraper : MonoBehaviour
     [SerializeField] private MoveJoystick _moveJoystick;
     [SerializeField] private Button _jumpButton;
 
-    [SerializeField] private List<BotView> _botViews;
+    //[SerializeField] private List<BotView> _botViews;
     [SerializeField] private List<BotController> _botControllers;
 
     [SerializeField] private TimerLevel _timerLevel;
@@ -37,10 +37,10 @@ public class Bootstraper : MonoBehaviour
     private void Awake()
     {
         InitializeComponents();
+        InitMobileUI();
         CheckLanguage();
         InitCoroutine();
         InitBots();
-        InitMobileUI();
         InitLevelLoader();
     }
 
@@ -65,9 +65,6 @@ public class Bootstraper : MonoBehaviour
 
     private void InitBots()
     {
-        foreach (var bot in _botViews)
-            bot.Construct(_gameConfig.CharacterBotData);
-
         foreach (var botController in _botControllers)
             botController.Construct(_gameConfig.BotControllerData, _gameActivator);
     }
@@ -76,7 +73,7 @@ public class Bootstraper : MonoBehaviour
     {
         _timerLevel.Construct(_gameConfig.LogicConfig, _gameActivator);
         _countdownController.Construct(_timerLevel, _gameConfig.LogicConfig, _language, _gameActivator);
-        _levelLoader.Construct(_timerLevel, _botControllers, _botViews, _countdownController, _player, _meshSurface, _raceManager, _adTimer);
+        _levelLoader.Construct(_timerLevel, _botControllers, _countdownController, _player, _meshSurface, _raceManager, _adTimer, _gameConfig);
         _levelLoader.StartLevelSequence();
     }
 

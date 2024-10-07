@@ -12,7 +12,7 @@ public class BotMover
     {
         _botView = botView;
 
-        _botView.Agent.speed = _botView.CharacterBotData.BotMoveSpeed;
+        _botView.Agent.speed = _botView.BotAgentData.BotMoveSpeed;
     }
 
     public void MoveTo(FlagPoint flagPoint)
@@ -43,7 +43,7 @@ public class BotMover
         {
             if (_botView.Agent.remainingDistance <= _botView.Agent.stoppingDistance)
             {
-                if (IsRandomPointFound(_botView.transform.position, _botView.CharacterBotData.BotRangeRandomMoving, out Vector3 point))
+                if (IsRandomPointFound(_botView.transform.position, _botView.BotAgentData.BotRangeRandomMoving, out Vector3 point))
                 {
                     _botView.Agent.SetDestination(point);
                     _botView.transform.LookAt(point);

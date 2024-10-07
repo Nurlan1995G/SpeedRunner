@@ -3,7 +3,6 @@ using Cinemachine;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Cinemachine.CinemachineFreeLook;
 
 namespace Assets._Project.CodeBase.CameraLogic
 {
