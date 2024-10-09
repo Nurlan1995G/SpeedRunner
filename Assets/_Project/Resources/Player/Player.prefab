@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectSpawnPlayer: {fileID: 4286831016315440715}
+  _cinemachine: {fileID: 0}
   <CharacterController>k__BackingField: {fileID: 4638996552447214916}
   <GroundChecker>k__BackingField: {fileID: 2646831356987762017}
 --- !u!114 &6476231631661614125
@@ -847,7 +848,7 @@ PrefabInstance:
     - target: {fileID: 7591278233993227678, guid: 1244a8ca2b412434b8815974d780a39d, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1253,7 +1254,7 @@ PrefabInstance:
     - target: {fileID: 4631080592096980753, guid: 4d4f3e0af18d3684a9cd2c1a5ce45a52, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 5948786430605933122, guid: 4d4f3e0af18d3684a9cd2c1a5ce45a52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2384,7 +2385,7 @@ PrefabInstance:
     - target: {fileID: 7436264151956359015, guid: 0a59bea1eb852934d8bd711f0a471f50, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 7835914794419764261, guid: 0a59bea1eb852934d8bd711f0a471f50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2632,7 +2633,7 @@ PrefabInstance:
     - target: {fileID: 1989037984879194106, guid: 44fcb02c2f60ef34f95b56c3e0b190bc, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 2052172000389787747, guid: 44fcb02c2f60ef34f95b56c3e0b190bc, type: 3}
       propertyPath: m_Name
       value: newModel9
@@ -2732,7 +2733,7 @@ PrefabInstance:
     - target: {fileID: 7649867445567127493, guid: c26ba5b716984034b9da276d414bd5c6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 9176465333095087328, guid: c26ba5b716984034b9da276d414bd5c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2896,7 +2897,7 @@ PrefabInstance:
     - target: {fileID: 3196804343862227246, guid: 81933a6981e61564985d34d686a9627f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 6584881174095708216, guid: 81933a6981e61564985d34d686a9627f, type: 3}
       propertyPath: m_Name
       value: newModel5
@@ -3648,7 +3649,7 @@ PrefabInstance:
     - target: {fileID: 2621095875956774105, guid: bf9a4d1eb1083bf4b8cbcb19edef04f3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 2845561393647825679, guid: bf9a4d1eb1083bf4b8cbcb19edef04f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3820,7 +3821,7 @@ PrefabInstance:
     - target: {fileID: 4881486066045171209, guid: 9d486cadc4ade064095a498609d56d02, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 6505923930313190404, guid: 9d486cadc4ade064095a498609d56d02, type: 3}
       propertyPath: m_Name
       value: newModel8
@@ -3952,7 +3953,7 @@ PrefabInstance:
     - target: {fileID: 7558085862294376739, guid: e995785edd0f81a43b8f826354fc8bd3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a264f5a4dc430a0498e45c46a7c5ffb8, type: 2}
+      objectReference: {fileID: 9100000, guid: 4a62d30c7b6d8ec4e8f89688f4fa828b, type: 2}
     - target: {fileID: 8200595767699728061, guid: e995785edd0f81a43b8f826354fc8bd3, type: 3}
       propertyPath: m_Name
       value: newModel6

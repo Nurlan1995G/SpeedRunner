@@ -34,7 +34,7 @@ public class FlagPoint : InteractableEnter
             _redFlag.SetActive(false);
             _blueFlag.SetActive(true);
             player.RespawnPosition(transform.position);
-            _adTimer.ShowAdWithCountdown(() => YandexGame.Instance._FullscreenShow());
+            _adTimer.CheckFlagInteraction(true);
         }
     }
 }
