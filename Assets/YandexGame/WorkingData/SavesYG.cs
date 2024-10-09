@@ -30,10 +30,10 @@ namespace YG
             Coin = 0;
             IsMute = false;
 
-            SelectedSkin = 26106;
+            SelectedSkin = 26110;
             SelectedObject = 0;
-            SelectedTrail = 27690;
-            SelectedAnimal = 27234;
+            SelectedTrail = 27688;
+            SelectedAnimal = 27236;
 
             OpenItemsInfoId = new List<int>
         {
