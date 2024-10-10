@@ -32,7 +32,7 @@ namespace YG
 
             SelectedSkin = 26110;
             SelectedObject = 0;
-            SelectedTrail = 27688;
+            SelectedTrail = 27692;
             SelectedAnimal = 27236;
 
             OpenItemsInfoId = new List<int>

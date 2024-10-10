@@ -16,6 +16,7 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private float _currentXRotation;
         private float _currentYRotation;
+        private bool _isMobilePlatform;
 
         private Vector2 _lastDirection;
         private Vector3 _currentMousePosition;
@@ -33,7 +34,12 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private void Update()
         {
-            if(_rotateInput.Mouse.RightButton.IsPressed())
+            if (!_isMobilePlatform)
+            {
+                if (_rotateInput.Mouse.RightButton.IsPressed())
+                    _rotationCameraAction.Invoke();
+            }
+            else
                 _rotationCameraAction.Invoke();
         }
 
@@ -46,6 +52,7 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         public void InitializeMobile()
         {
+            _isMobilePlatform = true;
             _currentXRotation = _cameraRotateData.RotateSpeedMobileX;
             _currentYRotation = _cameraRotateData.RotateSpeedMobileY;
             _rotationCameraAction = HandleTouchInput;
@@ -56,6 +63,7 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         public void InitializeKeyboard()
         {
+            _isMobilePlatform = false;
             _currentXRotation = _cameraRotateData.RotateSpeedKeyboardX;
             _currentYRotation = _cameraRotateData.RotateSpeedKeyboardY;
             _rotationCameraAction = ControlRotation;
@@ -81,10 +89,10 @@ namespace Assets._Project.CodeBase.CameraLogic
 
         private void HandleTouchInput()
         {
-            if (UnityEngine.Input.touchCount == 2)
+            if (Input.touchCount == 2)
             {
-                Touch touch1 = UnityEngine.Input.GetTouch(0);
-                Touch touch2 = UnityEngine.Input.GetTouch(1);
+                Touch touch1 = Input.GetTouch(0);
+                Touch touch2 = Input.GetTouch(1);
 
                 if (_variableJoystick.enabled)
                 {
@@ -102,7 +110,7 @@ namespace Assets._Project.CodeBase.CameraLogic
                     }
                 }
             }
-            else if (UnityEngine.Input.touchCount == 1)
+            else if (Input.touchCount == 1)
             {
                 ControlRotation();
             }
