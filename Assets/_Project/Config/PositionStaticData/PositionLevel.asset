@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PositionLevel
   m_EditorClassIdentifier: 
   InitPlayerPosition: {x: 110.38, y: 8.37, z: 67.52}
-  OnePosition: {x: -6194.1094, y: 92.52, z: -26.023901}
-  TwoPosition: {x: -6193.5293, y: 86.979996, z: -13.083914}
-  ThreePosition: {x: -6194.0693, y: 81.1, z: -39.603912}
+  OnePosition: {x: -6193.7905, y: 94.054, z: -27.136292}
+  TwoPosition: {x: -6193.1523, y: 88.642, z: -12.902306}
+  ThreePosition: {x: -6193.746, y: 82.108, z: -42.074303}
