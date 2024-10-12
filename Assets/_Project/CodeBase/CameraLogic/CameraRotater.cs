@@ -38,6 +38,8 @@ namespace Assets._Project.CodeBase.CameraLogic
             {
                 if (_rotateInput.Mouse.RightButton.IsPressed())
                     _rotationCameraAction.Invoke();
+                else
+                    StopCameraRotate();
             }
             else
                 _rotationCameraAction.Invoke();
@@ -82,9 +84,14 @@ namespace Assets._Project.CodeBase.CameraLogic
             }
             else
             {
-                _cinemachineFreeLook.m_XAxis.m_InputAxisValue = 0;
-                _cinemachineFreeLook.m_YAxis.m_InputAxisValue = 0;
+                StopCameraRotate();
             }
+        }
+
+        private void StopCameraRotate()
+        {
+            _cinemachineFreeLook.m_XAxis.m_InputAxisValue = 0;
+            _cinemachineFreeLook.m_YAxis.m_InputAxisValue = 0;
         }
 
         private void HandleTouchInput()
