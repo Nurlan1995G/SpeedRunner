@@ -138,7 +138,7 @@ Material:
     - _TextureImpact: 1
     - _UVSec: 0
     - _UnityShadowMode: 1
-    - _UnityShadowPower: 0.6
+    - _UnityShadowPower: 0.8
     - _UnityShadowSharpness: 1
     - _UvFadeX: 0.1
     - _UvFadeY: 0.1

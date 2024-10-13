@@ -49,7 +49,7 @@ Material:
     - _LightContribution: 1
     - _SrcBlend: 5
     - _UnityShadowMode: 1
-    - _UnityShadowPower: 0.6
+    - _UnityShadowPower: 0.8
     - _ZWrite: 0
     m_Colors: []
   m_BuildTextureStacks: []
