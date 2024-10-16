@@ -11,15 +11,15 @@ public class BotController : MonoBehaviour, IRespawned
     private TargetPoint _currentTarget;
     private PointSpawnZone _currentZone;
     private PointSpawnZone _previousZone;
-
-    private Vector3 _respawnPosition;
-    private bool _isAchievedTarget;
     private BotControllerAnimator _botControllerAnimator;
-    private Coroutine _speedBoostCoroutine;
     private GameActivator _gameActivator;
 
+    private Coroutine _speedBoostCoroutine;
     private Coroutine _climbTimeoutCoroutine;
+    private Vector3 _respawnPosition;
     private float _currentSpeed;
+    private float _startSpeed;
+    private bool _isAchievedTarget;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -146,12 +146,12 @@ public class BotController : MonoBehaviour, IRespawned
 
     private void InitMove()
     {
-        BotControllerData.MoveSpeed = RandomSpeed();
+        _startSpeed = RandomSpeed();
         SetStartedSpeed();
     }
 
     private void SetStartedSpeed() => 
-        _currentSpeed = BotControllerData.MoveSpeed;
+        _currentSpeed = _startSpeed;
 
     private void InitPosition()
     {
@@ -186,9 +186,9 @@ public class BotController : MonoBehaviour, IRespawned
 
     private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
     {
-        _currentSpeed = BotControllerData.MoveSpeed * multiplier;
+        _currentSpeed = _startSpeed * multiplier;
         yield return new WaitForSeconds(duration);
-        _currentSpeed = BotControllerData.MoveSpeed;
+        _currentSpeed = _startSpeed;
     }
 
     private IEnumerator ClimbTimeoutCoroutine()
