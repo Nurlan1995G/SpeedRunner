@@ -39,29 +39,29 @@ MonoBehaviour:
     BotBoostHeightUp: 1.2
     BotBoostWaitTime: 0.5
   BotControllerData:
-    MoveSpeed: 57.755363
-    MinMoveSpeed: 40
-    MaxMoveSpeed: 55
+    MoveSpeed: 50
+    MinMoveSpeed: 45
+    MaxMoveSpeed: 50
     RotateSpeed: 100
-    JumpGravity: 80
-    MaxFallGravitySpeed: 90
+    JumpGravity: 70
+    MaxFallGravitySpeed: 80
     ClimbDuration: 10
-    JumpForce: 75
+    JumpForce: 80
     JumpTrampoline: 3
-    BoostUp: 1.6
+    BoostUp: 1.65
     BoostMultiplier: 2
     BoostDuration: 1
   CameraRotateData:
-    RotateSpeedMobileX: 75
-    RotateSpeedMobileY: 3
+    RotateSpeedMobileX: 80
+    RotateSpeedMobileY: 4
     RotateSpeedKeyboardX: 300
     RotateSpeedKeyboardY: 4.5
     MinZoomDistanceMidle: 12
-    MaxZoomDistanceMidle: 25
+    MaxZoomDistanceMidle: 35
     MinZoomDistanceBottom: 20
-    MaxZoomDistanceBottom: 50
+    MaxZoomDistanceBottom: 70
     ZoomStep: 0.01
-    HideDistance: 50
+    HideDistance: 70
   LogicConfig:
     Timer: 480
     CountdownControllerTime: 5

@@ -9,7 +9,7 @@ public class Coin : InteractableEnter
     {
         if(other.TryGetComponent(out Player player))
         {
-            player.SetScore(10);
+            player.SetScore(25);
             SetEffectCoin();
         }
     }
