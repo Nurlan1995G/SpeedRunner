@@ -29,9 +29,12 @@ public class BuyButton : MonoBehaviour
 
                 if (Wallet.CoinValue < itemInfo.Price)
                 {
+                    _button.interactable = false;
                     _noMoneyDisplay.SetActive(true);
+                    _coinPanel.SetActive(false);
                     return;
                 }
+
                 _coinPanel.SetActive(true);
                 _coinPrice.text = itemInfo.Price.ToString();
                 break;

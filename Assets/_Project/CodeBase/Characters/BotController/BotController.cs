@@ -19,7 +19,6 @@ public class BotController : MonoBehaviour, IRespawned
     private Vector3 _respawnPosition;
     private float _currentSpeed;
     private float _startSpeed;
-    private bool _isAchievedTarget;
 
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -178,7 +177,6 @@ public class BotController : MonoBehaviour, IRespawned
             return;
 
         _currentTarget = _currentZone.TargetPoints[Random.Range(0, _currentZone.TargetPoints.Count)];
-        _isAchievedTarget = false;
     }
 
     private float RandomSpeed() =>
